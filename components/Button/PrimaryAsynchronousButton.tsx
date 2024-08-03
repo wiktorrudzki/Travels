@@ -7,7 +7,7 @@ type Props = Omit<React.ComponentPropsWithRef<typeof Button>, "color"> & {
   onPress: () => Promise<unknown>;
 };
 
-const AsynchronousPrimaryButton = ({ text, onPress, ...rest }: Props) => {
+const PrimaryAsynchronousButton = ({ text, onPress, ...rest }: Props) => {
   const [disabled, setDisabled] = useState(false);
 
   return (
@@ -23,4 +23,4 @@ const AsynchronousPrimaryButton = ({ text, onPress, ...rest }: Props) => {
   );
 };
 
-export default AsynchronousPrimaryButton;
+export default PrimaryAsynchronousButton;

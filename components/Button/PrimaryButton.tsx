@@ -10,9 +10,10 @@ type Props = Omit<React.ComponentPropsWithRef<typeof Button>, "color"> & {
 
 const PrimaryButton = ({ text, ...rest }: Props) => (
   <Button
-    style={rest.disabled ? styles.disabled : undefined}
+    opacity={rest.disabled ? 0.6 : 1}
     rounded="3xl"
     color="primary.400"
+    size="lg"
     {...rest}
   >
     <Text style={styles.text} text={text}></Text>
@@ -22,9 +23,6 @@ const PrimaryButton = ({ text, ...rest }: Props) => (
 const styles = StyleSheet.create({
   text: {
     color: COLORS.buttonText,
-  },
-  disabled: {
-    opacity: 0.6,
   },
 });
 

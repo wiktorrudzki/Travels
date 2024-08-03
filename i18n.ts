@@ -9,9 +9,11 @@ export const defaultNS = "common";
 export const resources = {
   pl: {
     common: pl.common,
+    welcome: pl.welcome,
   },
   en: {
     common: en.common,
+    welcome: en.welcome,
   },
 } as const;
 
@@ -23,18 +25,7 @@ i18n.use(initReactI18next).init({
   lng: locales.length > 0 ? locales[0].languageCode || "" : "pl",
   fallbackLng: "pl",
   defaultNS,
-  resources: {
-    pl: {
-      common: {
-        siema: "dadsad",
-      },
-    },
-    en: {
-      common: {
-        siema: "dadsad",
-      },
-    },
-  },
+  resources,
   ns,
   interpolation: {
     escapeValue: false,

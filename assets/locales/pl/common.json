@@ -1,3 +1,7 @@
 {
-  "siema": "dasdsa"
+  "log_in": "Zaloguj",
+  "register": "Zarejestruj",
+  "email": "Adres e-mail",
+  "password": "Hasło",
+  "confirm_password": "Potwierdź hasło"
 }

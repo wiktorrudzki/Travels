@@ -19,6 +19,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-evenly",
-    padding: 20,
   },
 });

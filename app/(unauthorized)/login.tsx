@@ -1,17 +1,14 @@
-import {
-  AsynchronousPrimaryButton,
-  PrimaryButton,
-  PrimaryLinkButton,
-} from "@/components/Buttons";
-import { getDispatchOffices, login } from "@/dal/iris";
-import { usePromise, usePromiseWithLoading } from "@/hooks";
+import { LinkButton } from "@/components/Button";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 
 const Login = () => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
-      <PrimaryLinkButton text="Login" href="/register" />
+      <LinkButton uppercased text={t("register")} href="/register" />
     </View>
   );
 };
@@ -20,7 +17,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
   },
 });
 
