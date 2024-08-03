@@ -1,5 +1,3 @@
-const tintColorLight = "#0a7ea4";
-
 export const COLORS = {
   primary: {
     50: "#C5FDFD",
@@ -13,4 +11,5 @@ export const COLORS = {
     800: "#007360",
     900: "#005A46",
   },
+  buttonText: "#fff",
 };

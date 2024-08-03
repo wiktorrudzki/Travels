@@ -1,13 +1,11 @@
-import { Link } from "expo-router";
+import { PrimaryLinkButton } from "@/components/Buttons";
 import React from "react";
 import { Text, View } from "react-native";
 
 const Travels = () => {
   return (
     <View>
-      <Link href="/account">
-        <Text>Travels</Text>
-      </Link>
+      <PrimaryLinkButton href="/account" text="Travels" />
     </View>
   );
 };

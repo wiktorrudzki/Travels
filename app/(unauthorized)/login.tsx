@@ -1,15 +1,28 @@
-import { Link } from "expo-router";
+import {
+  AsynchronousPrimaryButton,
+  PrimaryButton,
+  PrimaryLinkButton,
+} from "@/components/Buttons";
+import { getDispatchOffices, login } from "@/dal/iris";
+import { usePromise, usePromiseWithLoading } from "@/hooks";
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const Login = () => {
   return (
-    <View>
-      <Link href="/register">
-        <Text>Login</Text>
-      </Link>
+    <View style={styles.container}>
+      <PrimaryLinkButton text="Login" href="/register" />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+  },
+});
 
 export default Login;

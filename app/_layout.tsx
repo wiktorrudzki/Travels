@@ -1,15 +1,10 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Slot, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-import { extendTheme, NativeBaseProvider, ColorMode } from "native-base";
+import { extendTheme, NativeBaseProvider, Text } from "native-base";
 import { COLORS } from "@/constants/colors";
 
 const newColorTheme = COLORS;
@@ -17,6 +12,8 @@ const theme = extendTheme({ colors: newColorTheme });
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -35,11 +32,7 @@ export default function RootLayout() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <Stack>
-        <Slot />
-        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
-        <Stack.Screen name="(authorized)" options={{ headerShown: false }} />
-        <Stack.Screen name="(unauthorized)" options={{ headerShown: false }} />
+      <Stack screenOptions={DEFAULT_SCREEN_OPTIONS}>
         <Stack.Screen name="+not-found" />
       </Stack>
     </NativeBaseProvider>
