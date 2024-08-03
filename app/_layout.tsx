@@ -9,14 +9,16 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { NativeBaseProvider } from "native-base";
+import { extendTheme, NativeBaseProvider, ColorMode } from "native-base";
+import { COLORS } from "@/constants/colors";
+
+const newColorTheme = COLORS;
+const theme = extendTheme({ colors: newColorTheme });
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -32,8 +34,7 @@ export default function RootLayout() {
   }
 
   return (
-    <NativeBaseProvider>
-      {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+    <NativeBaseProvider theme={theme}>
       <Stack>
         <Slot />
         {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
@@ -41,7 +42,6 @@ export default function RootLayout() {
         <Stack.Screen name="(unauthorized)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-      {/* </ThemeProvider> */}
     </NativeBaseProvider>
   );
 }
