@@ -6,6 +6,7 @@ import "react-native-reanimated";
 
 import { extendTheme, NativeBaseProvider, Text } from "native-base";
 import { COLORS } from "@/constants/colors";
+import "../i18n";
 
 const newColorTheme = COLORS;
 const theme = extendTheme({ colors: newColorTheme });
