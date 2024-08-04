@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Link = ({ href, children, linkProps }: Props) => (
-  <LinkComponent href={href} {...linkProps} asChild>
+  <LinkComponent push href={href} {...linkProps} asChild>
     {children}
   </LinkComponent>
 );

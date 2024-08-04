@@ -8,15 +8,15 @@ type Props = Omit<React.ComponentPropsWithRef<typeof Button>, "color"> & {
 };
 
 const PrimaryAsynchronousButton = ({ text, onPress, ...rest }: Props) => {
-  const [disabled, setDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <PrimaryButton
       onPress={() => {
-        setDisabled(true);
-        onPress().finally(() => setDisabled(false));
+        setIsLoading(true);
+        onPress().finally(() => setIsLoading(false));
       }}
-      disabled={disabled}
+      isLoading={isLoading}
       text={text}
       {...rest}
     />

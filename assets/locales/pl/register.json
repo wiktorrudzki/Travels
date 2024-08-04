@@ -1,4 +1,5 @@
 {
   "already_have_acc": "Posiadasz już konto?",
-  "create_acc": "Stwórz konto"
+  "registration": "Rejestracja",
+  "pwd_match": "Hasła muszą być takie same"
 }

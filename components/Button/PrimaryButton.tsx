@@ -12,7 +12,7 @@ const PrimaryButton = ({ text, ...rest }: Props) => (
   <Button
     opacity={rest.disabled ? 0.6 : 1}
     rounded="3xl"
-    color="primary.400"
+    backgroundColor="primary.400"
     size="lg"
     {...rest}
   >

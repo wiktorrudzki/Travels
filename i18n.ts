@@ -10,10 +10,14 @@ export const resources = {
   pl: {
     common: pl.common,
     welcome: pl.welcome,
+    login: pl.login,
+    register: pl.register,
   },
   en: {
     common: en.common,
     welcome: en.welcome,
+    login: en.login,
+    register: en.register,
   },
 } as const;
 

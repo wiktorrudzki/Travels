@@ -1,7 +1,15 @@
 {
   "log_in": "Zaloguj",
   "register": "Zarejestruj",
+  "register_now": "Zarejestruj się teraz",
   "email": "Adres e-mail",
   "password": "Hasło",
-  "confirm_password": "Potwierdź hasło"
+  "confirm_pwd": "Potwierdź hasło",
+  "confirm_password": "Potwierdź hasło",
+  "forgot_pwd": "Zapomniałeś/aś hasła?",
+  "required_field": "To pole jest obowiązkowe",
+  "one_special_character": "{{ field }} musi posiadać przynajmniej jeden znak specjalny",
+  "one_uppercase_letter": "{{ field }} musi posiadać przynajmniej jedną wielką literę",
+  "min_length": "To pole musi posiadać minimum 8 znaków",
+  "incorrect_email": "Nieprawidłowy adres e-mail"
 }

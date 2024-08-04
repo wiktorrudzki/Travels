@@ -35,6 +35,11 @@ export default function RootLayout() {
     <NativeBaseProvider theme={theme}>
       <Stack screenOptions={DEFAULT_SCREEN_OPTIONS}>
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="login" />
+        <Stack.Screen name="register" />
+        <Stack.Screen name="account" />
+        <Stack.Screen name="home" />
+        <Stack.Screen name="travels" />
       </Stack>
     </NativeBaseProvider>
   );

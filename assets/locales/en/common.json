@@ -1,7 +1,15 @@
 {
   "log_in": "Log in",
   "register": "Register",
+  "register_now": "Register now",
   "email": "E-mail address",
   "password": "Password",
-  "confirm_password": "Confirm password"
+  "confirm_pwd": "Confirm password",
+  "confirm_password": "Confirm password",
+  "forgot_pwd": "Forgot password?",
+  "required_field": "This field is required",
+  "one_special_character": "{{ field }} must contain at least one special character",
+  "one_uppercase_letter": "{{ field }} must contain at least one uppercased letter",
+  "min_length": "This field has to be {{ length }} characters length minimum",
+  "incorrect_email": "Incorrect e-mail address"
 }
