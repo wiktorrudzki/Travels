@@ -1,7 +1,7 @@
 import { LinkButton, PrimaryLinkButton } from "@/components/Button";
 import { AuthLayout } from "@/components/Layout";
 import { Text } from "@/components/Text";
-import { RegisterForm } from "@/features/register";
+import { RegisterForm } from "@/features/register/components";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

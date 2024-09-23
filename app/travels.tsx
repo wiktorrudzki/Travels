@@ -1,11 +1,12 @@
 import { PrimaryLinkButton } from "@/components/Button";
+import { ROUTES } from "@/constants/routes";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
 const Travels = () => {
   return (
     <View>
-      <PrimaryLinkButton href="/account" text="Travels" />
+      <PrimaryLinkButton href={ROUTES.account} text="Travels" />
     </View>
   );
 };

@@ -9,17 +9,15 @@ type Props = {
   uppercased?: boolean;
 };
 
-const LinkButton = ({ text, href, uppercased }: Props) => {
-  return (
-    <Link href={href}>
-      <Text
-        textTransform={uppercased ? "uppercase" : "initial"}
-        color="primary.600"
-      >
-        {text}
-      </Text>
-    </Link>
-  );
-};
+const LinkButton = ({ text, href, uppercased }: Props) => (
+  <Link href={href}>
+    <Text
+      textTransform={uppercased ? "uppercase" : "initial"}
+      color="primary.600"
+    >
+      {text}
+    </Text>
+  </Link>
+);
 
 export default LinkButton;

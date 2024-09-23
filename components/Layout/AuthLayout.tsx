@@ -9,11 +9,11 @@ import "react-native-reanimated";
 
 type Props = {
   title: string;
-  Form: React.ReactNode;
-  OtherActions: React.ReactNode;
+  children: React.ReactNode;
+  otherActions: React.ReactNode;
 };
 
-const AuthLayout = ({ title, Form, OtherActions }: Props) => (
+const AuthLayout = ({ title, children, otherActions }: Props) => (
   <View paddingY="20" backgroundColor="light.50" style={styles.container}>
     <View
       backgroundColor="primary.400"
@@ -35,12 +35,12 @@ const AuthLayout = ({ title, Form, OtherActions }: Props) => (
               fontWeight="semibold"
               text={title}
             />
-            {Form}
+            {children}
           </View>
         </Card>
       </View>
       <View height="25%" justifyContent="center" alignItems="center">
-        {OtherActions}
+        {otherActions}
       </View>
     </View>
   </View>

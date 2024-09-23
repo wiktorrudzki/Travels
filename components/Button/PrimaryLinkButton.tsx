@@ -1,14 +1,15 @@
 import React from "react";
 import PrimaryButton from "./PrimaryButton";
-import { Href, useRouter } from "expo-router";
+import { useRouter } from "@/hooks";
+import { RouteValues } from "@/types/routes";
 
 type Props = {
-  href: Href<string | object>;
+  href: RouteValues;
   text: string;
 };
 
 const PrimaryLinkButton = ({ href, text }: Props) => {
-  const router = useRouter();
+  const { router } = useRouter();
 
   return <PrimaryButton onPress={() => router.push(href)} text={text} />;
 };
