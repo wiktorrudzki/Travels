@@ -1,30 +1,23 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { Icon, Input, Pressable } from "native-base";
-import React, { useState } from "react";
+import { useShow } from "@/hooks";
+import { Input } from "native-base";
+import React, { useMemo } from "react";
+import PasswordShowIcon from "./PasswordShowIcon";
 
 type Props = React.ComponentProps<typeof Input>;
 
 const TextInput = ({ type, ...rest }: Props) => {
-  const [show, setShow] = useState(false);
+  const { show, swap } = useShow();
+
+  const isPassword = useMemo(() => type === "password", [type]);
+  const hideText = useMemo(() => isPassword && !show, [isPassword, show]);
 
   return (
     <Input
       size="lg"
       InputRightElement={
-        type === "password" ? (
-          <Pressable onPress={() => setShow(!show)}>
-            <Icon
-              as={
-                <MaterialIcons name={show ? "visibility" : "visibility-off"} />
-              }
-              size={5}
-              mr="2"
-              color="muted.400"
-            />
-          </Pressable>
-        ) : undefined
+        isPassword ? <PasswordShowIcon swap={swap} show={show} /> : undefined
       }
-      type={type === "password" && !show ? "password" : "text"}
+      type={hideText ? "password" : "text"}
       {...rest}
     />
   );
