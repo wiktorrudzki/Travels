@@ -1,5 +1,5 @@
-import { Text } from "@/components/Text";
 import React from "react";
+import Text from "./Text";
 
 type Props = React.ComponentPropsWithRef<typeof Text> & {
   text: string;

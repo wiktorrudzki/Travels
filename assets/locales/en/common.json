@@ -11,5 +11,6 @@
   "one_special_character": "{{ field }} must contain at least one special character",
   "one_uppercase_letter": "{{ field }} must contain at least one uppercased letter",
   "min_length": "This field has to be {{ length }} characters length minimum",
-  "incorrect_email": "Incorrect e-mail address"
+  "incorrect_email": "Incorrect e-mail address",
+  "settings": "Ustawienia"
 }

@@ -1,5 +1,6 @@
 import { LinkButton } from "@/components/Button";
 import { Text } from "@/components/Text";
+import { ROUTES } from "@/constants/routes";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +10,11 @@ const OtherActions = () => {
   return (
     <>
       <Text text={t("login:dont_have_acc")} />
-      <LinkButton uppercased text={t("common:register_now")} href="/register" />
+      <LinkButton
+        uppercased
+        text={t("common:register_now")}
+        href={ROUTES.register}
+      />
     </>
   );
 };

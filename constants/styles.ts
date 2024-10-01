@@ -1,4 +1,4 @@
-import { ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 import { COLORS } from "./colors";
 
 export const DISABLED = 0.6;
@@ -15,6 +15,11 @@ export const EVENLY_FLEX: ViewStyle = {
   justifyContent: "space-evenly",
   alignItems: "center",
   flexDirection: "row",
+};
+
+export const FLEX_COLUMN: ViewStyle = {
+  display: "flex",
+  flexDirection: "column",
 };
 
 export const FULL_WIDTH: ViewStyle = {
@@ -73,4 +78,17 @@ export const ICON_SHADOW: ViewStyle = {
   shadowRadius: 0,
   shadowColor: COLORS.primary[400],
   elevation: 5,
+};
+
+export const ROUNDED: ViewStyle = {
+  borderRadius: 100,
+};
+
+export const SEMI_BOLD = 500;
+export const BOLD = 700;
+
+export const SEMI_BOLD_TITLE: TextStyle = {
+  fontSize: SPACING.HUGE,
+  lineHeight: SPACING.HUGE,
+  fontWeight: SEMI_BOLD,
 };

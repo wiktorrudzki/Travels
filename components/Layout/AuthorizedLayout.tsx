@@ -4,19 +4,22 @@ import { StyleSheet } from "react-native";
 import Navbar from "./Navbar";
 import {
   ALIGN_BOTTOM,
-  CENTER_FLEX,
+  FLEX_COLUMN,
   FULL_SPACE,
   FULL_WIDTH,
+  SPACING,
 } from "@/constants/styles";
 
 type Props = {
+  title?: React.ReactNode;
   children: React.ReactNode;
 };
 
-const AuthorizedLayout = ({ children }: Props) => {
+const AuthorizedLayout = ({ children, title }: Props) => {
   return (
     <View style={styles.container}>
-      {children}
+      {title}
+      <View style={styles.content}>{children}</View>
       <View style={styles.navbar}>
         <Navbar />
       </View>
@@ -26,9 +29,13 @@ const AuthorizedLayout = ({ children }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    ...CENTER_FLEX,
     ...FULL_SPACE,
+    ...FLEX_COLUMN,
     backgroundColor: "#fff",
+  },
+  content: {
+    paddingLeft: SPACING.HUGE,
+    paddingRight: SPACING.HUGE,
   },
   navbar: {
     ...FULL_WIDTH,
