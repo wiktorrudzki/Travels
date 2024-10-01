@@ -6,12 +6,18 @@ import { RouteValues } from "@/types/routes";
 type Props = {
   href: RouteValues;
   text: string;
+  replace?: boolean;
 };
 
-const PrimaryLinkButton = ({ href, text }: Props) => {
-  const { router } = useRouter();
+const PrimaryLinkButton = ({ href, text, replace }: Props) => {
+  const { replace: replaceRoute, push } = useRouter();
 
-  return <PrimaryButton onPress={() => router.push(href)} text={text} />;
+  return (
+    <PrimaryButton
+      onPress={() => (replace ? replaceRoute(href) : push(href))}
+      text={text}
+    />
+  );
 };
 
 export default PrimaryLinkButton;

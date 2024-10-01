@@ -1,14 +1,6 @@
-import { PrimaryLinkButton } from "@/components/Button";
-import { ROUTES } from "@/constants/routes";
+import { HomeScreen } from "@/screens/home";
 import React from "react";
-import { View } from "react-native";
 
-const Home = () => {
-  return (
-    <View>
-      <PrimaryLinkButton text="Home" href={ROUTES.travels} />
-    </View>
-  );
-};
+const Home = () => <HomeScreen />;
 
 export default Home;

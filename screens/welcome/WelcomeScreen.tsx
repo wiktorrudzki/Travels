@@ -1,10 +1,10 @@
 import { useRouter } from "@/hooks";
-import { View } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { checkFirstLaunch } from "@/features/welcome/helpers";
 import { Content, SplashImage } from "@/features/welcome/components";
 import { ROUTES } from "@/constants/routes";
+import { View } from "@/components/View";
 
 const WelcomeScreen = () => {
   const { replace } = useRouter();

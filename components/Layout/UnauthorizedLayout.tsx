@@ -1,11 +1,10 @@
-import { LinkButton, PrimaryButton } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { Text } from "@/components/Text";
-import { View } from "native-base";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { WhiteLogo } from "@/assets/icons";
 import "react-native-reanimated";
+import { View } from "../View";
 
 type Props = {
   title: string;
@@ -13,7 +12,7 @@ type Props = {
   otherActions: React.ReactNode;
 };
 
-const AuthLayout = ({ title, children, otherActions }: Props) => (
+const UnauthorizedLayout = ({ title, children, otherActions }: Props) => (
   <View paddingY="20" backgroundColor="light.50" style={styles.container}>
     <View
       backgroundColor="primary.400"
@@ -67,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AuthLayout;
+export default UnauthorizedLayout;

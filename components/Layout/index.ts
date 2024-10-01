@@ -1,1 +1,2 @@
-export { default as AuthLayout } from "./AuthLayout";
+export { default as UnauthorizedLayout } from "./UnauthorizedLayout";
+export { default as AuthorizedLayout } from "./AuthorizedLayout";

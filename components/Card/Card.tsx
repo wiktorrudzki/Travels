@@ -1,5 +1,5 @@
-import { View } from "native-base";
 import React from "react";
+import { View } from "../View";
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
   children?: React.ReactNode;

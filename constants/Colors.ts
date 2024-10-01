@@ -11,6 +11,7 @@ export const COLORS = {
     800: "#007360",
     900: "#005A46",
   },
+  white: "#fff",
   buttonText: "#fff",
   background: "#fff",
 };

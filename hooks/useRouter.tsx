@@ -6,7 +6,9 @@ const useRouter = () => {
 
   const replace = (path: RouteValues) => router.replace(path);
 
-  return { router, replace };
+  const push = (path: RouteValues) => router.push(path);
+
+  return { router, replace, push };
 };
 
 export default useRouter;

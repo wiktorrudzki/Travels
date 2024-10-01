@@ -1,11 +1,11 @@
 import { PrimaryLinkButton } from "@/components/Button";
 import { ROUTES } from "@/constants/routes";
-import { View } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import Description from "./Description";
 import { TitleText } from "@/components/Text";
+import { View } from "@/components/View";
 
 const Content = () => {
   const { t } = useTranslation("welcome");
@@ -22,7 +22,7 @@ const Content = () => {
         <TitleText text={t("title")} marginBottom="4" />
         <Description />
       </View>
-      <PrimaryLinkButton text={t("get_started")} href={ROUTES.login} />
+      <PrimaryLinkButton text={t("get_started")} href={ROUTES.login} replace />
     </View>
   );
 };

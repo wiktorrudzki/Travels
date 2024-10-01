@@ -1,14 +1,6 @@
-import { PrimaryLinkButton } from "@/components/Button";
-import { ROUTES } from "@/constants/routes";
+import { TravelsScreen } from "@/screens/travels";
 import React from "react";
-import { View } from "react-native";
 
-const Travels = () => {
-  return (
-    <View>
-      <PrimaryLinkButton href={ROUTES.account} text="Travels" />
-    </View>
-  );
-};
+const Travels = () => <TravelsScreen />;
 
 export default Travels;

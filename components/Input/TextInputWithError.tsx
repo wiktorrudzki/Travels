@@ -1,7 +1,7 @@
 import React from "react";
 import TextInput from "./TextInput";
-import { View } from "native-base";
 import InputErrorMessage from "./InputErrorMessage";
+import { View } from "../View";
 
 type Props = React.ComponentPropsWithRef<typeof TextInput> & {
   nativeID: string;
