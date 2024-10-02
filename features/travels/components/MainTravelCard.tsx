@@ -1,0 +1,64 @@
+import { Text } from "@/components/Text";
+import { View } from "@/components/View";
+import { COLORS } from "@/constants/colors";
+import {
+  FLEX_COLUMN,
+  FULL_HEIGHT,
+  FULL_SPACE,
+  FULL_WIDTH_IMAGE,
+  LITTLE_ROUNDED,
+  LITTLE_ROUNDED_IMAGE,
+  MAIN_CARD_TITLE,
+  SHADOW,
+  SPACING,
+} from "@/constants/styles";
+import { Image } from "native-base";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet } from "react-native";
+
+const MainTravelCard = () => {
+  const { t } = useTranslation("travels");
+
+  return (
+    <View style={styles.container}>
+      <Image
+        alt="main-image"
+        source={{
+          uri: "https://picsum.photos/200/300",
+        }}
+        style={styles.image}
+      />
+      <View style={styles.textWrapper}>
+        <Text style={styles.title} text="Mallorca" />
+        <Text text="12.09.2024 - 17.09.2024" />
+        <Text text={`${2} ${t("participants")}`} />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    ...FLEX_COLUMN,
+    ...SHADOW,
+    ...LITTLE_ROUNDED,
+    padding: SPACING.MEDIUM,
+    backgroundColor: COLORS.white,
+    gap: SPACING.MEDIUM,
+    maxHeight: 300,
+  },
+  image: {
+    ...FULL_WIDTH_IMAGE,
+    ...LITTLE_ROUNDED_IMAGE,
+    height: "60%",
+    resizeMode: "cover",
+  },
+  textWrapper: {
+    ...FULL_SPACE,
+    gap: SPACING.TINY,
+  },
+  title: MAIN_CARD_TITLE,
+});
+
+export default MainTravelCard;

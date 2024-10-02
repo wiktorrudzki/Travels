@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from "react-native";
+import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 import { COLORS } from "./colors";
 
 export const DISABLED = 0.6;
@@ -35,6 +35,10 @@ export const FULL_SPACE: ViewStyle = {
   ...FULL_WIDTH,
 };
 
+export const FULL_WIDTH_IMAGE: ImageStyle = {
+  width: "100%",
+};
+
 export const ALIGN_TOP: ViewStyle = {
   position: "absolute",
   top: 0,
@@ -67,7 +71,7 @@ export const SPACING = {
 
 export const SHADOW: ViewStyle = {
   shadowOffset: { width: 0, height: 0 },
-  shadowOpacity: 0.25,
+  shadowOpacity: 0.1,
   shadowRadius: 15,
   elevation: 5,
 };
@@ -84,6 +88,18 @@ export const ROUNDED: ViewStyle = {
   borderRadius: 100,
 };
 
+export const FULL_ROUNDED_IMAGE: ImageStyle = {
+  borderRadius: 100,
+};
+
+export const LITTLE_ROUNDED: ViewStyle = {
+  borderRadius: 25,
+};
+
+export const LITTLE_ROUNDED_IMAGE: ImageStyle = {
+  borderRadius: 25,
+};
+
 export const SEMI_BOLD = 500;
 export const BOLD = 700;
 
@@ -91,4 +107,16 @@ export const SEMI_BOLD_TITLE: TextStyle = {
   fontSize: SPACING.HUGE,
   lineHeight: SPACING.HUGE,
   fontWeight: SEMI_BOLD,
+};
+
+export const MAIN_CARD_TITLE: TextStyle = {
+  fontSize: SPACING.LARGE,
+  lineHeight: SPACING.LARGE,
+  fontWeight: BOLD,
+};
+
+export const CARD_TITLE: TextStyle = {
+  fontSize: SPACING.MEDIUM,
+  lineHeight: SPACING.MEDIUM,
+  fontWeight: BOLD,
 };

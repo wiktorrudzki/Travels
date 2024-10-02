@@ -12,5 +12,6 @@
   "one_uppercase_letter": "{{ field }} musi posiadać przynajmniej jedną wielką literę",
   "min_length": "To pole musi posiadać minimum 8 znaków",
   "incorrect_email": "Nieprawidłowy adres e-mail",
-  "settings": "Ustawienia"
+  "settings": "Ustawienia",
+  "delete": "Usuń"
 }

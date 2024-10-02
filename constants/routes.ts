@@ -7,4 +7,5 @@ export const ROUTES: Routes = {
   travels: "/travels",
   home: "/home",
   account: "/account",
+  trip: (id: string) => `/trip/${id}`,
 };

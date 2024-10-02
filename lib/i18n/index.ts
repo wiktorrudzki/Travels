@@ -12,12 +12,14 @@ export const resources = {
     welcome: pl.welcome,
     login: pl.login,
     register: pl.register,
+    travels: pl.travels,
   },
   en: {
     common: en.common,
     welcome: en.welcome,
     login: en.login,
     register: en.register,
+    travels: en.travels,
   },
 } as const;
 

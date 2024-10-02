@@ -41,6 +41,7 @@ export default function RootLayout() {
         <Stack.Screen name="account" />
         <Stack.Screen name="home" />
         <Stack.Screen name="travels" />
+        <Stack.Screen name="trip" />
       </Stack>
     </NativeBaseProvider>
   );
