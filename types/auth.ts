@@ -1,9 +1,9 @@
-export type LoginCredentials = {
+export type LoginRequest = {
   email: string;
   password: string;
 };
 
-export type RegisterCredentials = {
+export type RegisterRequest = {
   email: string;
   password: string;
   confirmPassword: string;

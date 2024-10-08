@@ -1,12 +1,12 @@
 import { PrimaryButton } from "@/components/Button";
 import { TextInputWithError } from "@/components/Input";
-import { RegisterCredentials } from "@/types/auth";
+import { RegisterRequest } from "@/types/auth";
 import { FormikProps } from "formik";
 import { FormControl, View } from "native-base";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
-type Props = FormikProps<RegisterCredentials>;
+type Props = FormikProps<RegisterRequest>;
 
 const RegisterFormInputs = ({
   handleChange,

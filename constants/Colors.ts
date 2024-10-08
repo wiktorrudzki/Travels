@@ -14,4 +14,7 @@ export const COLORS = {
   white: "#fff",
   buttonText: "#fff",
   background: "#fff",
+  error: {
+    50: ""
+  }
 };

@@ -1,9 +1,9 @@
-import { LoginCredentials } from "@/types/auth";
+import { LoginRequest } from "@/types/auth";
 import { Formik } from "formik";
 import LoginFormInputs from "./LoginFormInputs";
 import { useLogin } from "../hooks";
 
-const initialValues: LoginCredentials = { email: "", password: "" };
+const initialValues: LoginRequest = { email: "", password: "" };
 
 const LoginForm = () => {
   const { loginSchema, onSubmit } = useLogin();

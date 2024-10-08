@@ -2,20 +2,22 @@ import { AxiosError, AxiosResponse } from "axios";
 
 const usePromise = <T extends unknown[], A>(
   creator: (...args: T) => Promise<AxiosResponse<A>>,
-  onSuccess?: (data: AxiosResponse<A>) => void,
-  onFailure?: (err: AxiosError) => void
+  onSuccess?: (data: A) => void,
+  onFailure?: (err: string) => void
 ) => {
   const invoker = async (...args: T) =>
     creator(...args)
-      .then((data) => {
+      .then(({ data }) => {
         setTimeout(() => {}, 2000);
         if (onSuccess) {
           onSuccess(data);
         }
       })
-      .catch((e) => {
+      .catch((e: AxiosError) => {
         if (onFailure) {
-          onFailure(e);
+          onFailure(
+            typeof e.response?.data === "string" ? e.response.data : e.message
+          );
         }
       });
 

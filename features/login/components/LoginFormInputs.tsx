@@ -2,14 +2,14 @@ import { LinkButton, PrimaryButton } from "@/components/Button";
 import { TextInputWithError } from "@/components/Input";
 import { View } from "@/components/View";
 import { ROUTES } from "@/constants/routes";
-import { LoginCredentials } from "@/types/auth";
+import { LoginRequest } from "@/types/auth";
 import { FormikProps } from "formik";
 import { FormControl } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
-type Props = FormikProps<LoginCredentials>;
+type Props = FormikProps<LoginRequest>;
 
 const LoginFormInputs = ({
   handleChange,

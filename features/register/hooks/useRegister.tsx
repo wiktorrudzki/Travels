@@ -1,10 +1,25 @@
-import { RegisterCredentials } from "@/types/auth";
-import { specialCharacterRegex, uppercasedLetterRegex } from "@/utils/regex";
+import { usePromise, useRouter } from "@/hooks";
+import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, ref, string } from "yup";
+import * as SecureStore from "expo-secure-store";
+import { toaster } from "@/lib/native-base";
+import { ROUTES } from "@/constants/routes";
+import { register } from "@/dal/auth";
 
 const useRegister = () => {
   const { t } = useTranslation(["common", "register"]);
+
+  const { replace } = useRouter();
+
+  const successfullRegister = (value: string) =>
+    SecureStore.setItemAsync("Authorization", value).then(() =>
+      replace(ROUTES.home)
+    );
+
+  const [registerRequest] = usePromise(register, successfullRegister, (e) =>
+    toaster({ variant: "", description: e })
+  );
 
   const registerSchema = object().shape({
     email: string().required(t("required_field")).email(t("incorrect_email")),
@@ -14,19 +29,11 @@ const useRegister = () => {
         uppercasedLetterRegex,
         t("one_uppercase_letter", { field: t("password") })
       )
-      .matches(
-        specialCharacterRegex,
-        t("one_special_character", { field: t("password") })
-      )
       .required(t("required_field")),
     confirmPassword: string().oneOf([ref("password")], t("register:pwd_match")),
   });
 
-  const onSubmit = (values: RegisterCredentials) => {
-    console.log(values);
-  };
-
-  return { registerSchema, onSubmit };
+  return { registerSchema, onSubmit: registerRequest };
 };
 
 export default useRegister;

@@ -1,9 +1,9 @@
-import { RegisterCredentials } from "@/types/auth";
+import { RegisterRequest } from "@/types/auth";
 import { Formik } from "formik";
 import { useRegister } from "../hooks";
 import RegisterFormInputs from "./RegisterFormInputs";
 
-const initialValues: RegisterCredentials = {
+const initialValues: RegisterRequest = {
   email: "",
   password: "",
   confirmPassword: "",
