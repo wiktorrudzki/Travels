@@ -1,28 +1,62 @@
-import { COLORS } from "@/constants/colors";
-import { Alert, InfoIcon, useTheme } from "native-base";
-import React from "react";
+import {
+  Alert,
+  CheckCircleIcon,
+  InfoIcon,
+  useTheme,
+  WarningIcon,
+  WarningTwoIcon,
+} from "native-base";
+import React, { useMemo } from "react";
 import { StyleSheet } from "react-native";
-import { View } from "../View";
 import { Text } from "../Text";
-import { CENTER_FLEX, FLEX_COLUMN, FULL_HEIGHT } from "@/constants/styles";
+import { CENTER_FLEX, SPACING } from "@/constants/styles";
 
 type Props = {
-  title?: string;
-  description?: string;
-  variant: string;
+  text: string;
+  variant: "danger" | "warning" | "success" | "info";
 };
 
-const Toast = ({ title, description, variant }: Props) => {
+const Toast = ({ text, variant }: Props) => {
   const { colors } = useTheme();
 
-  // TODO add variants and styles
+  const color = useMemo(() => {
+    switch (variant) {
+      case "danger":
+        return colors.error;
+      case "success":
+        return colors.success;
+      case "warning":
+        return colors.warning;
+      case "info":
+        return colors.info;
+      default:
+        colors.warning;
+    }
+  }, []);
+
+  const icon = useMemo(() => {
+    switch (variant) {
+      case "danger":
+        return <WarningIcon color={color?.[400]} />;
+      case "success":
+        return <CheckCircleIcon color={color?.[400]} />;
+      case "warning":
+        return <WarningTwoIcon color={color?.[400]} />;
+      case "info":
+        return <InfoIcon color={color?.[400]} />;
+      default:
+        return <WarningTwoIcon color={color?.[400]} />;
+    }
+  }, []);
+
   return (
-    <Alert style={styles.container} backgroundColor={colors.error[400]}>
-      <InfoIcon />
-      <View style={styles.textWrapper}>
-        {title && <Text text={title} />}
-        {description && <Text text={description} />}
-      </View>
+    <Alert
+      style={styles.container}
+      backgroundColor={color?.[100]}
+      borderColor={color?.[400]}
+    >
+      {icon}
+      <Text text={text} />
     </Alert>
   );
 };
@@ -30,14 +64,9 @@ const Toast = ({ title, description, variant }: Props) => {
 const styles = StyleSheet.create({
   container: {
     ...CENTER_FLEX,
-  },
-  verticalLine: {
-    ...FULL_HEIGHT,
-    width: 10,
-    backgroundColor: COLORS.primary[400],
-  },
-  textWrapper: {
-    ...FLEX_COLUMN,
+    gap: SPACING.MEDIUM,
+    borderStyle: "solid",
+    borderWidth: 1,
   },
 });
 

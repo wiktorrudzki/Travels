@@ -18,7 +18,7 @@ const useLogin = () => {
     );
 
   const [loginRequest] = usePromise(login, successfullLogin, (e) =>
-    toaster({ description: e, variant: "" })
+    toaster({ text: e, variant: "danger" })
   );
 
   const loginSchema = object().shape({

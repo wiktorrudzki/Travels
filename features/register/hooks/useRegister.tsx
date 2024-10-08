@@ -18,7 +18,7 @@ const useRegister = () => {
     );
 
   const [registerRequest] = usePromise(register, successfullRegister, (e) =>
-    toaster({ variant: "", description: e })
+    toaster({ variant: "info", text: e })
   );
 
   const registerSchema = object().shape({
