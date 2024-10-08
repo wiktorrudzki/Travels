@@ -18,7 +18,7 @@ const LoginFormInputs = ({
   errors,
   touched,
 }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   return (
     <FormControl style={styles.form}>

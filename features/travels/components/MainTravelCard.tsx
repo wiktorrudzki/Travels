@@ -1,9 +1,7 @@
 import { Text } from "@/components/Text";
 import { View } from "@/components/View";
-import { COLORS } from "@/constants/colors";
 import {
   FLEX_COLUMN,
-  FULL_HEIGHT,
   FULL_SPACE,
   FULL_WIDTH_IMAGE,
   LITTLE_ROUNDED,
@@ -12,7 +10,7 @@ import {
   SHADOW,
   SPACING,
 } from "@/constants/styles";
-import { Image } from "native-base";
+import { Image, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -20,8 +18,10 @@ import { StyleSheet } from "react-native";
 const MainTravelCard = () => {
   const { t } = useTranslation("travels");
 
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} backgroundColor={colors.white}>
       <Image
         alt="main-image"
         source={{
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     ...SHADOW,
     ...LITTLE_ROUNDED,
     padding: SPACING.MEDIUM,
-    backgroundColor: COLORS.white,
     gap: SPACING.MEDIUM,
     maxHeight: 300,
   },

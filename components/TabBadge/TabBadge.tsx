@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "../View";
 import { StyleSheet } from "react-native";
-import { COLORS } from "@/constants/colors";
 import {
   CENTER_FLEX,
   FLEX_COLUMN,
@@ -11,8 +10,7 @@ import {
 } from "@/constants/styles";
 import { Text } from "../Text";
 import { RouteValues } from "@/types/routes";
-import { Link } from "../Link";
-import { ArrowBackIcon } from "native-base";
+import { ArrowBackIcon, useTheme } from "native-base";
 
 type Props = {
   title?: string;
@@ -22,22 +20,28 @@ type Props = {
   };
 };
 
-const TabBadge = ({ title, goBack }: Props) => (
-  <View style={styles.container}>
-    <View style={styles.badge} />
-    <View style={styles.textWrapper}>
-      {goBack && (
-        // <Link href={goBack.href}>
-        <View style={styles.goBackWrapper}>
-          <ArrowBackIcon color={COLORS.white} />
-          <Text style={styles.goBack} text={goBack.text} />
-        </View>
-        // </Link>
-      )}
-      {title && <Text text={title} style={styles.title} />}
+const TabBadge = ({ title, goBack }: Props) => {
+  const { colors } = useTheme();
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.badge} backgroundColor={colors.primary[400]} />
+      <View style={styles.textWrapper}>
+        {goBack && (
+          // <Link href={goBack.href}>
+          <View style={styles.goBackWrapper}>
+            <ArrowBackIcon color={colors.white} />
+            <Text color={colors.white} text={goBack.text} />
+          </View>
+          // </Link>
+        )}
+        {title && (
+          <Text text={title} color={colors.white} style={styles.title} />
+        )}
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +51,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   badge: {
-    backgroundColor: COLORS.primary[400],
     borderBottomLeftRadius: 2000,
     borderBottomRightRadius: 2000,
     position: "absolute",
@@ -66,10 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     gap: SPACING.SMALL,
   },
-  goBack: {
-    color: COLORS.white,
-  },
-  title: { ...SEMI_BOLD_TITLE, color: COLORS.white },
+  title: SEMI_BOLD_TITLE,
 });
 
 export default TabBadge;

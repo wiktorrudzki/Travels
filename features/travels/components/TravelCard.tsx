@@ -1,6 +1,5 @@
 import { Text } from "@/components/Text";
 import { View } from "@/components/View";
-import { COLORS } from "@/constants/colors";
 import { ROUTES } from "@/constants/routes";
 import {
   CARD_TITLE,
@@ -13,7 +12,7 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { useRouter } from "@/hooks";
-import { Image, Menu, Pressable, ThreeDotsIcon } from "native-base";
+import { Image, Menu, Pressable, ThreeDotsIcon, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -21,11 +20,13 @@ import { StyleSheet } from "react-native";
 const TravelCard = () => {
   const { t } = useTranslation(["common", "travels"]);
 
+  const { colors } = useTheme();
+
   const { push } = useRouter();
 
   return (
     <Pressable onPress={() => push(ROUTES.trip("123"))}>
-      <View style={styles.container}>
+      <View style={styles.container} backgroundColor={colors.white}>
         <View style={styles.content}>
           <Image
             alt="main-image"
@@ -61,7 +62,6 @@ const styles = StyleSheet.create({
     ...LITTLE_ROUNDED,
     justifyContent: "space-between",
     padding: SPACING.MEDIUM,
-    backgroundColor: COLORS.white,
     maxHeight: 75,
   },
   content: {
