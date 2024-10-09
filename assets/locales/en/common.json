@@ -13,5 +13,7 @@
   "min_length": "This field has to be {{ length }} characters length minimum",
   "incorrect_email": "Incorrect e-mail address",
   "settings": "Settings",
-  "delete": "Delete"
+  "delete": "Delete",
+  "first_name": "First Name",
+  "last_name": "Last Name"
 }

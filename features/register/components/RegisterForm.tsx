@@ -5,6 +5,8 @@ import RegisterFormInputs from "./RegisterFormInputs";
 
 const initialValues: RegisterRequest = {
   email: "",
+  firstName: "",
+  lastName: "",
   password: "",
   confirmPassword: "",
 };

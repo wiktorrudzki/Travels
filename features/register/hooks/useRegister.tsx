@@ -23,6 +23,12 @@ const useRegister = () => {
 
   const registerSchema = object().shape({
     email: string().required(t("required_field")).email(t("incorrect_email")),
+    firstName: string()
+      .required(t("required_field"))
+      .min(2, t("min_length", { length: 2 })),
+    lastName: string()
+      .required(t("required_field"))
+      .min(2, t("min_length", { length: 2 })),
     password: string()
       .min(8, t("min_length", { length: 8 }))
       .matches(

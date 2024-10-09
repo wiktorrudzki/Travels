@@ -30,6 +30,20 @@ const RegisterFormInputs = ({
           autoComplete="email"
         />
         <TextInputWithError
+          error={touched.firstName ? errors.firstName : undefined}
+          placeholder={t("first_name")}
+          onChangeText={handleChange("firstName")}
+          onBlur={handleBlur("firstName")}
+          nativeID="firstName"
+        />
+        <TextInputWithError
+          error={touched.lastName ? errors.lastName : undefined}
+          placeholder={t("last_name")}
+          onChangeText={handleChange("lastName")}
+          onBlur={handleBlur("lastName")}
+          nativeID="lastName"
+        />
+        <TextInputWithError
           error={touched.password ? errors.password : undefined}
           placeholder={t("password")}
           type="password"

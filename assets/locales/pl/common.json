@@ -13,5 +13,7 @@
   "min_length": "To pole musi posiadać minimum 8 znaków",
   "incorrect_email": "Nieprawidłowy adres e-mail",
   "settings": "Ustawienia",
-  "delete": "Usuń"
+  "delete": "Usuń",
+  "first_name": "Imię",
+  "last_name": "Nazwisko"
 }

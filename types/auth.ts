@@ -5,6 +5,8 @@ export type LoginRequest = {
 
 export type RegisterRequest = {
   email: string;
+  firstName: string;
+  lastName: string;
   password: string;
   confirmPassword: string;
 };

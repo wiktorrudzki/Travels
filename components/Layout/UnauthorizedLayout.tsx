@@ -25,7 +25,7 @@ const UnauthorizedLayout = ({ title, children, otherActions }: Props) => (
     </View>
 
     <View height="3/4" width="full" justifyContent="center" alignItems="center">
-      <View height="75%" width="80%">
+      <View maxHeight="90%" width="80%">
         <Card>
           <View style={styles.cardContent}>
             <Text
