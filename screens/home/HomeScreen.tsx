@@ -1,12 +1,20 @@
-import { PrimaryLinkButton } from "@/components/Button";
+import { PrimaryButton, PrimaryLinkButton } from "@/components/Button";
 import { AuthorizedLayout } from "@/components/Layout";
 import { ROUTES } from "@/constants/routes";
+import { logout } from "@/dal/auth";
+import { useAuth, usePromise } from "@/hooks";
 import React from "react";
 
-const HomeScreen = () => (
-  <AuthorizedLayout>
-    <PrimaryLinkButton text="Home" href={ROUTES.travels} />
-  </AuthorizedLayout>
-);
+const HomeScreen = () => {
+  const { logout: logoutFromApp } = useAuth();
 
+  const [logoutRequest] = usePromise(logout, logoutFromApp);
+
+  return (
+    <AuthorizedLayout>
+      <PrimaryLinkButton text="Home" href={ROUTES.travels} />
+      <PrimaryButton text="logout" onPress={logoutRequest} />
+    </AuthorizedLayout>
+  );
+};
 export default HomeScreen;

@@ -3,3 +3,4 @@ export { default as useShow } from "./useShow";
 export { default as useRouter } from "./useRouter";
 export { default as usePromiseWithLoading } from "./usePromiseWithLoading";
 export { default as usePathname } from "./usePathname";
+export { useAuth, AuthProvider } from "./useAuth";

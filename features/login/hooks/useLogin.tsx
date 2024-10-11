@@ -1,23 +1,16 @@
-import { ROUTES } from "@/constants/routes";
 import { login } from "@/dal/auth";
-import { usePromise, useRouter } from "@/hooks";
+import { useAuth, usePromise } from "@/hooks";
 import { toaster } from "@/lib/native-base";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, string } from "yup";
-import * as SecureStore from "expo-secure-store";
 
 const useLogin = () => {
   const { t } = useTranslation();
 
-  const { replace } = useRouter();
+  const { login: loginToApp } = useAuth();
 
-  const successfullLogin = (value: string) =>
-    SecureStore.setItemAsync("Authorization", value).then(() =>
-      replace(ROUTES.home)
-    );
-
-  const [loginRequest] = usePromise(login, successfullLogin, (e) =>
+  const [loginRequest] = usePromise(login, loginToApp, (e) =>
     toaster({ text: e, variant: "danger" })
   );
 

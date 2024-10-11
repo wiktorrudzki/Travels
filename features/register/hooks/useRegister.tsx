@@ -1,23 +1,16 @@
-import { usePromise, useRouter } from "@/hooks";
+import { useAuth, usePromise, useRouter } from "@/hooks";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, ref, string } from "yup";
-import * as SecureStore from "expo-secure-store";
 import { toaster } from "@/lib/native-base";
-import { ROUTES } from "@/constants/routes";
 import { register } from "@/dal/auth";
 
 const useRegister = () => {
   const { t } = useTranslation(["common", "register"]);
 
-  const { replace } = useRouter();
+  const { login } = useAuth();
 
-  const successfullRegister = (value: string) =>
-    SecureStore.setItemAsync("Authorization", value).then(() =>
-      replace(ROUTES.home)
-    );
-
-  const [registerRequest] = usePromise(register, successfullRegister, (e) =>
+  const [registerRequest] = usePromise(register, login, (e) =>
     toaster({ variant: "info", text: e })
   );
 
