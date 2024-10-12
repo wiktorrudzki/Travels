@@ -120,3 +120,15 @@ export const CARD_TITLE: TextStyle = {
   lineHeight: SPACING.MEDIUM,
   fontWeight: BOLD,
 };
+
+export const DASH_BOTTOM: ViewStyle = {
+  borderBottomWidth: 1,
+  borderStyle: "solid",
+};
+
+export const BOLD_UPPERCASED_TITLE: TextStyle = {
+  fontSize: SPACING.GIGANTIC / 2,
+  lineHeight: SPACING.GIGANTIC / 2,
+  fontWeight: BOLD,
+  textTransform: "uppercase",
+};

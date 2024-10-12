@@ -7,14 +7,14 @@ type Props = Omit<React.ComponentPropsWithRef<typeof Button>, "color"> & {
   text: string;
 };
 
-const PrimaryButton = ({ text, ...rest }: Props) => {
+const DangerButton = ({ text, ...rest }: Props) => {
   const { colors } = useTheme();
 
   return (
     <Button
       opacity={rest.disabled ? DISABLED : 1}
       rounded="3xl"
-      backgroundColor={colors.primary[400]}
+      backgroundColor={colors.error[500]}
       size="lg"
       {...rest}
     >
@@ -23,4 +23,4 @@ const PrimaryButton = ({ text, ...rest }: Props) => {
   );
 };
 
-export default PrimaryButton;
+export default DangerButton;

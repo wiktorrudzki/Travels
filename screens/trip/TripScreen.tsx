@@ -9,9 +9,7 @@ import { useTranslation } from "react-i18next";
 const TripScreen = () => {
   const { id } = useLocalSearchParams();
 
-  const {t} = useTranslation();
-
-  console.log(id);
+  const { t } = useTranslation();
 
   return (
     <AuthorizedLayout

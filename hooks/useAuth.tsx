@@ -8,10 +8,11 @@ import React, {
   useState,
 } from "react";
 import * as SecureStore from "expo-secure-store";
-import useRouter from "./useRouter";
-import { ROUTES } from "@/constants/routes";
 import usePromise from "./usePromise";
 import { verifySession } from "@/dal/auth";
+import { TWENTY_SECONDS } from "@/constants/time";
+import { toaster } from "@/lib/native-base";
+import { useTranslation } from "react-i18next";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -23,16 +24,18 @@ export const AuthProvider = ({ children }: Props) => {
   const [isSignedIn, setIsSignedIn] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { replace } = useRouter();
+  const { t } = useTranslation("common");
 
   const loginToApp = () => {
     setIsSignedIn("true");
-    replace(ROUTES.home);
   };
 
-  const logoutFromApp = () => {
-    setIsSignedIn("false");
-  };
+  const logoutFromApp = async () =>
+    SecureStore.deleteItemAsync("Authorization")
+      .then(() => setIsSignedIn("false"))
+      .catch((e) => {
+        console.log(e);
+      });
 
   const successfullAuth = () => {
     setLoading(false);
@@ -40,8 +43,13 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const failureAuth = () => {
-    setIsSignedIn("false");
+    logoutFromApp();
     setLoading(false);
+  };
+
+  const failureVerify = () => {
+    toaster({ text: t("session_expired"), variant: "danger" });
+    logoutFromApp();
   };
 
   const [verifyAuthorization] = usePromise(
@@ -49,6 +57,8 @@ export const AuthProvider = ({ children }: Props) => {
     successfullAuth,
     failureAuth
   );
+
+  const [checkSession] = usePromise(verifySession, undefined, failureVerify);
 
   useEffect(() => {
     verifyAuthorization();
@@ -69,6 +79,22 @@ export const AuthProvider = ({ children }: Props) => {
     () => Boolean(isSignedIn && isSignedIn === "true"),
     [isSignedIn]
   );
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isLoggedIn) {
+      interval = setInterval(() => {
+        checkSession();
+      }, TWENTY_SECONDS);
+    }
+
+    return () => {
+      if (interval !== null) {
+        clearInterval(interval);
+      }
+    };
+  }, [isLoggedIn]);
 
   const value = {
     isLoggedIn,

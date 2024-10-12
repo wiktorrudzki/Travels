@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     ...FULL_WIDTH,
     position: "relative",
-    height: "30%",
+    height: "25%",
     justifyContent: "center",
   },
   badge: {

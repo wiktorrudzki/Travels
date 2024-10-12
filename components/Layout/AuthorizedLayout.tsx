@@ -9,6 +9,7 @@ import {
   FULL_WIDTH,
   SPACING,
 } from "@/constants/styles";
+import { useTheme } from "native-base";
 
 type Props = {
   title?: React.ReactNode;
@@ -16,8 +17,10 @@ type Props = {
 };
 
 const AuthorizedLayout = ({ children, title }: Props) => {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} backgroundColor={colors.white}>
       {title}
       <View style={styles.content}>{children}</View>
       <View style={styles.navbar}>
@@ -31,11 +34,11 @@ const styles = StyleSheet.create({
   container: {
     ...FULL_SPACE,
     ...FLEX_COLUMN,
-    backgroundColor: "#fff",
   },
   content: {
     paddingLeft: SPACING.HUGE,
     paddingRight: SPACING.HUGE,
+    marginTop: SPACING.HUGE,
   },
   navbar: {
     ...FULL_WIDTH,

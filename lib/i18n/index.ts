@@ -13,6 +13,7 @@ export const resources = {
     login: pl.login,
     register: pl.register,
     travels: pl.travels,
+    account: pl.account,
   },
   en: {
     common: en.common,
@@ -20,6 +21,7 @@ export const resources = {
     login: en.login,
     register: en.register,
     travels: en.travels,
+    account: en.account,
   },
 } as const;
 

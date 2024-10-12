@@ -15,5 +15,7 @@
   "settings": "Settings",
   "delete": "Delete",
   "first_name": "First Name",
-  "last_name": "Last Name"
+  "last_name": "Last Name",
+  "session_expired": "Your session has expired",
+  "logout": "Logout"
 }

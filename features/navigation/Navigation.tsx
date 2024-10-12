@@ -19,8 +19,6 @@ const Navigation = () => {
   const SignedStack = createStackNavigator();
   const UnnsignedStack = createStackNavigator();
 
-  console.log(isLoggedIn);
-
   return (
     <>
       {isLoggedIn ? (

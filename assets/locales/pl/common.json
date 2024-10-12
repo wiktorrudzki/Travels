@@ -15,5 +15,7 @@
   "settings": "Ustawienia",
   "delete": "Usuń",
   "first_name": "Imię",
-  "last_name": "Nazwisko"
+  "last_name": "Nazwisko",
+  "session_expired": "Twoja sesja wygasła",
+  "logout": "Wyloguj"
 }
