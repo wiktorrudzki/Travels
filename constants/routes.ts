@@ -1,4 +1,3 @@
-import { Tab } from "@/types/account";
 import { Routes } from "@/types/routes";
 
 export const ROUTES: Routes = {
@@ -13,15 +12,28 @@ export const ROUTES: Routes = {
 
 export const ACCOUNT_TABS = [
   {
-    title: "General",
+    title: "general",
     tabs: [
       {
-        title: "Account",
+        title: "account",
         href: ROUTES.home,
       },
       {
-        title: "Change password",
+        title: "change_password",
         href: ROUTES.travels,
+      },
+    ],
+  },
+  {
+    title: "friends",
+    tabs: [
+      {
+        title: "friends_list",
+        href: ROUTES.home,
+      },
+      {
+        title: "add_friend",
+        href: ROUTES.home,
       },
     ],
   },

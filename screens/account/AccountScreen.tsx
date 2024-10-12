@@ -18,8 +18,12 @@ const AccountScreen = () => {
   return (
     <AuthorizedLayout title={<TabBadge title={t("common:settings")} />}>
       <View style={styles.container}>
-        {ACCOUNT_TABS.map(({ title, tabs }) => (
-          <Section title={t(`account:${title}`)} tabs={tabs} />
+        {ACCOUNT_TABS.map(({ title, tabs }, index) => (
+          <Section
+            key={`${title}_${index}`}
+            title={t(`account:${title}`)}
+            tabs={tabs}
+          />
         ))}
         <DangerButton text={t("common:logout")} onPress={logout} />
       </View>

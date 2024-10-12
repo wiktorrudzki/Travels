@@ -1,6 +1,9 @@
 {
-  "General": "Ogólne",
-  "Account": "Konto",
-  "Change password": "Zmień hasło",
-  "logout_success": "Pomyslnie wylogowano z aplikacji"
+  "general": "Ogólne",
+  "account": "Konto",
+  "change_password": "Zmień hasło",
+  "logout_success": "Pomyslnie wylogowano z aplikacji",
+  "friends": "Znajomi",
+  "friends_list": "Lista znajomych",
+  "add_friend": "Dodaj znajomego"
 }

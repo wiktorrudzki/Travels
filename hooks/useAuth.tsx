@@ -13,6 +13,8 @@ import { verifySession } from "@/dal/auth";
 import { TWENTY_SECONDS } from "@/constants/time";
 import { toaster } from "@/lib/native-base";
 import { useTranslation } from "react-i18next";
+import { AxiosResponseHeaders } from "axios";
+import { decocdeAuthorizationHeader } from "@/utils/jwt";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -64,11 +66,16 @@ export const AuthProvider = ({ children }: Props) => {
     verifyAuthorization();
   }, []);
 
-  const login = useCallback(
-    (token: string) =>
-      SecureStore.setItemAsync("Authorization", token).then(loginToApp),
-    []
-  );
+  const login = useCallback((_: unknown, headers: AxiosResponseHeaders) => {
+    SecureStore.setItemAsync(
+      "Authorization",
+      decocdeAuthorizationHeader(headers.get("Authorization"))
+    ).then(loginToApp);
+    SecureStore.setItemAsync(
+      "UserId",
+      headers.get("UserId")?.toString() || ""
+    ).then(loginToApp);
+  }, []);
 
   const logout = useCallback(
     () => SecureStore.deleteItemAsync("Authorization").then(logoutFromApp),

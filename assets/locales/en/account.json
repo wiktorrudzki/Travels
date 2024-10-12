@@ -1,6 +1,9 @@
 {
-  "General": "General",
-  "Account": "Account",
-  "Change password": "Change password",
-  "logout_success": "Successfully logout from the app"
+  "general": "General",
+  "account": "Account",
+  "change_password": "Change password",
+  "logout_success": "Successfully logout from the app",
+  "friends": "Friends",
+  "friends_list": "List of friends",
+  "add_friend": "Add new friend"
 }

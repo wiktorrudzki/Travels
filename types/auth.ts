@@ -1,3 +1,5 @@
+import { AxiosResponseHeaders } from "axios";
+
 export type LoginRequest = {
   email: string;
   password: string;
@@ -13,6 +15,6 @@ export type RegisterRequest = {
 
 export type AuthContextType = {
   isLoggedIn: boolean;
-  login: (token: string) => void;
+  login: (_: unknown, headers: AxiosResponseHeaders) => void;
   logout: () => void;
 };
