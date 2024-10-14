@@ -4,7 +4,7 @@ import { AccountScreen } from "@/screens/account";
 import { HomeScreen } from "@/screens/home";
 import { LoginScreen } from "@/screens/login";
 import { RegisterScreen } from "@/screens/register";
-import { TravelsScreen } from "@/screens/travels";
+import { TripsScreen } from "@/screens/trips";
 import { TripScreen } from "@/screens/trip";
 import { WelcomeScreen } from "@/screens/welcome";
 import { useRoute } from "@react-navigation/native";
@@ -28,7 +28,7 @@ const Navigation = () => {
         >
           <SignedStack.Screen name="account" component={AccountScreen} />
           <SignedStack.Screen name="home" component={HomeScreen} />
-          <SignedStack.Screen name="travels" component={TravelsScreen} />
+          <SignedStack.Screen name="trips" component={TripsScreen} />
           <SignedStack.Screen name="trip" component={TripScreen} />
         </SignedStack.Navigator>
       ) : (

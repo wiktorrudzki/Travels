@@ -27,7 +27,7 @@ const Navbar = () => {
       <NavbarIcon
         icon={<Calendar />}
         checkedIcon={<CalendarChecked />}
-        href={ROUTES.travels}
+        href={ROUTES.trips}
       />
       <NavbarIcon
         icon={<User />}

@@ -10,13 +10,18 @@ import {
   SHADOW,
   SPACING,
 } from "@/constants/styles";
+import { Trip } from "@/types/trip";
 import { Image, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
-const MainTravelCard = () => {
-  const { t } = useTranslation("travels");
+type Props = {
+  trip: Trip;
+};
+
+const MainTripCard = ({ trip }: Props) => {
+  const { t } = useTranslation("trips");
 
   const { colors } = useTheme();
 
@@ -30,7 +35,7 @@ const MainTravelCard = () => {
         style={styles.image}
       />
       <View style={styles.textWrapper}>
-        <Text style={styles.title} text="Mallorca" />
+        <Text style={styles.title} text={trip.title} />
         <Text text="12.09.2024 - 17.09.2024" />
         <Text text={`${2} ${t("participants")}`} />
       </View>
@@ -60,4 +65,4 @@ const styles = StyleSheet.create({
   title: MAIN_CARD_TITLE,
 });
 
-export default MainTravelCard;
+export default MainTripCard;

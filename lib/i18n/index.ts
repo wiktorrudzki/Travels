@@ -12,7 +12,7 @@ export const resources = {
     welcome: pl.welcome,
     login: pl.login,
     register: pl.register,
-    travels: pl.travels,
+    trips: pl.trips,
     account: pl.account,
   },
   en: {
@@ -20,7 +20,7 @@ export const resources = {
     welcome: en.welcome,
     login: en.login,
     register: en.register,
-    travels: en.travels,
+    trips: en.trips,
     account: en.account,
   },
 } as const;

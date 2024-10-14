@@ -12,7 +12,7 @@ const HomeScreen = () => {
 
   return (
     <AuthorizedLayout>
-      <PrimaryLinkButton text="Home" href={ROUTES.travels} />
+      <PrimaryLinkButton text="Home" href={ROUTES.trips} />
       <PrimaryButton text="logout" onPress={logoutRequest} />
     </AuthorizedLayout>
   );

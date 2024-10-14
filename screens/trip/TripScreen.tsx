@@ -15,10 +15,10 @@ const TripScreen = () => {
     <AuthorizedLayout
       title={
         <TabBadge
-          goBack={{
-            href: "/travels",
-            text: "Travels",
-          }}
+          // goBack={{
+          //   href: "/trips",
+          //   text: "Trips",
+          // }}
           title={t("Settings")}
         />
       }

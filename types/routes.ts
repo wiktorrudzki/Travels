@@ -4,7 +4,7 @@ export type StaticRoutes = {
   register: "/register";
   account: "/account";
   home: "/home";
-  travels: "/travels";
+  trips: "/trips";
 };
 
 export type DynamicRoutes = {

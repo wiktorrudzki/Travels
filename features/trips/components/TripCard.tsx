@@ -12,20 +12,25 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { useRouter } from "@/hooks";
+import { Trip } from "@/types/trip";
 import { Image, Menu, Pressable, ThreeDotsIcon, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
-const TravelCard = () => {
-  const { t } = useTranslation(["common", "travels"]);
+type Props = {
+  trip: Trip;
+};
+
+const TripCard = ({ trip }: Props) => {
+  const { t } = useTranslation(["common", "trips"]);
 
   const { colors } = useTheme();
 
   const { push } = useRouter();
 
   return (
-    <Pressable onPress={() => push(ROUTES.trip("123"))}>
+    <Pressable onPress={() => push(ROUTES.trip(trip.id))}>
       <View style={styles.container} backgroundColor={colors.white}>
         <View style={styles.content}>
           <Image
@@ -36,7 +41,7 @@ const TravelCard = () => {
             style={styles.image}
           />
           <View style={styles.textWrapper}>
-            <Text style={styles.title} text="Mallorca" />
+            <Text style={styles.title} text={trip.title} />
             <Text text="12.09.2024 - 17.09.2024" />
           </View>
         </View>
@@ -47,8 +52,8 @@ const TravelCard = () => {
             </Pressable>
           )}
         >
-          <Menu.Item>{t("change_name", { ns: "travels" })}</Menu.Item>
-          <Menu.Item>{t("delete", { ns: "common" })}</Menu.Item>
+          <Menu.Item>{t("trips:change_name")}</Menu.Item>
+          <Menu.Item>{t("commondelete")}</Menu.Item>
         </Menu>
       </View>
     </Pressable>
@@ -86,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TravelCard;
+export default TripCard;

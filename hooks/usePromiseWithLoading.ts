@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const usePromiseWithLoading = <T extends unknown[], A>(
   creator: (...args: T) => Promise<AxiosResponse<A>>,
-  onSuccess?: (data: AxiosResponse<A>) => void,
+  onSuccess?: (data: A) => void,
   onFailure?: (err: AxiosError) => void
 ) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +13,7 @@ const usePromiseWithLoading = <T extends unknown[], A>(
     setTimeout(() => {}, 2000);
 
     return creator(...args)
-      .then((data) => {
+      .then(({ data }) => {
         if (onSuccess) {
           onSuccess(data);
         }

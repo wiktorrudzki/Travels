@@ -4,7 +4,7 @@ export const ROUTES: Routes = {
   welcome: "/",
   login: "/login",
   register: "/register",
-  travels: "/travels",
+  trips: "/trips",
   home: "/home",
   account: "/account",
   trip: (id: string) => `/trip/${id}`,
@@ -20,7 +20,7 @@ export const ACCOUNT_TABS = [
       },
       {
         title: "change_password",
-        href: ROUTES.travels,
+        href: ROUTES.trips,
       },
     ],
   },
