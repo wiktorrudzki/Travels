@@ -1,3 +1,3 @@
 import { api } from "@/api";
 
-export const getTrip = (id: number) => api.get("/");
+export const getTrips = () => api.get("/trip");

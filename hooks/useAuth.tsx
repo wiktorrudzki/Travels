@@ -71,10 +71,6 @@ export const AuthProvider = ({ children }: Props) => {
       "Authorization",
       decocdeAuthorizationHeader(headers.get("Authorization"))
     ).then(loginToApp);
-    SecureStore.setItemAsync(
-      "UserId",
-      headers.get("UserId")?.toString() || ""
-    ).then(loginToApp);
   }, []);
 
   const logout = useCallback(

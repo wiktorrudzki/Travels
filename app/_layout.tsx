@@ -5,9 +5,9 @@ import "react-native-reanimated";
 
 import { extendTheme, NativeBaseProvider } from "native-base";
 import "@/lib/i18n";
-import { COLORS } from "@/constants/colors";
 import { AuthProvider } from "@/hooks";
 import { Navigation } from "@/features/navigation";
+import { COLORS } from "@/constants/colors";
 
 const newColorTheme = COLORS;
 const theme = extendTheme({ colors: newColorTheme });
