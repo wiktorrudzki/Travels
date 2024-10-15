@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
   },
   goBackWrapper: {
     ...CENTER_FLEX,
-    justifyContent: "flex-start",
     gap: SPACING.SMALL,
+    justifyContent: "flex-start",
   },
   title: SEMI_BOLD_TITLE,
 });

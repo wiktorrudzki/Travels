@@ -3,8 +3,8 @@ import { RouteProp } from "@react-navigation/native";
 export type Trip = {
   id: string;
   title: string;
-  start: Date;
-  end: Date;
+  start: string;
+  end: string;
   events: [];
   participants: [];
 };

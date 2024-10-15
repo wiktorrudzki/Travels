@@ -76,6 +76,13 @@ export const SHADOW: ViewStyle = {
   elevation: 5,
 };
 
+export const LITTLE_SHADOW: ViewStyle = {
+  shadowOffset: { width: 0, height: 0 },
+  shadowOpacity: 0.07,
+  shadowRadius: 15,
+  elevation: 5,
+};
+
 export const ICON_SHADOW: ViewStyle = {
   shadowOffset: { width: 0, height: -1 },
   shadowOpacity: 1,
