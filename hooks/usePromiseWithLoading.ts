@@ -6,11 +6,13 @@ const usePromiseWithLoading = <T extends unknown[], A>(
   onSuccess?: (data: A) => void,
   onFailure?: (err: AxiosError) => void
 ) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [{ runBefore, isLoading }, setIsLoading] = useState<{
+    runBefore: boolean;
+    isLoading: boolean;
+  }>({ runBefore: false, isLoading: false });
 
   const invoker = async (...args: T) => {
-    setIsLoading(true);
-    setTimeout(() => {}, 2000);
+    setIsLoading({ runBefore: true, isLoading: true });
 
     return creator(...args)
       .then(({ data }) => {
@@ -23,10 +25,10 @@ const usePromiseWithLoading = <T extends unknown[], A>(
           onFailure(e);
         }
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoading({ runBefore: true, isLoading: false }));
   };
 
-  return [invoker, isLoading] as const;
+  return [invoker, isLoading, runBefore] as const;
 };
 
 export default usePromiseWithLoading;

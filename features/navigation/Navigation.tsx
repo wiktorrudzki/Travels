@@ -1,15 +1,14 @@
-import NotFoundScreen from "@/app/+not-found";
 import { useAuth } from "@/hooks";
-import { AccountScreen } from "@/screens/account";
-import { HomeScreen } from "@/screens/home";
-import { LoginScreen } from "@/screens/login";
-import { RegisterScreen } from "@/screens/register";
-import { TripsScreen } from "@/screens/trips";
-import { TripScreen } from "@/screens/trip";
-import { WelcomeScreen } from "@/screens/welcome";
-import { useRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import Account from "@/app/account";
+import Home from "@/app/home";
+import Trips from "@/app/trips";
+import Trip from "@/app/trip/[id]";
+import NotFound from "@/app/+not-found";
+import Login from "@/app/login";
+import Register from "@/app/register";
+import Welcome from "@/app/welcome";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
@@ -26,20 +25,21 @@ const Navigation = () => {
           initialRouteName="home"
           screenOptions={DEFAULT_SCREEN_OPTIONS}
         >
-          <SignedStack.Screen name="account" component={AccountScreen} />
-          <SignedStack.Screen name="home" component={HomeScreen} />
-          <SignedStack.Screen name="trips" component={TripsScreen} />
-          <SignedStack.Screen name="trip" component={TripScreen} />
+          <SignedStack.Screen name="account" component={Account} />
+          <SignedStack.Screen name="home" component={Home} />
+          <SignedStack.Screen name="trips" component={Trips} />
+          <SignedStack.Screen name="trip/[id]" component={Trip} />
+          <UnnsignedStack.Screen name="+not-found" component={NotFound} />
         </SignedStack.Navigator>
       ) : (
         <UnnsignedStack.Navigator
           initialRouteName="welcome"
           screenOptions={DEFAULT_SCREEN_OPTIONS}
         >
-          <UnnsignedStack.Screen name="not-found" component={NotFoundScreen} />
-          <UnnsignedStack.Screen name="login" component={LoginScreen} />
-          <UnnsignedStack.Screen name="register" component={RegisterScreen} />
-          <UnnsignedStack.Screen name="welcome" component={WelcomeScreen} />
+          <UnnsignedStack.Screen name="+not-found" component={NotFound} />
+          <UnnsignedStack.Screen name="login" component={Login} />
+          <UnnsignedStack.Screen name="register" component={Register} />
+          <UnnsignedStack.Screen name="welcome" component={Welcome} />
         </UnnsignedStack.Navigator>
       )}
     </>

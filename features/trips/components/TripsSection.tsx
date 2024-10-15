@@ -7,13 +7,12 @@ import { SPACING } from "@/constants/styles";
 import { useTrips } from "../hooks";
 import { Text } from "@/components/Text";
 import { useTranslation } from "react-i18next";
+import { Spinner } from "native-base";
 
 const TripsSection = () => {
-  const { trips } = useTrips();
+  const { trips, isLoading, runBefore } = useTrips();
 
   const { t } = useTranslation("trips");
-
-  console.log(trips);
 
   const mainTrip = useMemo(
     () => (trips.length > 0 ? trips[0] : undefined),
@@ -23,6 +22,14 @@ const TripsSection = () => {
     () => (trips.length > 1 ? trips.slice(1) : []),
     [trips]
   );
+
+  if (isLoading || !runBefore) {
+    return (
+      <View>
+        <Spinner size="lg" />
+      </View>
+    );
+  }
 
   if (mainTrip == undefined) {
     return (

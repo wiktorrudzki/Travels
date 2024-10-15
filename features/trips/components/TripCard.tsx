@@ -12,6 +12,7 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { useRouter } from "@/hooks";
+import { formatToDate } from "@/lib/date-fns";
 import { Trip } from "@/types/trip";
 import { Image, Menu, Pressable, ThreeDotsIcon, useTheme } from "native-base";
 import React from "react";
@@ -42,7 +43,9 @@ const TripCard = ({ trip }: Props) => {
           />
           <View style={styles.textWrapper}>
             <Text style={styles.title} text={trip.title} />
-            <Text text="12.09.2024 - 17.09.2024" />
+            <Text
+              text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
+            />
           </View>
         </View>
         <Menu
@@ -53,7 +56,7 @@ const TripCard = ({ trip }: Props) => {
           )}
         >
           <Menu.Item>{t("trips:change_name")}</Menu.Item>
-          <Menu.Item>{t("commondelete")}</Menu.Item>
+          <Menu.Item>{t("common:delete")}</Menu.Item>
         </Menu>
       </View>
     </Pressable>

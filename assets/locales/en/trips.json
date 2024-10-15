@@ -1,5 +1,6 @@
 {
   "participants": "participants",
   "change_name": "Change name",
-  "no_trips_planned": "There are no trips planned in the future. It's the high time to change it!"
+  "no_trips_planned": "There are no trips planned in the future. It's the high time to change it!",
+  "trips": "Trips"
 }

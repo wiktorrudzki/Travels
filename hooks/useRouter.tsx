@@ -1,12 +1,12 @@
 import { RouteValues } from "@/types/routes";
-import { useRouter as useRouterNative } from "expo-router";
+import { Href, useRouter as useRouterNative } from "expo-router";
 
 const useRouter = () => {
   const router = useRouterNative();
 
-  const replace = (path: RouteValues) => router.replace(path);
+  const replace = (path: RouteValues) => router.replace(path as Href);
 
-  const push = (path: RouteValues) => router.push(path);
+  const push = (path: RouteValues) => router.push(path as Href);
 
   return { router, replace, push };
 };

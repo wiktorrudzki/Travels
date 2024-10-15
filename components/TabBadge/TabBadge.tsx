@@ -11,6 +11,7 @@ import {
 import { Text } from "../Text";
 import { RouteValues } from "@/types/routes";
 import { ArrowBackIcon, useTheme } from "native-base";
+import { Link } from "@react-navigation/native";
 
 type Props = {
   title?: string;
@@ -28,12 +29,12 @@ const TabBadge = ({ title, goBack }: Props) => {
       <View style={styles.badge} backgroundColor={colors.primary[400]} />
       <View style={styles.textWrapper}>
         {goBack && (
-          // <Link href={goBack.href}>
-          <View style={styles.goBackWrapper}>
-            <ArrowBackIcon color={colors.white} />
-            <Text color={colors.white} text={goBack.text} />
-          </View>
-          // </Link>
+          <Link to={goBack.href}>
+            <View style={styles.goBackWrapper}>
+              <ArrowBackIcon color={colors.white} />
+              <Text color={colors.white} text={goBack.text} />
+            </View>
+          </Link>
         )}
         {title && (
           <Text text={title} color={colors.white} style={styles.title} />

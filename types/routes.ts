@@ -5,6 +5,7 @@ export type StaticRoutes = {
   account: "/account";
   home: "/home";
   trips: "/trips";
+  notFound: "not-found";
 };
 
 export type DynamicRoutes = {
@@ -14,5 +15,5 @@ export type DynamicRoutes = {
 export type Routes = StaticRoutes & DynamicRoutes;
 
 export type RouteValues =
-  | Routes[keyof StaticRoutes]
-  | ReturnType<DynamicRoutes["trip"]>;
+  | StaticRoutes[keyof StaticRoutes]
+  | ReturnType<DynamicRoutes[keyof DynamicRoutes]>;

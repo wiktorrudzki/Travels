@@ -12,9 +12,12 @@ type Props = {
 const TripsProvider = ({ children }: Props) => {
   const [trips, setTrips] = useState<Trip[]>([]);
 
-  const [getAll, isLoading] = usePromiseWithLoading(getTrips, (data) => {
-    setTrips(data);
-  });
+  const [getAll, isLoading, runBefore] = usePromiseWithLoading(
+    getTrips,
+    (data) => {
+      setTrips(data);
+    }
+  );
 
   useEffect(() => {
     getAll();
@@ -22,7 +25,8 @@ const TripsProvider = ({ children }: Props) => {
 
   const value: TripsContextType = {
     trips,
-    isLoading
+    isLoading,
+    runBefore,
   };
 
   return (

@@ -10,6 +10,7 @@ import {
   SHADOW,
   SPACING,
 } from "@/constants/styles";
+import { formatToDate } from "@/lib/date-fns";
 import { Trip } from "@/types/trip";
 import { Image, useTheme } from "native-base";
 import React from "react";
@@ -36,7 +37,9 @@ const MainTripCard = ({ trip }: Props) => {
       />
       <View style={styles.textWrapper}>
         <Text style={styles.title} text={trip.title} />
-        <Text text="12.09.2024 - 17.09.2024" />
+        <Text
+          text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
+        />
         <Text text={`${2} ${t("participants")}`} />
       </View>
     </View>
