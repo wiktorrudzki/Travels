@@ -1,8 +1,7 @@
-import { PrimaryButton, PrimaryLinkButton } from "@/components/Button";
+import { PrimaryButton } from "@/components/Button";
 import { AuthorizedLayout } from "@/components/Layout";
-import { ROUTES } from "@/constants/routes";
 import { logout } from "@/dal/auth";
-import { useAuth, usePromise } from "@/hooks";
+import { useAuth, usePromise, useSignedInNavigation } from "@/hooks";
 import React from "react";
 
 const HomeScreen = () => {
@@ -10,13 +9,13 @@ const HomeScreen = () => {
 
   const [logoutRequest] = usePromise(logout, logoutFromApp);
 
+  const { push } = useSignedInNavigation();
+
   return (
     <AuthorizedLayout>
-      <PrimaryLinkButton text="Home" href={ROUTES.trips} />
+      <PrimaryButton text="Home" onPress={() => push("home")} />
       <PrimaryButton text="logout" onPress={logoutRequest} />
     </AuthorizedLayout>
   );
 };
 export default HomeScreen;
-
-// TODO DODAĆ WALIDACJĘ TOKENA W ATRYBUCIE AUTHORIZE NA BACKENDZIE, PRZENIEŚC PRZYCISK DO WYLOGOWANIA DO ZAKŁADKI /ACCOUNT

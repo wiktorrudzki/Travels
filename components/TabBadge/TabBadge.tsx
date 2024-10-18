@@ -9,15 +9,15 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { Text } from "../Text";
-import { RouteValues } from "@/types/routes";
 import { ArrowBackIcon, useTheme } from "native-base";
-import { Link } from "@react-navigation/native";
+import { RootStackSignedInPropsList } from "@/types/routes";
+import { SignedLink } from "../Link";
 
 type Props = {
   title?: string;
   goBack?: {
     text: string;
-    href: RouteValues;
+    to: keyof RootStackSignedInPropsList;
   };
 };
 
@@ -29,12 +29,12 @@ const TabBadge = ({ title, goBack }: Props) => {
       <View style={styles.badge} backgroundColor={colors.primary[400]} />
       <View style={styles.textWrapper}>
         {goBack && (
-          <Link to={goBack.href}>
+          <SignedLink to={{ screen: goBack.to }}>
             <View style={styles.goBackWrapper}>
               <ArrowBackIcon color={colors.white} />
               <Text color={colors.white} text={goBack.text} />
             </View>
-          </Link>
+          </SignedLink>
         )}
         {title && (
           <Text text={title} color={colors.white} style={styles.title} />

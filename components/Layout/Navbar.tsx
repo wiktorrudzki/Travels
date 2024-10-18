@@ -10,7 +10,6 @@ import {
 } from "@/assets/icons";
 import { StyleSheet } from "react-native";
 import { EVENLY_FLEX, FULL_WIDTH, SHADOW, SPACING } from "@/constants/styles";
-import { ROUTES } from "@/constants/routes";
 import NavbarIcon from "./NavbarIcon";
 import { useTheme } from "native-base";
 
@@ -22,17 +21,17 @@ const Navbar = () => {
       <NavbarIcon
         icon={<Search />}
         checkedIcon={<SearchChecked />}
-        href={ROUTES.home}
+        href="home"
       />
       <NavbarIcon
         icon={<Calendar />}
         checkedIcon={<CalendarChecked />}
-        href={ROUTES.trips}
+        href="trips"
       />
       <NavbarIcon
         icon={<User />}
         checkedIcon={<UserChecked />}
-        href={ROUTES.account}
+        href="account"
       />
     </View>
   );

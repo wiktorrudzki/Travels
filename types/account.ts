@@ -1,6 +1,6 @@
-import { RouteValues } from "./routes";
+import { RootStackSignedInPropsList } from "./routes";
 
 export type Tab = {
   title: string;
-  href: RouteValues;
+  to: keyof RootStackSignedInPropsList;
 };

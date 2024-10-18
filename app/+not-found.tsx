@@ -1,29 +1,36 @@
-import { Link } from "@/components/Link";
+import { SignedLinkButton, UnsignedLinkButton } from "@/components/Button";
 import { Text } from "@/components/Text";
 import { View } from "@/components/View";
-import { ROUTES } from "@/constants/routes";
+import { CENTER_FLEX, FULL_SPACE } from "@/constants/styles";
 import { useAuth } from "@/hooks";
+import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 
 export default function NotFound() {
   const { isLoggedIn } = useAuth();
 
+  const { t } = useTranslation();
+
+  const notFoundText = t("not_found_link");
+
+  console.log(isLoggedIn);
+
   return (
     <View style={styles.container}>
-      <Text text="Oops! Looks like you got lost. Content not found" />
-      <Link href={isLoggedIn ? ROUTES.home : ROUTES.login}>
-        <Text text="come back" />
-      </Link>
+      <Text text={t("not_found_message")} />
+      {isLoggedIn ? (
+        <SignedLinkButton text={notFoundText} href={{ screen: "home" }} />
+      ) : (
+        <UnsignedLinkButton text={notFoundText} href={{ screen: "login" }} />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    ...CENTER_FLEX,
+    ...FULL_SPACE,
+    flexDirection: "column",
   },
 });

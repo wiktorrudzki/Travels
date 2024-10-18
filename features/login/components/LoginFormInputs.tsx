@@ -1,7 +1,6 @@
-import { LinkButton, PrimaryButton } from "@/components/Button";
+import { UnsignedLinkButton, PrimaryButton } from "@/components/Button";
 import { TextInputWithError } from "@/components/Input";
 import { View } from "@/components/View";
-import { ROUTES } from "@/constants/routes";
 import { LoginRequest } from "@/types/auth";
 import { FormikProps } from "formik";
 import { FormControl } from "native-base";
@@ -40,7 +39,7 @@ const LoginFormInputs = ({
           onBlur={handleBlur("password")}
           nativeID="password"
         />
-        <LinkButton text={t("forgot_pwd")} href={ROUTES.login} />
+        <UnsignedLinkButton text={t("forgot_pwd")} href={{ screen: "/login" }} />
       </View>
       <PrimaryButton onPress={() => handleSubmit()} text={t("log_in")} />
     </FormControl>

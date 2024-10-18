@@ -1,4 +1,4 @@
-import { useAuth, usePromise, useRouter } from "@/hooks";
+import { useAuth, usePromise } from "@/hooks";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, ref, string } from "yup";

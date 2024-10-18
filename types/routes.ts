@@ -1,19 +1,16 @@
-export type StaticRoutes = {
-  welcome: "/";
-  login: "/login";
-  register: "/register";
-  account: "/account";
-  home: "/home";
-  trips: "/trips";
-  notFound: "not-found";
+export type RootStackSignedInPropsList = {
+  account: undefined;
+  home: undefined;
+  trips: undefined;
+  trip: { id: string };
+  "*": undefined;
+  "+not-found": undefined;
 };
 
-export type DynamicRoutes = {
-  trip: (id: string) => `/trip/${typeof id}`;
+export type RootStackUnsignedInPropsList = {
+  "*": undefined;
+  "+not-found": undefined;
+  login: undefined;
+  register: undefined;
+  welcome: undefined;
 };
-
-export type Routes = StaticRoutes & DynamicRoutes;
-
-export type RouteValues =
-  | StaticRoutes[keyof StaticRoutes]
-  | ReturnType<DynamicRoutes[keyof DynamicRoutes]>;

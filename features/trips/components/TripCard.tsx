@@ -1,6 +1,5 @@
 import { Text } from "@/components/Text";
 import { View } from "@/components/View";
-import { ROUTES } from "@/constants/routes";
 import {
   CARD_TITLE,
   CENTER_FLEX,
@@ -11,7 +10,7 @@ import {
   SHADOW,
   SPACING,
 } from "@/constants/styles";
-import { useRouter } from "@/hooks";
+import { useSignedInNavigation } from "@/hooks";
 import { formatToDate } from "@/lib/date-fns";
 import { Trip } from "@/types/trip";
 import { Image, Menu, Pressable, ThreeDotsIcon, useTheme } from "native-base";
@@ -28,10 +27,10 @@ const TripCard = ({ trip }: Props) => {
 
   const { colors } = useTheme();
 
-  const { push } = useRouter();
+  const { push } = useSignedInNavigation();
 
   return (
-    <Pressable onPress={() => push(ROUTES.trip(trip.id))}>
+    <Pressable onPress={() => push("trip", { id: trip.id })}>
       <View style={styles.container} backgroundColor={colors.white}>
         <View style={styles.content}>
           <Image

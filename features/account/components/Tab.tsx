@@ -7,7 +7,7 @@ import {
   FULL_WIDTH,
   SPACING,
 } from "@/constants/styles";
-import { useRouter } from "@/hooks";
+import { useSignedInNavigation } from "@/hooks";
 import { Tab as TabType } from "@/types/account";
 import { ChevronRightIcon, Pressable, useTheme } from "native-base";
 import React from "react";
@@ -18,15 +18,15 @@ type Props = {
   tab: TabType;
 };
 
-const Tab = ({ tab: { href, title } }: Props) => {
-  const { push } = useRouter();
-
+const Tab = ({ tab: { to, title } }: Props) => {
   const { colors } = useTheme();
+
+  const navigation = useSignedInNavigation();
 
   const { t } = useTranslation("account");
 
   return (
-    <Pressable onPress={() => push(href)}>
+    <Pressable onPress={() => navigation.push(to)}>
       <View style={styles.container} borderBottomColor={colors.muted[300]}>
         <Text style={styles.title} text={t(title)} />
         <ChevronRightIcon />

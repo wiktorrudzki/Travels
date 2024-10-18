@@ -1,26 +1,16 @@
-import { Routes } from "@/types/routes";
+import { Tab } from "@/types/account";
 
-export const ROUTES: Routes = {
-  welcome: "/",
-  login: "/login",
-  register: "/register",
-  trips: "/trips",
-  home: "/home",
-  account: "/account",
-  trip: (id: string) => `/trip/${id}`,
-};
-
-export const ACCOUNT_TABS = [
+export const ACCOUNT_TABS: { title: string; tabs: Tab[] }[] = [
   {
     title: "general",
     tabs: [
       {
         title: "account",
-        href: ROUTES.home,
+        to: "home",
       },
       {
         title: "change_password",
-        href: ROUTES.trips,
+        to: "home",
       },
     ],
   },
@@ -29,11 +19,11 @@ export const ACCOUNT_TABS = [
     tabs: [
       {
         title: "friends_list",
-        href: ROUTES.home,
+        to: "home",
       },
       {
         title: "add_friend",
-        href: ROUTES.home,
+        to: "home",
       },
     ],
   },

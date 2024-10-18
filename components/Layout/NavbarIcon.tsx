@@ -1,21 +1,21 @@
-import { ROUTES } from "@/constants/routes";
-import { usePathname, useRouter } from "@/hooks";
-import { RouteValues } from "@/types/routes";
+import { useSignedInNavigation } from "@/hooks";
+import { RootStackSignedInPropsList } from "@/types/routes";
+import { useRoute } from "@react-navigation/native";
 import { Pressable } from "native-base";
 import React from "react";
 
 type Props = {
   icon: React.ReactNode;
   checkedIcon: React.ReactNode;
-  href: RouteValues;
+  href: keyof RootStackSignedInPropsList;
 };
 
 const NavbarIcon = ({ icon, checkedIcon, href }: Props) => {
-  const pathname = usePathname();
+  const route = useRoute();
 
-  const { push } = useRouter();
+  const { push } = useSignedInNavigation();
 
-  return pathname === href ? (
+  return route.name === href ? (
     checkedIcon
   ) : (
     <Pressable onPress={() => push(href)}>{icon}</Pressable>

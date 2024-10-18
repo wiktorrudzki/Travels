@@ -9,17 +9,22 @@ import NotFound from "@/app/+not-found";
 import Login from "@/app/login";
 import Register from "@/app/register";
 import Welcome from "@/app/welcome";
+import {
+  RootStackSignedInPropsList,
+  RootStackUnsignedInPropsList,
+} from "@/types/routes";
+import { NavigationContainer } from "@react-navigation/native";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
 const Navigation = () => {
   const { isLoggedIn } = useAuth();
 
-  const SignedStack = createStackNavigator();
-  const UnnsignedStack = createStackNavigator();
+  const SignedStack = createStackNavigator<RootStackSignedInPropsList>();
+  const UnnsignedStack = createStackNavigator<RootStackUnsignedInPropsList>();
 
   return (
-    <>
+    <NavigationContainer independent={true}>
       {isLoggedIn ? (
         <SignedStack.Navigator
           initialRouteName="home"
@@ -28,21 +33,23 @@ const Navigation = () => {
           <SignedStack.Screen name="account" component={Account} />
           <SignedStack.Screen name="home" component={Home} />
           <SignedStack.Screen name="trips" component={Trips} />
-          <SignedStack.Screen name="trip/[id]" component={Trip} />
-          <UnnsignedStack.Screen name="+not-found" component={NotFound} />
+          <SignedStack.Screen name="trip" component={Trip} />
+          <SignedStack.Screen name="+not-found" component={NotFound} />
+          <SignedStack.Screen name="*" component={NotFound} />
         </SignedStack.Navigator>
       ) : (
         <UnnsignedStack.Navigator
           initialRouteName="welcome"
           screenOptions={DEFAULT_SCREEN_OPTIONS}
         >
-          <UnnsignedStack.Screen name="+not-found" component={NotFound} />
           <UnnsignedStack.Screen name="login" component={Login} />
           <UnnsignedStack.Screen name="register" component={Register} />
           <UnnsignedStack.Screen name="welcome" component={Welcome} />
+          <SignedStack.Screen name="+not-found" component={NotFound} />
+          <SignedStack.Screen name="*" component={NotFound} />
         </UnnsignedStack.Navigator>
       )}
-    </>
+    </NavigationContainer>
   );
 };
 

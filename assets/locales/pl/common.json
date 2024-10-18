@@ -17,5 +17,7 @@
   "first_name": "Imię",
   "last_name": "Nazwisko",
   "session_expired": "Twoja sesja wygasła",
-  "logout": "Wyloguj"
+  "logout": "Wyloguj",
+  "not_found_message": "Oops! Wygląda na to, że się zgubiłeś!",
+  "not_found_link": "Wróć do aplikacji"
 }

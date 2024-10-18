@@ -5,7 +5,6 @@ import Tab from "./Tab";
 import { StyleSheet } from "react-native";
 import {
   BOLD_UPPERCASED_TITLE,
-  CARD_TITLE,
   FLEX_COLUMN,
   SPACING,
 } from "@/constants/styles";

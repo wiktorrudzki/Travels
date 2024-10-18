@@ -17,5 +17,7 @@
   "first_name": "First Name",
   "last_name": "Last Name",
   "session_expired": "Your session has expired",
-  "logout": "Logout"
+  "logout": "Logout",
+  "not_found_message": "Oops! Looks like you got lost!",
+  "not_found_link": "Go back to the app"
 }
