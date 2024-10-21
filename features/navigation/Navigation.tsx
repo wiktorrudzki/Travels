@@ -15,6 +15,7 @@ import {
 } from "@/types/routes";
 import { NavigationContainer } from "@react-navigation/native";
 import CreateEvent from "@/app/trip/create-event/[id]";
+import EditEvent from "@/app/trip/edit-event/[id]";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
@@ -39,6 +40,7 @@ const Navigation = () => {
             name="trip/create-event"
             component={CreateEvent}
           />
+          <SignedStack.Screen name="trip/edit-event" component={EditEvent} />
           <SignedStack.Screen name="+not-found" component={NotFound} />
           <SignedStack.Screen name="*" component={NotFound} />
         </SignedStack.Navigator>

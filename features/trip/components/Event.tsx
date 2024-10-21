@@ -11,11 +11,12 @@ import {
 } from "@/constants/styles";
 import { areDatesSame, formatToDateTime, formatToTime } from "@/lib/date-fns";
 import { Event as EventType } from "@/types/event";
-import { useTheme } from "native-base";
+import { Pressable, useTheme } from "native-base";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { useTripWithEvents } from "../hooks";
+import { useSignedInNavigation } from "@/hooks";
 
 type Props = {
   event: EventType;
@@ -25,6 +26,8 @@ const Event = ({ event }: Props) => {
   const { colors } = useTheme();
 
   const { currentDay } = useTripWithEvents();
+
+  const { push } = useSignedInNavigation();
 
   const { i18n } = useTranslation();
 
@@ -45,20 +48,17 @@ const Event = ({ event }: Props) => {
   );
 
   return (
-    <View backgroundColor={colors.white} style={styles.container}>
-      <View style={styles.topWrapper}>
-        <Text style={styles.name} text={event.name} />
-        <Text
-          text={`${formatToTime(event.start, i18n.language)} - ${formatToTime(
-            event.end,
-            i18n.language
-          )}`}
-        />
+    <Pressable onPress={() => push("trip/edit-event", { id: event.id })}>
+      <View backgroundColor={colors.white} style={styles.container}>
+        <View style={styles.topWrapper}>
+          <Text style={styles.name} text={event.name} />
+          <Text text={`${start} - ${end}`} />
+        </View>
+        <View style={styles.bottomWrapper}>
+          <Text text="100PLN" />
+        </View>
       </View>
-      <View style={styles.bottomWrapper}>
-        <Text text="100PLN" />
-      </View>
-    </View>
+    </Pressable>
   );
 };
 

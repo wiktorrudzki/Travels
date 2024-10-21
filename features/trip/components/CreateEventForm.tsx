@@ -1,24 +1,22 @@
-import { CreateEventForm as CreateEventFormType } from "@/types/event";
+import { EventForm } from "@/types/event";
 import { Formik } from "formik";
 import React, { useMemo } from "react";
 import { useCreateEvent, useTrip } from "../hooks";
-import EventFormInputs from "./EventFormInputs";
 import { PrimaryButton } from "@/components/Button";
 import { FormControl } from "native-base";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
 import { StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
+import EventFormInputs from "./EventFormInputs";
 
 const CreateEventForm = () => {
-  const { onSubmit, schema } = useCreateEvent();
+  const { schema, isLoading, onSubmit } = useCreateEvent();
 
   const { trip } = useTrip();
 
   const { t } = useTranslation("trips");
 
-  const { isLoading } = useCreateEvent();
-
-  const initialValues: CreateEventFormType = useMemo(
+  const initialValues: EventForm = useMemo(
     () => ({
       name: "",
       description: "",
@@ -37,7 +35,7 @@ const CreateEventForm = () => {
     >
       {(props) => (
         <FormControl style={styles.form}>
-          <EventFormInputs {...props} />
+          <EventFormInputs {...props} trip={trip} />
           <PrimaryButton
             isLoading={isLoading}
             onPress={() => props.handleSubmit()}

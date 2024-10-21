@@ -18,6 +18,7 @@ export type Trip = {
   start: string;
   end: string;
   ownerId: string;
+  canAdd?: boolean;
 };
 
 export type TripsContextType = {
@@ -32,7 +33,13 @@ export type TripRouteWithId = RouteProp<{
   };
 }>;
 
-export type CreateEventRouteWithTripId = RouteProp<{
+export type CreateEventRoute = RouteProp<{
+  "trip/add-event": {
+    id: string;
+  };
+}>;
+
+export type EditEventRoute = RouteProp<{
   "trip/add-event": {
     id: string;
   };

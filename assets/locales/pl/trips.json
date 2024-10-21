@@ -6,5 +6,7 @@
   "events": "Wydarzenia",
   "create_success": "Pomyslnie utworzono wydarzenie",
   "create_event": "Utwórz wydarzenie",
-  "desc": "Opis"
+  "desc": "Opis",
+  "edit_event": "Edytuj wydarzenie",
+  "edit_success": "Pomyślnie edytowano wydarzenie"
 }

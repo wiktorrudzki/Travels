@@ -6,5 +6,7 @@
   "events": "Events",
   "create_success": "Successfully created event",
   "create_event": "Create event",
-  "desc": "Description"
+  "desc": "Description",
+  "edit_event": "Edit event",
+  "edit_success": "Successfully edited event"
 }

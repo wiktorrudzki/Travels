@@ -1,31 +1,24 @@
-import { createEvent } from "@/dal/event";
-import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
+import { editEvent } from "@/dal/event";
+import { usePromiseWithLoading } from "@/hooks";
 import { toaster } from "@/lib/native-base";
-import { EventForm, Event } from "@/types/event";
+import { EventForm } from "@/types/event";
 import { useTranslation } from "react-i18next";
 import { date, object, ref, string } from "yup";
 
-const useCreateEvent = () => {
+const useEditEvent = (eventId: string) => {
   const { t } = useTranslation(["common", "trips"]);
-
-  const { goBack } = useSignedInNavigation();
 
   const success = () => {
     toaster({ text: t("trips:create_success"), variant: "success" });
-    goBack();
   };
 
   const failure = (e: string) => toaster({ text: e, variant: "danger" });
 
-  const [create, isLoading] = usePromiseWithLoading(
-    createEvent,
-    success,
-    failure
-  );
+  const [edit, isLoading] = usePromiseWithLoading(editEvent, success, failure);
 
   const schema = object().shape({
     name: string()
-      .required(t("common:required_field"))
+      .required()
       .max(
         100,
         t("common:max_characters", {
@@ -46,8 +39,9 @@ const useCreateEvent = () => {
   });
 
   const onSubmit = (values: EventForm) =>
-    create({
+    edit({
       ...values,
+      id: eventId,
       start: new Date(values.start),
       end: new Date(values.end),
     });
@@ -55,4 +49,4 @@ const useCreateEvent = () => {
   return { schema, isLoading, onSubmit };
 };
 
-export default useCreateEvent;
+export default useEditEvent;

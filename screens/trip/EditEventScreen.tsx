@@ -1,14 +1,16 @@
 import { AuthorizedLayout } from "@/components/Layout";
 import { TabBadge } from "@/components/TabBadge";
-import { CreateEventForm } from "@/features/trip/components";
-import { useTrip } from "@/features/trip/hooks";
+import { EditEventForm } from "@/features/trip/components";
+import { useEvent } from "@/features/trip/hooks";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const CreateEventScreen = () => {
+const EditEventScreen = () => {
   const { t } = useTranslation(["trips", "common"]);
 
-  const { trip } = useTrip();
+  const {
+    event: { trip },
+  } = useEvent();
 
   return (
     <AuthorizedLayout
@@ -18,13 +20,13 @@ const CreateEventScreen = () => {
             to: { screen: "trip", params: { id: trip.id } },
             text: trip.title,
           }}
-          title={t("trips:create_event")}
+          title={t("trips:edit_event")}
         />
       }
     >
-      <CreateEventForm />
+      <EditEventForm />
     </AuthorizedLayout>
   );
 };
 
-export default CreateEventScreen;
+export default EditEventScreen;

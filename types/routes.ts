@@ -4,6 +4,7 @@ export type RootStackSignedInPropsList = {
   trips: undefined;
   trip: { id: string };
   "trip/create-event": { id: string };
+  "trip/edit-event": { id: string };
   "*": undefined;
   "+not-found": undefined;
 };

@@ -1,26 +1,27 @@
 import { DatePickerWithError, TextInputWithError } from "@/components/Input";
 import { View } from "@/components/View";
-import { CreateEventForm } from "@/types/event";
+import { EventForm } from "@/types/event";
 import { FormikProps } from "formik";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import { useTrip } from "../hooks";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
+import { Trip } from "@/types/trip";
 
-type Props = FormikProps<CreateEventForm>;
+type Props = FormikProps<EventForm> & {
+  trip: Pick<Trip, "start" | "end">;
+};
 
-const EventFormInputs = ({
-  handleChange,
-  handleBlur,
+const EditEventFormInputs = ({
   errors,
   touched,
   values,
+  trip,
+  handleChange,
+  handleBlur,
 }: Props) => {
   const { t } = useTranslation(["trips", "common"]);
-
-  const { trip } = useTrip();
 
   const minimumDate = useMemo(() => new Date(trip.start), [trip]);
   const maximumDate = useMemo(() => new Date(trip.end), [trip]);
@@ -31,6 +32,7 @@ const EventFormInputs = ({
   return (
     <View style={styles.inputsWrapper}>
       <TextInputWithError
+        value={values.name}
         error={touched.name ? errors.name : undefined}
         placeholder={t("common:name")}
         inputMode="text"
@@ -39,6 +41,7 @@ const EventFormInputs = ({
         nativeID="name"
       />
       <TextInputWithError
+        value={values.description}
         error={touched.description ? errors.description : undefined}
         placeholder={t("trips:desc")}
         inputMode="text"
@@ -77,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventFormInputs;
+export default EditEventFormInputs;

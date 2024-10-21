@@ -30,6 +30,7 @@ const TripScreen = () => {
       title={
         <TabBadge
           goBack={{
+            to: { screen: "trips" },
             text: t("trips"),
           }}
           title={trip.title}

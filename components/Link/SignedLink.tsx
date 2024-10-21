@@ -1,19 +1,18 @@
-import { useSignedInNavigation } from "@/hooks";
 import { RootStackSignedInPropsList } from "@/types/routes";
-import { Link as LinkComponent } from "@react-navigation/native";
+import { Link } from "@react-navigation/native";
 import { To } from "@react-navigation/native/lib/typescript/src/useLinkTo";
 import React from "react";
 
 type Props = {
   children: React.ReactNode;
   to: To<RootStackSignedInPropsList>;
-  props?: React.ComponentProps<typeof LinkComponent>;
+  props?: React.ComponentProps<typeof Link>;
 };
 
 const SignedLink = ({ to, children, props }: Props) => (
-  <LinkComponent to={to} {...props}>
+  <Link to={to} {...props}>
     {children}
-  </LinkComponent>
+  </Link>
 );
 
 export default SignedLink;
