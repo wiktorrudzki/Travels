@@ -1,12 +1,23 @@
 import { RouteProp } from "@react-navigation/native";
+import { User } from "./user";
+import { Event } from "./event";
+
+export type TripWithEvents = {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  events: Event[];
+  owner: User;
+  participants: [];
+};
 
 export type Trip = {
   id: string;
   title: string;
   start: string;
   end: string;
-  events: [];
-  participants: [];
+  ownerId: string;
 };
 
 export type TripsContextType = {
@@ -21,8 +32,29 @@ export type TripRouteWithId = RouteProp<{
   };
 }>;
 
-export type TripContextType = {
-  trip: Trip | undefined;
+export type CreateEventRouteWithTripId = RouteProp<{
+  "trip/add-event": {
+    id: string;
+  };
+}>;
+
+export type TripWithEventsContextType = {
+  trip: TripWithEvents;
+  currentDay: Date;
   isLoading: boolean;
   runBefore: boolean;
+  canCreateEvents?: boolean;
+  changeDay: (day: Date) => void;
+};
+
+export type TripContextType = {
+  trip: Trip;
+  isLoading: boolean;
+  runBefore: boolean;
+  canCreateEvents?: boolean;
+};
+
+export type TripDayContextType = {
+  day: Date;
+  setDay: (day: Date) => void;
 };

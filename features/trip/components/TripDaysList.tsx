@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTrip } from "../hooks";
+import { useTripWithEvents } from "../hooks";
 import { ScrollView, useTheme } from "native-base";
 import { getDaysArray } from "@/lib/date-fns";
 import TripDay from "./TripDay";
@@ -7,7 +7,7 @@ import { StyleSheet } from "react-native";
 import { CENTER_FLEX, SPACING } from "@/constants/styles";
 
 const TripDaysList = () => {
-  const { trip } = useTrip();
+  const { trip } = useTripWithEvents();
 
   const { colors } = useTheme();
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     ...CENTER_FLEX,
     gap: SPACING.SMALL,
-    padding: SPACING.MEDIUM,
+    justifyContent: "flex-start",
   },
 });
 

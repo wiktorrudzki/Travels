@@ -1,4 +1,4 @@
-import { useAuth, usePromise } from "@/hooks";
+import { useAuth, usePromise, usePromiseWithLoading } from "@/hooks";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, ref, string } from "yup";
@@ -10,8 +10,10 @@ const useRegister = () => {
 
   const { login } = useAuth();
 
-  const [registerRequest] = usePromise(register, login, (e) =>
-    toaster({ variant: "info", text: e })
+  const [registerRequest, isLoading] = usePromiseWithLoading(
+    register,
+    login,
+    (e) => toaster({ variant: "info", text: e })
   );
 
   const registerSchema = object().shape({
@@ -32,7 +34,7 @@ const useRegister = () => {
     confirmPassword: string().oneOf([ref("password")], t("register:pwd_match")),
   });
 
-  return { registerSchema, onSubmit: registerRequest };
+  return { registerSchema, isLoading, onSubmit: registerRequest };
 };
 
 export default useRegister;

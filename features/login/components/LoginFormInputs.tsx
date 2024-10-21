@@ -7,6 +7,7 @@ import { FormControl } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
+import { useLogin } from "../hooks";
 
 type Props = FormikProps<LoginRequest>;
 
@@ -18,6 +19,8 @@ const LoginFormInputs = ({
   touched,
 }: Props) => {
   const { t } = useTranslation("common");
+
+  const { isLoading } = useLogin();
 
   return (
     <FormControl style={styles.form}>
@@ -39,9 +42,13 @@ const LoginFormInputs = ({
           onBlur={handleBlur("password")}
           nativeID="password"
         />
-        <UnsignedLinkButton text={t("forgot_pwd")} href={{ screen: "/login" }} />
+        <UnsignedLinkButton text={t("forgot_pwd")} href={{ screen: "login" }} />
       </View>
-      <PrimaryButton onPress={() => handleSubmit()} text={t("log_in")} />
+      <PrimaryButton
+        isLoading={isLoading}
+        onPress={() => handleSubmit()}
+        text={t("log_in")}
+      />
     </FormControl>
   );
 };

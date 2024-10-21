@@ -14,6 +14,7 @@ import {
   RootStackUnsignedInPropsList,
 } from "@/types/routes";
 import { NavigationContainer } from "@react-navigation/native";
+import CreateEvent from "@/app/trip/create-event/[id]";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
@@ -34,6 +35,10 @@ const Navigation = () => {
           <SignedStack.Screen name="home" component={Home} />
           <SignedStack.Screen name="trips" component={Trips} />
           <SignedStack.Screen name="trip" component={Trip} />
+          <SignedStack.Screen
+            name="trip/create-event"
+            component={CreateEvent}
+          />
           <SignedStack.Screen name="+not-found" component={NotFound} />
           <SignedStack.Screen name="*" component={NotFound} />
         </SignedStack.Navigator>

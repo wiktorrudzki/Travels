@@ -78,7 +78,7 @@ export const SHADOW: ViewStyle = {
 
 export const LITTLE_SHADOW: ViewStyle = {
   shadowOffset: { width: 0, height: 0 },
-  shadowOpacity: 0.07,
+  shadowOpacity: 0.04,
   shadowRadius: 15,
   elevation: 5,
 };

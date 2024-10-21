@@ -1,6 +1,6 @@
 import { getTrips } from "@/dal/trip";
 import { usePromiseWithLoading } from "@/hooks";
-import { Trip, TripsContextType } from "@/types/trip";
+import { TripsContextType, Trip } from "@/types/trip";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const TripsContext = createContext<TripsContextType | null>(null);

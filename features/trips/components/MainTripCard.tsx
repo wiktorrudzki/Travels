@@ -10,9 +10,10 @@ import {
   SHADOW,
   SPACING,
 } from "@/constants/styles";
+import { useSignedInNavigation } from "@/hooks";
 import { formatToDate } from "@/lib/date-fns";
 import { Trip } from "@/types/trip";
-import { Image, useTheme } from "native-base";
+import { Image, Pressable, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -26,23 +27,27 @@ const MainTripCard = ({ trip }: Props) => {
 
   const { colors } = useTheme();
 
+  const { push } = useSignedInNavigation();
+
   return (
-    <View style={styles.container} backgroundColor={colors.white}>
-      <Image
-        alt="main-image"
-        source={{
-          uri: "https://picsum.photos/200/300",
-        }}
-        style={styles.image}
-      />
-      <View style={styles.textWrapper}>
-        <Text style={styles.title} text={trip.title} />
-        <Text
-          text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
+    <Pressable onPress={() => push("trip", { id: trip.id })}>
+      <View style={styles.container} backgroundColor={colors.white}>
+        <Image
+          alt="main-image"
+          source={{
+            uri: "https://picsum.photos/200/300",
+          }}
+          style={styles.image}
         />
-        <Text text={`${2} ${t("participants")}`} />
+        <View style={styles.textWrapper}>
+          <Text style={styles.title} text={trip.title} />
+          <Text
+            text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
+          />
+          <Text text={`${2} ${t("participants")}`} />
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

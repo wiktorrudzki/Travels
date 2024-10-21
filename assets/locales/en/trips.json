@@ -3,5 +3,8 @@
   "change_name": "Change name",
   "no_trips_planned": "There are no trips planned in the future. It's the high time to change it!",
   "trips": "Trips",
-  "events": "Events"
+  "events": "Events",
+  "create_success": "Successfully created event",
+  "create_event": "Create event",
+  "desc": "Description"
 }

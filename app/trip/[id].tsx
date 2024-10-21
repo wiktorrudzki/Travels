@@ -1,4 +1,4 @@
-import { TripProvider } from "@/features/trip/hooks";
+import { TripWithEventsProvider } from "@/features/trip/hooks";
 import { TripScreen } from "@/screens/trip";
 import { TripRouteWithId } from "@/types/trip";
 import { useRoute } from "@react-navigation/native";
@@ -8,9 +8,9 @@ const Trip = () => {
   const { params } = useRoute<TripRouteWithId>();
 
   return (
-    <TripProvider id={params.id}>
+    <TripWithEventsProvider id={params.id}>
       <TripScreen />
-    </TripProvider>
+    </TripWithEventsProvider>
   );
 };
 

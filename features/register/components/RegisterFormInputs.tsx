@@ -5,6 +5,7 @@ import { FormikProps } from "formik";
 import { FormControl, View } from "native-base";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
+import { useRegister } from "../hooks";
 
 type Props = FormikProps<RegisterRequest>;
 
@@ -16,6 +17,8 @@ const RegisterFormInputs = ({
   touched,
 }: Props) => {
   const { t } = useTranslation();
+
+  const { isLoading } = useRegister();
 
   return (
     <FormControl style={styles.form}>
@@ -35,6 +38,7 @@ const RegisterFormInputs = ({
           onChangeText={handleChange("firstName")}
           onBlur={handleBlur("firstName")}
           nativeID="firstName"
+          autoComplete="name"
         />
         <TextInputWithError
           error={touched.lastName ? errors.lastName : undefined}
@@ -42,6 +46,7 @@ const RegisterFormInputs = ({
           onChangeText={handleChange("lastName")}
           onBlur={handleBlur("lastName")}
           nativeID="lastName"
+          autoComplete="name-family"
         />
         <TextInputWithError
           error={touched.password ? errors.password : undefined}
@@ -60,7 +65,11 @@ const RegisterFormInputs = ({
           nativeID="confirmPassword"
         />
       </View>
-      <PrimaryButton onPress={() => handleSubmit()} text={t("register")} />
+      <PrimaryButton
+        isLoading={isLoading}
+        onPress={() => handleSubmit()}
+        text={t("register")}
+      />
     </FormControl>
   );
 };

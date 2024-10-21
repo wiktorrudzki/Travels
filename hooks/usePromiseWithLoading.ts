@@ -1,10 +1,10 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse, AxiosResponseHeaders } from "axios";
 import { useState } from "react";
 
 const usePromiseWithLoading = <T extends unknown[], A>(
   creator: (...args: T) => Promise<AxiosResponse<A>>,
-  onSuccess?: (data: A) => void,
-  onFailure?: (err: AxiosError) => void
+  onSuccess?: (data: A, headers: AxiosResponseHeaders) => void,
+  onFailure?: (err: string) => void
 ) => {
   const [{ runBefore, isLoading }, setIsLoading] = useState<{
     runBefore: boolean;
@@ -15,14 +15,16 @@ const usePromiseWithLoading = <T extends unknown[], A>(
     setIsLoading({ runBefore: true, isLoading: true });
 
     return creator(...args)
-      .then(({ data }) => {
+      .then(({ data, headers }) => {
         if (onSuccess) {
-          onSuccess(data);
+          onSuccess(data, headers as AxiosResponseHeaders);
         }
       })
       .catch((e) => {
         if (onFailure) {
-          onFailure(e);
+          onFailure(
+            typeof e.response?.data === "string" ? e.response.data : e.message
+          );
         }
       })
       .finally(() => setIsLoading({ runBefore: true, isLoading: false }));

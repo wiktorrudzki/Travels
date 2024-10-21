@@ -11,6 +11,7 @@
   "one_special_character": "{{ field }} must contain at least one special character",
   "one_uppercase_letter": "{{ field }} must contain at least one uppercased letter",
   "min_length": "This field has to be {{ length }} characters length minimum",
+  "max_length": "This field can be {{ length }} characters length maximum",
   "incorrect_email": "Incorrect e-mail address",
   "settings": "Settings",
   "delete": "Delete",
@@ -19,5 +20,10 @@
   "session_expired": "Your session has expired",
   "logout": "Logout",
   "not_found_message": "Oops! Looks like you got lost!",
-  "not_found_link": "Go back to the app"
+  "not_found_link": "Go back to the app",
+  "end_after_start": "The end must be after start",
+  "back": "Back",
+  "name": "Name",
+  "start": "Start",
+  "end": "End"
 }

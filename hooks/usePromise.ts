@@ -8,7 +8,6 @@ const usePromise = <T extends unknown[], A>(
   const invoker = async (...args: T) =>
     creator(...args)
       .then(({ data, headers }) => {
-        setTimeout(() => {}, 2000);
         if (onSuccess) {
           onSuccess(data, headers as AxiosResponseHeaders);
         }

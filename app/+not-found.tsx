@@ -13,8 +13,6 @@ export default function NotFound() {
 
   const notFoundText = t("not_found_link");
 
-  console.log(isLoggedIn);
-
   return (
     <View style={styles.container}>
       <Text text={t("not_found_message")} />

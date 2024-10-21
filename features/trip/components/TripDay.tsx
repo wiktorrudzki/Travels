@@ -8,10 +8,15 @@ import {
   LITTLE_SHADOW,
   SPACING,
 } from "@/constants/styles";
-import { formatToDayName, getDayOfTheMonth } from "@/lib/date-fns";
-import { useTheme } from "native-base";
+import {
+  areDatesSame,
+  formatToDayName,
+  getDayOfTheMonth,
+} from "@/lib/date-fns";
+import { Pressable, useTheme } from "native-base";
 import React from "react";
 import { StyleSheet } from "react-native";
+import { useTripWithEvents } from "../hooks";
 
 type Props = {
   day: Date;
@@ -20,12 +25,24 @@ type Props = {
 const TripDay = ({ day }: Props) => {
   const { colors } = useTheme();
 
+  const { currentDay, changeDay } = useTripWithEvents();
+
+  const onDayChange = () => changeDay(day);
+
   return (
-    <View style={styles.container} backgroundColor={colors.white}>
-      <Text style={styles.dayText} text={formatToDayName(day)} />
-      <View style={styles.line} backgroundColor={colors.muted[300]} />
-      <Text style={styles.dateText} text={getDayOfTheMonth(day).toString()} />
-    </View>
+    <Pressable onPress={onDayChange}>
+      <View style={styles.container} backgroundColor={colors.white}>
+        <Text style={styles.dayText} text={formatToDayName(day)} />
+        <View style={styles.line} backgroundColor={colors.muted[300]} />
+        <Text
+          color={
+            areDatesSame(currentDay, day) ? colors.primary[400] : undefined
+          }
+          style={styles.dateText}
+          text={getDayOfTheMonth(day).toString()}
+        />
+      </View>
+    </Pressable>
   );
 };
 

@@ -13,19 +13,22 @@ import { useTheme } from "native-base";
 
 type Props = {
   title?: React.ReactNode;
+  withoutNavbar?: boolean;
   children: React.ReactNode;
 };
 
-const AuthorizedLayout = ({ children, title }: Props) => {
+const AuthorizedLayout = ({ children, title, withoutNavbar }: Props) => {
   const { colors } = useTheme();
 
   return (
     <View style={styles.container} backgroundColor={colors.white}>
       {title}
       <View style={styles.content}>{children}</View>
-      <View style={styles.navbar}>
-        <Navbar />
-      </View>
+      {!withoutNavbar && (
+        <View style={styles.navbar}>
+          <Navbar />
+        </View>
+      )}
     </View>
   );
 };

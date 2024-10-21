@@ -9,33 +9,45 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { Text } from "../Text";
-import { ArrowBackIcon, useTheme } from "native-base";
+import { ArrowBackIcon, Pressable, useTheme } from "native-base";
 import { RootStackSignedInPropsList } from "@/types/routes";
 import { SignedLink } from "../Link";
+import { To } from "@react-navigation/native/lib/typescript/src/useLinkTo";
+import { useSignedInNavigation } from "@/hooks";
 
 type Props = {
   title?: string;
   goBack?: {
     text: string;
-    to: keyof RootStackSignedInPropsList;
+    to?: To<RootStackSignedInPropsList>;
   };
 };
 
-const TabBadge = ({ title, goBack }: Props) => {
+const TabBadge = ({ title, goBack: goBackProps }: Props) => {
   const { colors } = useTheme();
+
+  const { goBack } = useSignedInNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.badge} backgroundColor={colors.primary[400]} />
       <View style={styles.textWrapper}>
-        {goBack && (
-          <SignedLink to={{ screen: goBack.to }}>
-            <View style={styles.goBackWrapper}>
-              <ArrowBackIcon color={colors.white} />
-              <Text color={colors.white} text={goBack.text} />
-            </View>
-          </SignedLink>
-        )}
+        {goBackProps &&
+          (goBackProps.to ? (
+            <SignedLink to={goBackProps.to}>
+              <View style={styles.goBackWrapper}>
+                <ArrowBackIcon color={colors.white} />
+                <Text color={colors.white} text={goBackProps.text} />
+              </View>
+            </SignedLink>
+          ) : (
+            <Pressable onPress={() => goBack()}>
+              <View style={styles.goBackWrapper}>
+                <ArrowBackIcon color={colors.white} />
+                <Text color={colors.white} text={goBackProps.text} />
+              </View>
+            </Pressable>
+          ))}
         {title && (
           <Text text={title} color={colors.white} style={styles.title} />
         )}

@@ -1,4 +1,6 @@
 export { default as TextInput } from "./TextInput";
 export { default as InputErrorMessage } from "./InputErrorMessage";
 export { default as SearchInput } from "./SearchInput";
+export { default as DatePicker } from "./DatePicker";
+export { default as DatePickerWithError } from "./DatePickerWithError";
 export { default as TextInputWithError } from "./TextInputWithError";

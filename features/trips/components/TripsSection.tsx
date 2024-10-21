@@ -7,7 +7,7 @@ import { SPACING } from "@/constants/styles";
 import { useTrips } from "../hooks";
 import { Text } from "@/components/Text";
 import { useTranslation } from "react-i18next";
-import { Spinner } from "native-base";
+import { LoadingSpinner } from "@/components/Spinner";
 
 const TripsSection = () => {
   const { trips, isLoading, runBefore } = useTrips();
@@ -24,11 +24,7 @@ const TripsSection = () => {
   );
 
   if (isLoading || !runBefore) {
-    return (
-      <View>
-        <Spinner size="lg" />
-      </View>
-    );
+    return <LoadingSpinner />;
   }
 
   if (mainTrip == undefined) {

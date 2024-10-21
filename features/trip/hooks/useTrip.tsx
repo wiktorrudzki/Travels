@@ -1,5 +1,6 @@
+import { LoadingSpinner } from "@/components/Spinner";
 import { getTrip } from "@/dal/trip";
-import { usePromiseWithLoading } from "@/hooks";
+import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
 import { Trip, TripContextType } from "@/types/trip";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -13,16 +14,24 @@ type Props = {
 const TripProvider = ({ children, id }: Props) => {
   const [trip, setTrip] = useState<Trip>();
 
-  const [getAll, isLoading, runBefore] = usePromiseWithLoading(
-    getTrip,
-    (data) => {
-      setTrip(data);
-    }
-  );
+  const { replace } = useSignedInNavigation();
+
+  const [get, isLoading, runBefore] = usePromiseWithLoading(getTrip, (data) => {
+    setTrip(data);
+  });
 
   useEffect(() => {
-    getAll(id);
+    get(id);
   }, []);
+
+  if (isLoading || !runBefore) {
+    return <LoadingSpinner />;
+  }
+
+  if (trip == undefined) {
+    replace("+not-found");
+    return null;
+  }
 
   const value: TripContextType = {
     trip,

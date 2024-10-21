@@ -1,5 +1,5 @@
 import { login } from "@/dal/auth";
-import { useAuth, usePromise } from "@/hooks";
+import { useAuth, usePromise, usePromiseWithLoading } from "@/hooks";
 import { toaster } from "@/lib/native-base";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
@@ -10,8 +10,10 @@ const useLogin = () => {
 
   const { login: loginToApp } = useAuth();
 
-  const [loginRequest] = usePromise(login, loginToApp, (e) =>
-    toaster({ text: e, variant: "danger" })
+  const [loginRequest, isLoading] = usePromiseWithLoading(
+    login,
+    loginToApp,
+    (e) => toaster({ text: e, variant: "danger" })
   );
 
   const loginSchema = object().shape({
@@ -25,7 +27,7 @@ const useLogin = () => {
       .required(t("required_field")),
   });
 
-  return { loginSchema, onSubmit: loginRequest };
+  return { loginSchema, isLoading, onSubmit: loginRequest };
 };
 
 export default useLogin;

@@ -10,6 +10,8 @@ type Props = Omit<React.ComponentPropsWithRef<typeof Button>, "color"> & {
 const PrimaryButton = ({ text, ...rest }: Props) => {
   const { colors } = useTheme();
 
+  console.log(rest.isLoading);
+
   return (
     <Button
       opacity={rest.disabled ? DISABLED : 1}
