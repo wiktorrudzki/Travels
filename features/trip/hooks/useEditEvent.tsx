@@ -9,7 +9,7 @@ const useEditEvent = (eventId: string) => {
   const { t } = useTranslation(["common", "trips"]);
 
   const success = () => {
-    toaster({ text: t("trips:create_success"), variant: "success" });
+    toaster({ text: t("trips:edit_success"), variant: "success" });
   };
 
   const failure = (e: string) => toaster({ text: e, variant: "danger" });

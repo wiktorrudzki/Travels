@@ -16,7 +16,7 @@ export type EventWithTrip = {
   start: string;
   end: string;
   trip: Trip;
-  canEdit?: boolean;
+  canEdit: boolean;
 };
 
 export type EventForm = {

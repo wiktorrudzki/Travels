@@ -42,9 +42,13 @@ const TripScreen = () => {
         <TripDaysList />
         <View style={styles.createEventWrapper}>
           <Text style={styles.title} text={t("events")} />
-          <Pressable onPress={() => push("trip/create-event", { id: trip.id })}>
-            <AddIcon size="2xl" color={colors.black} />
-          </Pressable>
+          {trip.canAdd && (
+            <Pressable
+              onPress={() => push("trip/create-event", { id: trip.id })}
+            >
+              <AddIcon size="2xl" color={colors.black} />
+            </Pressable>
+          )}
         </View>
         <View>
           <TripEventsList />

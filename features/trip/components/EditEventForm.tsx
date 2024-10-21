@@ -36,13 +36,15 @@ const EditEventForm = () => {
       onSubmit={onSubmit}
     >
       {(props) => (
-        <FormControl style={styles.form}>
+        <FormControl isDisabled={!event.canEdit} style={styles.form}>
           <EventFormInputs {...props} trip={trip} />
-          <PrimaryButton
-            isLoading={isLoading}
-            onPress={() => props.handleSubmit()}
-            text={t("edit_event")}
-          />
+          {event.canEdit && (
+            <PrimaryButton
+              isLoading={isLoading}
+              onPress={() => props.handleSubmit()}
+              text={t("edit_event")}
+            />
+          )}
         </FormControl>
       )}
     </Formik>

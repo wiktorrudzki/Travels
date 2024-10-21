@@ -10,6 +10,7 @@ export type TripWithEvents = {
   events: Event[];
   owner: User;
   participants: [];
+  canAdd: boolean;
 };
 
 export type Trip = {
@@ -18,7 +19,6 @@ export type Trip = {
   start: string;
   end: string;
   ownerId: string;
-  canAdd?: boolean;
 };
 
 export type TripsContextType = {
