@@ -5,7 +5,6 @@ import {
   FLEX_COLUMN,
   FULL_WIDTH,
   LITTLE_ROUNDED,
-  LITTLE_SHADOW,
   SPACING,
 } from "@/constants/styles";
 import {
@@ -49,7 +48,6 @@ const TripDay = ({ day }: Props) => {
 const styles = StyleSheet.create({
   container: {
     ...FLEX_COLUMN,
-    ...LITTLE_SHADOW,
     ...LITTLE_ROUNDED,
     padding: SPACING.MEDIUM,
     gap: SPACING.SMALL,

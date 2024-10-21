@@ -5,7 +5,6 @@ import {
   FLEX_COLUMN,
   FULL_WIDTH,
   LITTLE_ROUNDED,
-  LITTLE_SHADOW,
   SEMI_BOLD,
   SPACING,
 } from "@/constants/styles";
@@ -65,7 +64,6 @@ const Event = ({ event }: Props) => {
 const styles = StyleSheet.create({
   container: {
     ...FLEX_COLUMN,
-    ...LITTLE_SHADOW,
     ...LITTLE_ROUNDED,
     padding: SPACING.MEDIUM,
     gap: SPACING.MEDIUM,

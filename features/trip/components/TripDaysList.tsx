@@ -21,11 +21,7 @@ const TripDaysList = () => {
   );
 
   return (
-    <ScrollView
-      backgroundColor={colors.white}
-      contentContainerStyle={styles.container}
-      horizontal={true}
-    >
+    <ScrollView contentContainerStyle={styles.container} horizontal={true}>
       {tripDays.map((day) => (
         <TripDay key={day.toString()} day={day} />
       ))}

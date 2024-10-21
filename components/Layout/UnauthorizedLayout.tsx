@@ -13,7 +13,7 @@ type Props = {
 };
 
 const UnauthorizedLayout = ({ title, children, otherActions }: Props) => (
-  <View paddingY="20" backgroundColor="light.50" style={styles.container}>
+  <View paddingY="20" style={styles.container}>
     <View
       backgroundColor="primary.400"
       rounded="full"

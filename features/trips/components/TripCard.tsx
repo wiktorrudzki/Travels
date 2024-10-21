@@ -65,7 +65,6 @@ const TripCard = ({ trip }: Props) => {
 const styles = StyleSheet.create({
   container: {
     ...CENTER_FLEX,
-    ...SHADOW,
     ...LITTLE_ROUNDED,
     justifyContent: "space-between",
     padding: SPACING.MEDIUM,

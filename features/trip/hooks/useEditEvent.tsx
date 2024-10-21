@@ -49,4 +49,6 @@ const useEditEvent = (eventId: string) => {
   return { schema, isLoading, onSubmit };
 };
 
+// TODO USUNAC STREFY CZASOWE Z BAZY DANYCH, DODAC SCROLLOWANIE EVENTOW W APLIKACJI, DODAC OPIS DO WYDARZEN W BAZIE, DODAC UCZESTNIKOW WYJAZDU DO FORMULARZA
+
 export default useEditEvent;

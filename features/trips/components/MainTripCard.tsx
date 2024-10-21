@@ -54,7 +54,6 @@ const MainTripCard = ({ trip }: Props) => {
 const styles = StyleSheet.create({
   container: {
     ...FLEX_COLUMN,
-    ...SHADOW,
     ...LITTLE_ROUNDED,
     padding: SPACING.MEDIUM,
     gap: SPACING.MEDIUM,

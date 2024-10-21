@@ -21,7 +21,7 @@ const AuthorizedLayout = ({ children, title, withoutNavbar }: Props) => {
   const { colors } = useTheme();
 
   return (
-    <View style={styles.container} backgroundColor={colors.white}>
+    <View style={styles.container}>
       {title}
       <View style={styles.content}>{children}</View>
       {!withoutNavbar && (

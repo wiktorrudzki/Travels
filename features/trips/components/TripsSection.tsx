@@ -8,6 +8,7 @@ import { useTrips } from "../hooks";
 import { Text } from "@/components/Text";
 import { useTranslation } from "react-i18next";
 import { LoadingSpinner } from "@/components/Spinner";
+import { ScrollView } from "native-base";
 
 const TripsSection = () => {
   const { trips, isLoading, runBefore } = useTrips();
@@ -36,18 +37,19 @@ const TripsSection = () => {
   }
 
   return (
-    <View style={styles.content}>
+    <ScrollView contentContainerStyle={styles.content}>
       <MainTripCard trip={mainTrip} />
       {restTrips.map((trip) => (
         <TripCard key={trip.id} trip={trip} />
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   content: {
     gap: SPACING.MEDIUM,
+    paddingBottom: 275,
   },
 });
 
