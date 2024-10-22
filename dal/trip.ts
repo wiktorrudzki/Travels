@@ -9,3 +9,5 @@ export const getTripWithEvents = (id: string, day?: string) =>
     : api.get<TripWithEvents>(`/trip/with-events/${id}`);
 
 export const getTrip = (id: string) => api.get<Trip>(`/trip/${id}`);
+
+export const deleteTrip = (id: string) => api.delete<string>(`/trip/${id}`);

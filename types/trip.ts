@@ -25,6 +25,7 @@ export type TripsContextType = {
   trips: Trip[];
   isLoading: boolean;
   runBefore: boolean;
+  deleteTrip: (id: string) => void;
 };
 
 export type TripRouteWithId = RouteProp<{

@@ -50,9 +50,7 @@ const TripScreen = () => {
             </Pressable>
           )}
         </View>
-        {/* <View style={styles.listWrapper}> */}
         <TripEventsList />
-        {/* </View> */}
       </View>
     </AuthorizedLayout>
   );

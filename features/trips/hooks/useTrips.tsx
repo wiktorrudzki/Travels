@@ -23,10 +23,14 @@ const TripsProvider = ({ children }: Props) => {
     getAll();
   }, []);
 
+  const deleteTrip = (id: string) =>
+    setTrips((prev) => prev.filter((trip) => trip.id !== id));
+
   const value: TripsContextType = {
     trips,
     isLoading,
     runBefore,
+    deleteTrip,
   };
 
   return (

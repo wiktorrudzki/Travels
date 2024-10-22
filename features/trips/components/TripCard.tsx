@@ -7,27 +7,32 @@ import {
   FULL_HEIGHT,
   LITTLE_ROUNDED,
   LITTLE_ROUNDED_IMAGE,
-  SHADOW,
   SPACING,
 } from "@/constants/styles";
 import { useSignedInNavigation } from "@/hooks";
 import { formatToDate } from "@/lib/date-fns";
 import { Trip } from "@/types/trip";
-import { Image, Menu, Pressable, ThreeDotsIcon, useTheme } from "native-base";
+import { Image, Pressable, useTheme } from "native-base";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
+import { useDeleteTrip } from "../hooks";
+import { LoadingSpinner } from "@/components/Spinner";
+import TripMenu from "./TripMenu";
 
 type Props = {
   trip: Trip;
 };
 
 const TripCard = ({ trip }: Props) => {
-  const { t } = useTranslation(["common", "trips"]);
+  const { deleteTrip, isLoading } = useDeleteTrip();
 
   const { colors } = useTheme();
 
   const { push } = useSignedInNavigation();
+
+  if (isLoading) {
+    return <LoadingSpinner style={{ height: "auto" }} />;
+  }
 
   return (
     <Pressable onPress={() => push("trip", { id: trip.id })}>
@@ -47,16 +52,7 @@ const TripCard = ({ trip }: Props) => {
             />
           </View>
         </View>
-        <Menu
-          trigger={(triggerProps) => (
-            <Pressable {...triggerProps}>
-              <ThreeDotsIcon style={styles.icon} />
-            </Pressable>
-          )}
-        >
-          <Menu.Item>{t("trips:change_name")}</Menu.Item>
-          <Menu.Item>{t("common:delete")}</Menu.Item>
-        </Menu>
+        <TripMenu trip={trip} onDelete={deleteTrip} />
       </View>
     </Pressable>
   );
@@ -87,9 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: CARD_TITLE,
-  icon: {
-    transform: [{ rotate: "90deg" }],
-  },
 });
 
 export default TripCard;

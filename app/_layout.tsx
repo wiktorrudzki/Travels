@@ -8,9 +8,19 @@ import "@/lib/i18n";
 import { AuthProvider } from "@/hooks";
 import { Navigation } from "@/features/navigation";
 import { COLORS } from "@/constants/colors";
+import { LITTLE_ROUNDED } from "@/constants/styles";
 
 const newColorTheme = COLORS;
-const theme = extendTheme({ colors: newColorTheme });
+const theme = extendTheme({
+  colors: newColorTheme,
+  components: {
+    Menu: {
+      baseStyle: {
+        ...LITTLE_ROUNDED,
+      },
+    },
+  },
+});
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

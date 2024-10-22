@@ -1,12 +1,14 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import { View } from "../View";
 import { Spinner } from "native-base";
 import { StyleSheet } from "react-native";
 import { CENTER_FLEX, FULL_SPACE } from "@/constants/styles";
 
-const LoadingSpinner = () => {
+type Props = ComponentProps<typeof View>;
+
+const LoadingSpinner = (props: Props) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} {...props}>
       <Spinner size="lg" />
     </View>
   );

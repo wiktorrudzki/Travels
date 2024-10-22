@@ -1,6 +1,8 @@
 import { Text } from "@/components/Text";
 import { View } from "@/components/View";
 import {
+  ALIGN_BOTTOM,
+  ALIGN_RIGHT,
   FLEX_COLUMN,
   FULL_SPACE,
   FULL_WIDTH_IMAGE,
@@ -17,17 +19,26 @@ import { Image, Pressable, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
+import TripMenu from "./TripMenu";
+import { useDeleteTrip } from "../hooks";
+import { LoadingSpinner } from "@/components/Spinner";
 
 type Props = {
   trip: Trip;
 };
 
 const MainTripCard = ({ trip }: Props) => {
+  const { deleteTrip, isLoading } = useDeleteTrip();
+
   const { t } = useTranslation("trips");
 
   const { colors } = useTheme();
 
   const { push } = useSignedInNavigation();
+
+  if (isLoading) {
+    return <LoadingSpinner style={{ height: "auto" }} />;
+  }
 
   return (
     <Pressable onPress={() => push("trip", { id: trip.id })}>
@@ -45,6 +56,9 @@ const MainTripCard = ({ trip }: Props) => {
             text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
           />
           <Text text={`${2} ${t("participants")}`} />
+        </View>
+        <View style={styles.menuWrapper}>
+          <TripMenu trip={trip} onDelete={deleteTrip} />
         </View>
       </View>
     </Pressable>
@@ -70,6 +84,11 @@ const styles = StyleSheet.create({
     gap: SPACING.TINY,
   },
   title: MAIN_CARD_TITLE,
+  menuWrapper: {
+    ...ALIGN_BOTTOM,
+    ...ALIGN_RIGHT,
+    padding: SPACING.LARGE,
+  },
 });
 
 export default MainTripCard;

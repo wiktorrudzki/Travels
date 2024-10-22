@@ -8,5 +8,6 @@
   "create_event": "Create event",
   "desc": "Description",
   "edit_event": "Edit event",
-  "edit_success": "Successfully edited event"
+  "edit_success": "Successfully edited event",
+  "delete_trip_success": "Successfully deleted an event"
 }
