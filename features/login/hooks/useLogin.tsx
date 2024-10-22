@@ -1,9 +1,12 @@
 import { login } from "@/dal/auth";
-import { useAuth, usePromise, usePromiseWithLoading } from "@/hooks";
+import { useAuth, usePromiseWithLoading } from "@/hooks";
 import { toaster } from "@/lib/native-base";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, string } from "yup";
+import CryptoJS from "crypto-js";
+import { LoginRequest } from "@/types/auth";
+import { hashWithSha256ToHex } from "@/lib/crypto-js";
 
 const useLogin = () => {
   const { t } = useTranslation();
@@ -27,7 +30,13 @@ const useLogin = () => {
       .required(t("required_field")),
   });
 
-  return { loginSchema, isLoading, onSubmit: loginRequest };
+  const onSubmit = (values: LoginRequest) => {
+    const password = hashWithSha256ToHex(values.password);
+
+    return loginRequest({ ...values, password });
+  };
+
+  return { loginSchema, isLoading, onSubmit };
 };
 
 export default useLogin;

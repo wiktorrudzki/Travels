@@ -1,9 +1,12 @@
-import { useAuth, usePromise, usePromiseWithLoading } from "@/hooks";
+import { useAuth, usePromiseWithLoading } from "@/hooks";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, ref, string } from "yup";
 import { toaster } from "@/lib/native-base";
 import { register } from "@/dal/auth";
+import { RegisterRequest } from "@/types/auth";
+import CryptoJS from "crypto-js";
+import { hashWithSha256ToHex } from "@/lib/crypto-js";
 
 const useRegister = () => {
   const { t } = useTranslation(["common", "register"]);
@@ -34,7 +37,14 @@ const useRegister = () => {
     confirmPassword: string().oneOf([ref("password")], t("register:pwd_match")),
   });
 
-  return { registerSchema, isLoading, onSubmit: registerRequest };
+  const onSubmit = (values: RegisterRequest) => {
+    const password = hashWithSha256ToHex(values.password);
+    const confirmPassword = hashWithSha256ToHex(values.confirmPassword);
+
+    return registerRequest({ ...values, password, confirmPassword });
+  };
+
+  return { registerSchema, isLoading, onSubmit };
 };
 
 export default useRegister;
