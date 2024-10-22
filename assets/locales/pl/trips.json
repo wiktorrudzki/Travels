@@ -9,5 +9,6 @@
   "desc": "Opis",
   "edit_event": "Edytuj wydarzenie",
   "edit_success": "Pomyślnie edytowano wydarzenie",
-  "delete_trip_success": "Pomyslnie usunięto wydarzenie"
+  "delete_trip_success": "Pomyslnie usunięto wydarzenie",
+  "delete_event": "Usuń wydarzenie"
 }
