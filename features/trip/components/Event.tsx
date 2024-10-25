@@ -11,7 +11,7 @@ import {
 import { areDatesSame, formatToDateTime, formatToTime } from "@/lib/date-fns";
 import { Event as EventType } from "@/types/event";
 import { Pressable, useTheme } from "native-base";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { useTripWithEvents } from "../hooks";
@@ -30,32 +30,33 @@ const Event = ({ event }: Props) => {
 
   const { i18n } = useTranslation();
 
-  const start = useMemo(
-    () =>
-      areDatesSame(event.start, currentDay)
-        ? formatToTime(event.start, i18n.language)
-        : formatToDateTime(event.start),
-    [event, currentDay]
+  const formatDate = useCallback(
+    (date: string) =>
+      areDatesSame(date, currentDay)
+        ? formatToTime(date, i18n.language)
+        : formatToDateTime(date),
+    [currentDay, i18n.language]
   );
 
-  const end = useMemo(
-    () =>
-      areDatesSame(event.end, currentDay)
-        ? formatToTime(event.end, i18n.language)
-        : formatToDateTime(event.end),
-    [event, currentDay]
+  const start = useMemo(
+    () => formatDate(event.start),
+    [event.start, formatDate]
   );
+
+  const end = useMemo(() => formatDate(event.end), [event.end, formatDate]);
+
+  const eventDuration = useMemo(() => `${start} - ${end}`, [start, end]);
 
   return (
     <Pressable onPress={() => push("trip/edit-event", { id: event.id })}>
       <View backgroundColor={colors.white} style={styles.container}>
         <View style={styles.topWrapper}>
           <Text style={styles.name} text={event.name} />
-          <Text text={`${start} - ${end}`} />
+          <Text text={eventDuration} />
         </View>
-        <View style={styles.bottomWrapper}>
+        {/* <View style={styles.bottomWrapper}>
           <Text text="100PLN" />
-        </View>
+        </View> */}
       </View>
     </Pressable>
   );

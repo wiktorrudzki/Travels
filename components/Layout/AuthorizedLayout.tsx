@@ -9,7 +9,6 @@ import {
   FULL_WIDTH,
   SPACING,
 } from "@/constants/styles";
-import { useTheme } from "native-base";
 
 type Props = {
   title?: React.ReactNode;
@@ -17,21 +16,17 @@ type Props = {
   children: React.ReactNode;
 };
 
-const AuthorizedLayout = ({ children, title, withoutNavbar }: Props) => {
-  const { colors } = useTheme();
-
-  return (
-    <View style={styles.container}>
-      {title}
-      <View style={styles.content}>{children}</View>
-      {!withoutNavbar && (
-        <View style={styles.navbar}>
-          <Navbar />
-        </View>
-      )}
-    </View>
-  );
-};
+const AuthorizedLayout = ({ children, title, withoutNavbar }: Props) => (
+  <View style={styles.container}>
+    {title}
+    <View style={styles.content}>{children}</View>
+    {!withoutNavbar && (
+      <View style={styles.navbar}>
+        <Navbar />
+      </View>
+    )}
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {

@@ -15,9 +15,10 @@ const usePromiseWithLoading = <T extends unknown[], A>(
     setIsLoading({ runBefore: true, isLoading: true });
 
     return creator(...args)
-      .then(({ data, headers }) => {
+      .then((d) => {
+        console.log(d);
         if (onSuccess) {
-          onSuccess(data, headers as AxiosResponseHeaders);
+          onSuccess(d.data, d.headers as AxiosResponseHeaders);
         }
       })
       .catch((e) => {

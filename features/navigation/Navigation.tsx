@@ -16,6 +16,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import CreateEvent from "@/app/trip/create-event/[id]";
 import EditEvent from "@/app/trip/edit-event/[id]";
+import QrCode from "@/app/qr-code";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
@@ -32,8 +33,8 @@ const Navigation = () => {
           initialRouteName="home"
           screenOptions={DEFAULT_SCREEN_OPTIONS}
         >
-          <SignedStack.Screen name="account" component={Account} />
           <SignedStack.Screen name="home" component={Home} />
+          <SignedStack.Screen name="account" component={Account} />
           <SignedStack.Screen name="trips" component={Trips} />
           <SignedStack.Screen name="trip" component={Trip} />
           <SignedStack.Screen
@@ -41,6 +42,7 @@ const Navigation = () => {
             component={CreateEvent}
           />
           <SignedStack.Screen name="trip/edit-event" component={EditEvent} />
+          <SignedStack.Screen name="qr-code" component={QrCode} />
           <SignedStack.Screen name="+not-found" component={NotFound} />
           <SignedStack.Screen name="*" component={NotFound} />
         </SignedStack.Navigator>

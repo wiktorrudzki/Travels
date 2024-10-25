@@ -5,6 +5,7 @@ export type RootStackSignedInPropsList = {
   trip: { id: string };
   "trip/create-event": { id: string };
   "trip/edit-event": { id: string };
+  "qr-code": undefined;
   "*": undefined;
   "+not-found": undefined;
 };

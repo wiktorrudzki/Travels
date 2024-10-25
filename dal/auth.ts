@@ -9,3 +9,8 @@ export const register = (body: RegisterRequest) =>
 export const logout = () => api.delete("/auth/logout");
 
 export const verifySession = () => api.get("/auth/verify-session");
+
+export const getQrCode = () =>
+  api.get("/auth/QR", {
+    responseType: "arraybuffer",
+  });
