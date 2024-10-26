@@ -40,7 +40,7 @@ const TripScreen = () => {
             }}
             title={trip.title}
           />
-          <TripSettingsButton />
+          {trip.isOwner && <TripSettingsButton />}
         </>
       }
       withoutNavbar

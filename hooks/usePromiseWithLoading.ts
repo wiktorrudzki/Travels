@@ -16,7 +16,6 @@ const usePromiseWithLoading = <T extends unknown[], A>(
 
     return creator(...args)
       .then((d) => {
-        console.log(d);
         if (onSuccess) {
           onSuccess(d.data, d.headers as AxiosResponseHeaders);
         }

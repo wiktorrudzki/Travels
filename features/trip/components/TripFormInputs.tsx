@@ -41,12 +41,14 @@ const TripFormInputs = ({
 
   const participantsValue = useMemo(
     () => trip.participants.map(({ guid }) => guid),
-    []
+    [trip]
   );
+
+  console.log(friends, friends.concat(trip.owner).map(toParticipantData));
 
   const data = useMemo(
     () => friends.concat(trip.owner).map(toParticipantData),
-    []
+    [friends, trip]
   );
 
   return (
