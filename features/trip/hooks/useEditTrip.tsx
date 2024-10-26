@@ -1,6 +1,6 @@
 import { editEvent } from "@/dal/event";
 import { editTrip } from "@/dal/trip";
-import { usePromiseWithLoading } from "@/hooks";
+import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
 import { toaster } from "@/lib/native-base";
 import { TripForm } from "@/types/trip";
 import { useTranslation } from "react-i18next";
@@ -9,8 +9,11 @@ import { array, date, object, ref, string } from "yup";
 const useEditTrip = (tripId: string) => {
   const { t } = useTranslation(["common", "trips"]);
 
+  const { replace } = useSignedInNavigation();
+
   const success = () => {
     toaster({ text: t("trips:edit_success"), variant: "success" });
+    replace("trip", { id: tripId });
   };
 
   const failure = (e: string) => toaster({ text: e, variant: "danger" });

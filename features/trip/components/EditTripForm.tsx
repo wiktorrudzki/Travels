@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useMemo } from "react";
-import { useEditTrip, useTripWithEvents } from "../hooks";
+import { useEditTrip, useTripWithEvents, useUserFriends } from "../hooks";
 import { DangerButton, PrimaryButton } from "@/components/Button";
 import { FormControl, ScrollView } from "native-base";
 import {
@@ -27,6 +27,8 @@ const EditTripForm = () => {
     replace("trips")
   );
 
+  const { isLoading: isLoadingFriends } = useUserFriends();
+
   const { t } = useTranslation("trips");
 
   const initialValues: TripForm = useMemo(
@@ -39,7 +41,7 @@ const EditTripForm = () => {
     [trip]
   );
 
-  if (isLoadingDelete) {
+  if (isLoadingDelete || isLoadingFriends) {
     return <LoadingSpinner style={{ height: "auto" }} />;
   }
 

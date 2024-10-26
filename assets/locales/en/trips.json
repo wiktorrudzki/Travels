@@ -13,5 +13,7 @@
   "delete_event": "Delete event",
   "select_participants": "Select participants",
   "edit_trip": "Edit trip",
-  "delete_trip": "Delete trip"
+  "delete_trip": "Delete trip",
+  "cannot_delete_owner": "You can't delete owner from the participants list",
+  "add_participant_out_of_list": "Add participant from outside the list"
 }

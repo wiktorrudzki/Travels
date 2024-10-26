@@ -9,9 +9,13 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
-import { Participant, TripForm } from "@/types/trip";
+import { TripForm } from "@/types/trip";
 import { useTripWithEvents, useUserFriends } from "../hooks";
-import { useCallback, useMemo } from "react";
+import { useState } from "react";
+import { toParticipantData } from "../helpers/mappers";
+import { toaster } from "@/lib/native-base";
+import QRCodeScanner from "react-native-qrcode-scanner";
+import { PrimaryButton } from "@/components/Button";
 
 type Props = FormikProps<TripForm>;
 
@@ -21,6 +25,7 @@ const TripFormInputs = ({
   values,
   handleChange,
   handleBlur,
+  setFieldValue,
 }: Props) => {
   const { t } = useTranslation(["trips", "common"]);
 
@@ -31,27 +36,43 @@ const TripFormInputs = ({
 
   const { friends } = useUserFriends();
 
-  const toParticipantData = useCallback(
-    ({ firstName, lastName, guid }: Participant) => ({
-      label: `${firstName} ${lastName}`,
-      value: guid,
-    }),
-    []
+  const [participants, setParticipants] = useState(
+    trip.participants.map(({ guid }) => guid)
+  );
+  const [data, setData] = useState(
+    friends.concat(trip.owner).map(toParticipantData)
   );
 
-  const participantsValue = useMemo(
-    () => trip.participants.map(({ guid }) => guid),
-    [trip]
-  );
+  const [showQRScanner, setShowQRScanner] = useState(false);
 
-  console.log(friends, friends.concat(trip.owner).map(toParticipantData));
+  const onParticipantsChange = (updated: string[]) => {
+    if (!updated.includes(trip.owner.guid)) {
+      toaster({ text: t("trips:cannot_delete_owner"), variant: "danger" });
+      return;
+    }
 
-  const data = useMemo(
-    () => friends.concat(trip.owner).map(toParticipantData),
-    [friends, trip]
-  );
+    setParticipants(updated);
+    setFieldValue("participants", updated);
+  };
 
-  return (
+  return showQRScanner ? (
+    <QRCodeScanner
+      onRead={(e) => console.log(e)}
+      // onRead={this.onSuccess}
+      // flashMode={RNCamera.Constants.FlashMode.torch}
+      // topContent={
+      //   <Text style={styles.centerText}>
+      //     Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text>{" "}
+      //     on your computer and scan the QR code.
+      //   </Text>
+      // }
+      // bottomContent={
+      //   <TouchableOpacity style={styles.buttonTouchable}>
+      //     <Text style={styles.buttonText}>OK. Got it!</Text>
+      //   </TouchableOpacity>
+      // }
+    />
+  ) : (
     <View style={styles.inputsWrapper}>
       <TextInputWithError
         value={values.title}
@@ -65,8 +86,12 @@ const TripFormInputs = ({
       <MultiSelect
         label={t("trips:select_participants")}
         data={data}
-        value={participantsValue}
-        onChange={() => {}}
+        value={participants}
+        onChange={onParticipantsChange}
+      />
+      <PrimaryButton
+        onPress={() => setShowQRScanner(true)}
+        text={t("trips:add_participant_out_of_list")}
       />
       <DatePickerWithError
         error={touched.end ? errors.end : undefined}
@@ -83,7 +108,7 @@ const TripFormInputs = ({
         onChange={(e) => handleChange("end")(toStringDate(e))}
         mode="datetime"
         label={t("common:end")}
-      />
+      />{" "}
     </View>
   );
 };

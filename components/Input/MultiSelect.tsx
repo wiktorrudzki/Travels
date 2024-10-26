@@ -5,7 +5,7 @@ import {
   SHADOW,
   SPACING,
 } from "@/constants/styles";
-import { useTheme } from "native-base";
+import { AddIcon, useTheme } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
@@ -38,7 +38,7 @@ const MultiSelectExample = ({ label, ...passThroughProps }: Props) => {
         containerStyle={{
           ...styles.container,
         }}
-        activeColor="transparent"
+        activeColor={colors.primary[400]}
         itemContainerStyle={{
           ...styles.itemContainer,
           borderColor: colors.muted[300],
