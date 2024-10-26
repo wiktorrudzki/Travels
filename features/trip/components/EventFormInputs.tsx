@@ -76,7 +76,7 @@ const EventFormInputs = ({
 const styles = StyleSheet.create({
   inputsWrapper: {
     ...FLEX_COLUMN,
-    gap: SPACING.MEDIUM,
+    gap: SPACING.LARGE,
   },
 });
 

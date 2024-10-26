@@ -16,7 +16,6 @@ const DatePicker = (props: Props) => {
       locale={i18n.language}
       themeVariant="light"
       accentColor={colors.primary[400]}
-      textColor="blue"
       {...props}
     />
   );

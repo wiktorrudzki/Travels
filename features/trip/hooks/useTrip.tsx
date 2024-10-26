@@ -16,9 +16,7 @@ const TripProvider = ({ children, id }: Props) => {
 
   const { replace } = useSignedInNavigation();
 
-  const [get, isLoading, runBefore] = usePromiseWithLoading(getTrip, (data) => {
-    setTrip(data);
-  });
+  const [get, isLoading, runBefore] = usePromiseWithLoading(getTrip, setTrip);
 
   useEffect(() => {
     get(id);

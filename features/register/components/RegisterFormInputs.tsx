@@ -6,6 +6,7 @@ import { FormControl, View } from "native-base";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { useRegister } from "../hooks";
+import { SPACING } from "@/constants/styles";
 
 type Props = FormikProps<RegisterRequest>;
 
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   },
   inputsWrapper: {
     flexDirection: "column",
-    gap: 12,
+    gap: SPACING.LARGE / 2,
   },
 });
 

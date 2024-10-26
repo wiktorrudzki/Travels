@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 import {
   CENTER_FLEX,
   FULL_WIDTH,
-  LITTLE_ROUNDED,
+  LABEL_FONT_SIZE,
   SPACING,
 } from "@/constants/styles";
 import { useTheme } from "native-base";
@@ -23,7 +23,7 @@ const DatePickerWithError = ({ error, nativeID, label, ...rest }: Props) => {
 
   return (
     <View borderBottomColor={colors.muted[300]} style={styles.container}>
-      {label && <Text text={label} />}
+      {label && <Text fontSize={LABEL_FONT_SIZE} text={label} />}
       <DatePicker nativeID={nativeID} {...rest} />
       <InputErrorMessage nativeId={nativeID} error={error} />
     </View>

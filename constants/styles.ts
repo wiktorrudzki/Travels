@@ -69,6 +69,10 @@ export const SPACING = {
   MASSIVE: 48,
 };
 
+export const LABEL_FONT_SIZE = 16;
+
+export const SCROLLABLE_FORM_WITH_TAB_BADGE_PADDING_BOTTOM = 350;
+
 export const SHADOW: ViewStyle = {
   shadowOffset: { width: 0, height: 0 },
   shadowOpacity: 0.1,

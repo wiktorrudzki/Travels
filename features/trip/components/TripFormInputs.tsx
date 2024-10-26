@@ -9,7 +9,9 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
-import { TripForm } from "@/types/trip";
+import { Participant, TripForm } from "@/types/trip";
+import { useTripWithEvents, useUserFriends } from "../hooks";
+import { useCallback, useMemo } from "react";
 
 type Props = FormikProps<TripForm>;
 
@@ -25,6 +27,28 @@ const TripFormInputs = ({
   const toStringDate = (e: DateTimePickerEvent) =>
     new Date(e.nativeEvent.timestamp).toString();
 
+  const { trip } = useTripWithEvents();
+
+  const { friends } = useUserFriends();
+
+  const toParticipantData = useCallback(
+    ({ firstName, lastName, guid }: Participant) => ({
+      label: `${firstName} ${lastName}`,
+      value: guid,
+    }),
+    []
+  );
+
+  const participantsValue = useMemo(
+    () => trip.participants.map(({ guid }) => guid),
+    []
+  );
+
+  const data = useMemo(
+    () => friends.concat(trip.owner).map(toParticipantData),
+    []
+  );
+
   return (
     <View style={styles.inputsWrapper}>
       <TextInputWithError
@@ -37,21 +61,9 @@ const TripFormInputs = ({
         nativeID="title"
       />
       <MultiSelect
-        data={[
-          {
-            label: "111",
-            value: "111",
-          },
-          {
-            label: "222",
-            value: "222",
-          },
-          {
-            label: "333",
-            value: "333",
-          },
-        ]}
-        value={[]}
+        label={t("trips:select_participants")}
+        data={data}
+        value={participantsValue}
         onChange={() => {}}
       />
       <DatePickerWithError
@@ -77,8 +89,10 @@ const TripFormInputs = ({
 const styles = StyleSheet.create({
   inputsWrapper: {
     ...FLEX_COLUMN,
-    gap: SPACING.MEDIUM,
+    gap: SPACING.LARGE,
   },
 });
+
+// todo co zrobic jak ktos zmniejszy zakres trip start/end a event zostanie poza zakresem
 
 export default TripFormInputs;

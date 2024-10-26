@@ -1,4 +1,7 @@
-import { TripWithEventsProvider } from "@/features/trip/hooks";
+import {
+  TripWithEventsProvider,
+  UserFriendsProvider,
+} from "@/features/trip/hooks";
 import { EditTripScreen } from "@/screens/trip";
 import { EditTripRoute } from "@/types/trip";
 import { useRoute } from "@react-navigation/native";
@@ -9,7 +12,9 @@ const EditTrip = () => {
 
   return (
     <TripWithEventsProvider id={params.id}>
-      <EditTripScreen />
+      <UserFriendsProvider>
+        <EditTripScreen />
+      </UserFriendsProvider>
     </TripWithEventsProvider>
   );
 };

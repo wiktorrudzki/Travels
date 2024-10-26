@@ -48,3 +48,5 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+### POSTMAN PASSWORD: 195f62edd40a1d9b0c6407104596d6c29e2b408ecc1cc964e803376917ab1fd0
