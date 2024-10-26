@@ -4,3 +4,4 @@ export { default as SearchInput } from "./SearchInput";
 export { default as DatePicker } from "./DatePicker";
 export { default as DatePickerWithError } from "./DatePickerWithError";
 export { default as TextInputWithError } from "./TextInputWithError";
+export { default as MultiSelect } from "./MultiSelect";

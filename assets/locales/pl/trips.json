@@ -8,7 +8,10 @@
   "create_event": "Utwórz wydarzenie",
   "desc": "Opis",
   "edit_event": "Edytuj wydarzenie",
-  "edit_success": "Pomyślnie edytowano wydarzenie",
-  "delete_trip_success": "Pomyslnie usunięto wydarzenie",
-  "delete_event": "Usuń wydarzenie"
+  "edit_success": "Pomyślnie edytowano",
+  "delete_trip_success": "Pomyslnie usunięto wyjazd",
+  "delete_event": "Usuń wydarzenie",
+  "select_participants": "Wybierz uczestników",
+  "edit_trip": "Edytuj wyjazd",
+  "delete_trip": "Usuń wyjazd"
 }

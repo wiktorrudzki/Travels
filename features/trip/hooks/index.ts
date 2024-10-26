@@ -4,3 +4,4 @@ export { TripWithEventsProvider, useTripWithEvents } from "./useTripWithEvents";
 export { EventProvider, useEvent } from "./useEvent";
 export { default as useEditEvent } from "./useEditEvent";
 export { default as useDeleteEvent } from "./useDeleteEvent";
+export { default as useEditTrip } from "./useEditTrip";

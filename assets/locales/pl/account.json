@@ -5,5 +5,6 @@
   "logout_success": "Pomyslnie wylogowano z aplikacji",
   "friends": "Znajomi",
   "friends_list": "Lista znajomych",
-  "add_friend": "Dodaj znajomego"
+  "add_friend": "Dodaj znajomego",
+  "qr_not_found": "Nie udało sie odnaleźć kodu QR dla twojego konta"
 }

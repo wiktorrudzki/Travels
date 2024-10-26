@@ -25,5 +25,7 @@
   "back": "Powrót",
   "name": "Nazwa",
   "start": "Start",
-  "end": "Koniec"
+  "end": "Koniec",
+  "search": "Szukaj",
+  "title": "Tytuł"
 }

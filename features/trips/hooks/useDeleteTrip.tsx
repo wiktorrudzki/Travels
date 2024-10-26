@@ -4,14 +4,12 @@ import { toaster } from "@/lib/native-base";
 import { useTranslation } from "react-i18next";
 import { useTrips } from "./useTrips";
 
-const useDeleteTrip = () => {
+const useDeleteTrip = (callback?: (id: string) => void) => {
   const { t } = useTranslation("trips");
-
-  const { deleteTrip: deleteOne } = useTrips();
 
   const success = (id: string) => {
     toaster({ text: t("delete_trip_success"), variant: "success" });
-    deleteOne(id);
+    callback && callback(id);
   };
 
   const failure = (e: string) => {

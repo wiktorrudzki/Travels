@@ -8,7 +8,10 @@
   "create_event": "Create event",
   "desc": "Description",
   "edit_event": "Edit event",
-  "edit_success": "Successfully edited event",
-  "delete_trip_success": "Successfully deleted an event",
-  "delete_event": "Delete event"
+  "edit_success": "Successfully edited",
+  "delete_trip_success": "Successfully deleted a trip",
+  "delete_event": "Delete event",
+  "select_participants": "Select participants",
+  "edit_trip": "Edit trip",
+  "delete_trip": "Delete trip"
 }

@@ -1,11 +1,14 @@
 import { AuthorizedLayout } from "@/components/Layout";
-import { TabBadge } from "@/components/TabBadge";
 import { View } from "@/components/View";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useTripWithEvents } from "@/features/trip/hooks";
 import { AddIcon, Pressable, useTheme } from "native-base";
-import { TripDaysList, TripEventsList } from "@/features/trip/components";
+import {
+  TripDaysList,
+  TripEventsList,
+  TripSettingsButton,
+} from "@/features/trip/components";
 import { Text } from "@/components/Text";
 import { StyleSheet } from "react-native";
 import {
@@ -15,6 +18,7 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { useSignedInNavigation } from "@/hooks";
+import { TabBadge } from "@/components/TabBadge";
 
 const TripScreen = () => {
   const { t } = useTranslation("trips");
@@ -28,13 +32,16 @@ const TripScreen = () => {
   return (
     <AuthorizedLayout
       title={
-        <TabBadge
-          goBack={{
-            to: { screen: "trips" },
-            text: t("trips"),
-          }}
-          title={trip.title}
-        />
+        <>
+          <TabBadge
+            goBack={{
+              to: { screen: "trips" },
+              text: t("trips"),
+            }}
+            title={trip.title}
+          />
+          <TripSettingsButton />
+        </>
       }
       withoutNavbar
     >
@@ -42,7 +49,7 @@ const TripScreen = () => {
         <TripDaysList />
         <View style={styles.createEventWrapper}>
           <Text style={styles.title} text={t("events")} />
-          {trip.canAdd && (
+          {trip.isOwner && (
             <Pressable
               onPress={() => push("trip/create-event", { id: trip.id })}
             >

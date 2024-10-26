@@ -9,8 +9,8 @@ export type TripWithEvents = {
   end: string;
   events: Event[];
   owner: User;
-  participants: [];
-  canAdd: boolean;
+  participants: Participant[];
+  isOwner: boolean;
 };
 
 export type Trip = {
@@ -30,6 +30,12 @@ export type TripsContextType = {
 
 export type TripRouteWithId = RouteProp<{
   trip: {
+    id: string;
+  };
+}>;
+
+export type EditTripRoute = RouteProp<{
+  "trip/edit": {
     id: string;
   };
 }>;
@@ -65,4 +71,25 @@ export type TripContextType = {
 export type TripDayContextType = {
   day: Date;
   setDay: (day: Date) => void;
+};
+
+export type TripForm = {
+  title: string;
+  start: string;
+  end: string;
+  participants: string[];
+};
+
+export type EditTripRequest = {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  participants: string[];
+};
+
+export type Participant = {
+  firstName: string;
+  lastName: string;
+  guid: string;
 };

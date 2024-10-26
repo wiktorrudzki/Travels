@@ -14,7 +14,7 @@ const useDeleteEvent = () => {
   const { replace } = useSignedInNavigation();
 
   const success = (id: string) => {
-    toaster({ text: t("delete_trip_success"), variant: "success" });
+    toaster({ text: t("delete_event"), variant: "success" });
     replace("trip", { id: trip.id });
   };
 

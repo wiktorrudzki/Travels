@@ -15,7 +15,7 @@ import { Trip } from "@/types/trip";
 import { Image, Pressable, useTheme } from "native-base";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { useDeleteTrip } from "../hooks";
+import { useDeleteTrip, useTrips } from "../hooks";
 import { LoadingSpinner } from "@/components/Spinner";
 import TripMenu from "./TripMenu";
 
@@ -24,7 +24,9 @@ type Props = {
 };
 
 const TripCard = ({ trip }: Props) => {
-  const { deleteTrip, isLoading } = useDeleteTrip();
+  const { deleteTrip: deleteOne } = useTrips();
+
+  const { deleteTrip, isLoading } = useDeleteTrip(deleteOne);
 
   const { colors } = useTheme();
 
