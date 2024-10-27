@@ -5,4 +5,5 @@ export { EventProvider, useEvent } from "./useEvent";
 export { default as useEditEvent } from "./useEditEvent";
 export { default as useDeleteEvent } from "./useDeleteEvent";
 export { default as useEditTrip } from "./useEditTrip";
+export { default as useTripParticipants } from "./useTripParticipants";
 export { UserFriendsProvider, useUserFriends } from "./useUserFriends";

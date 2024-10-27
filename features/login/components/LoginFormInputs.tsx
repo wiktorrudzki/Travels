@@ -7,20 +7,20 @@ import { FormControl } from "native-base";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import { useLogin } from "../hooks";
 
-type Props = FormikProps<LoginRequest>;
+type Props = FormikProps<LoginRequest> & {
+  isLoading: boolean;
+};
 
 const LoginFormInputs = ({
+  isLoading,
+  errors,
+  touched,
   handleChange,
   handleSubmit,
   handleBlur,
-  errors,
-  touched,
 }: Props) => {
   const { t } = useTranslation("common");
-
-  const { isLoading } = useLogin();
 
   return (
     <FormControl style={styles.form}>

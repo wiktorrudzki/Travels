@@ -12,7 +12,7 @@ const initialValues: RegisterRequest = {
 };
 
 const RegisterForm = () => {
-  const { registerSchema, onSubmit } = useRegister();
+  const { registerSchema, isLoading, onSubmit } = useRegister();
 
   return (
     <Formik
@@ -20,7 +20,7 @@ const RegisterForm = () => {
       validationSchema={registerSchema}
       onSubmit={onSubmit}
     >
-      {(props) => <RegisterFormInputs {...props} />}
+      {(props) => <RegisterFormInputs isLoading={isLoading} {...props} />}
     </Formik>
   );
 };

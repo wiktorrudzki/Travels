@@ -6,7 +6,7 @@ import { useLogin } from "../hooks";
 const initialValues: LoginRequest = { email: "", password: "" };
 
 const LoginForm = () => {
-  const { loginSchema, onSubmit } = useLogin();
+  const { loginSchema, isLoading, onSubmit } = useLogin();
 
   return (
     <Formik
@@ -14,7 +14,7 @@ const LoginForm = () => {
       validationSchema={loginSchema}
       onSubmit={onSubmit}
     >
-      {(props) => <LoginFormInputs {...props} />}
+      {(props) => <LoginFormInputs isLoading={isLoading} {...props} />}
     </Formik>
   );
 };

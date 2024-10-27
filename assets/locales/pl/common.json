@@ -27,5 +27,8 @@
   "start": "Start",
   "end": "Koniec",
   "search": "Szukaj",
-  "title": "Tytuł"
+  "title": "Tytuł",
+  "choose_date": "Wybierz datę",
+  "choose_time": "Wybierz godznę",
+  "cancel": "Anuluj"
 }

@@ -1,7 +1,11 @@
 import { Formik } from "formik";
 import React, { useMemo } from "react";
-import { useEditTrip, useTripWithEvents, useUserFriends } from "../hooks";
-import { DangerButton, PrimaryButton } from "@/components/Button";
+import {
+  useEditTrip,
+  useTripParticipants,
+  useTripWithEvents,
+  useUserFriends,
+} from "../hooks";
 import { FormControl, ScrollView } from "native-base";
 import {
   FLEX_COLUMN,
@@ -9,15 +13,33 @@ import {
   SPACING,
 } from "@/constants/styles";
 import { StyleSheet } from "react-native";
-import { useTranslation } from "react-i18next";
 import { LoadingSpinner } from "@/components/Spinner";
 import { TripForm } from "@/types/trip";
 import { useDeleteTrip } from "@/features/trips/hooks";
 import TripFormInputs from "./TripFormInputs";
-import { useSignedInNavigation } from "@/hooks";
+import { useScanQR, useSignedInNavigation } from "@/hooks";
+import { toOption } from "../helpers/mappers";
+import AddParticipantByQR from "./AddParticipantByQR";
+import EditTripButtons from "./EditTripButtons";
 
 const EditTripForm = () => {
   const { trip } = useTripWithEvents();
+
+  const { showQRScanner, onQRScannerAcessRequest, hideScanner } = useScanQR();
+
+  const { friends } = useUserFriends();
+
+  const {
+    participants,
+    options,
+    onParticipantsChange,
+    onParticipantsFromOutListAdd,
+  } = useTripParticipants({
+    trip,
+    initialOptions: friends.concat(trip.owner).map(toOption),
+    initialParticipants: trip.participants.map(({ guid }) => guid),
+    onParticipantAdd: hideScanner,
+  });
 
   const { replace } = useSignedInNavigation();
 
@@ -26,10 +48,6 @@ const EditTripForm = () => {
   const { deleteTrip, isLoading: isLoadingDelete } = useDeleteTrip(() =>
     replace("trips")
   );
-
-  const { isLoading: isLoadingFriends } = useUserFriends();
-
-  const { t } = useTranslation("trips");
 
   const initialValues: TripForm = useMemo(
     () => ({
@@ -41,7 +59,7 @@ const EditTripForm = () => {
     [trip]
   );
 
-  if (isLoadingDelete || isLoadingFriends) {
+  if (isLoadingDelete) {
     return <LoadingSpinner style={{ height: "auto" }} />;
   }
 
@@ -51,25 +69,32 @@ const EditTripForm = () => {
       validationSchema={schema}
       onSubmit={onSubmit}
     >
-      {(props) => (
-        <ScrollView contentContainerStyle={styles.scroll}>
-          <FormControl isDisabled={!trip.isOwner} style={styles.form}>
-            <TripFormInputs {...props} />
-            {trip.isOwner && (
-              <>
-                <PrimaryButton
-                  isLoading={isLoadingEdit}
-                  onPress={() => props.handleSubmit()}
-                  text={t("edit_trip")}
+      {showQRScanner ? (
+        <AddParticipantByQR
+          onCancel={hideScanner}
+          onScan={onParticipantsFromOutListAdd}
+        />
+      ) : (
+        (props) => (
+          <ScrollView contentContainerStyle={styles.scroll}>
+            <FormControl isDisabled={!trip.isOwner} style={styles.form}>
+              <TripFormInputs
+                {...props}
+                onParticipantsChange={onParticipantsChange}
+                participants={participants}
+                participantsOptions={options}
+              />
+              {trip.isOwner && (
+                <EditTripButtons
+                  isLoadingSubmit={isLoadingEdit}
+                  onAddParticipantOutOfList={onQRScannerAcessRequest}
+                  onSubmit={() => props.handleSubmit()}
+                  onDelete={() => deleteTrip(trip.id)}
                 />
-                <DangerButton
-                  onPress={() => deleteTrip(trip.id)}
-                  text={t("delete_trip")}
-                />
-              </>
-            )}
-          </FormControl>
-        </ScrollView>
+              )}
+            </FormControl>
+          </ScrollView>
+        )
       )}
     </Formik>
   );

@@ -12,3 +12,8 @@ export type UserFriendsContextType = {
   friends: Participant[];
   isLoading: boolean;
 };
+
+export type CameraAccessContextType = {
+  hasCameraPermission: boolean;
+  getCameraPermissions: () => void;
+};

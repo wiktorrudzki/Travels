@@ -5,21 +5,21 @@ import { FormikProps } from "formik";
 import { FormControl, View } from "native-base";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import { useRegister } from "../hooks";
 import { SPACING } from "@/constants/styles";
 
-type Props = FormikProps<RegisterRequest>;
+type Props = FormikProps<RegisterRequest> & {
+  isLoading: boolean;
+};
 
 const RegisterFormInputs = ({
+  isLoading,
+  errors,
+  touched,
   handleChange,
   handleSubmit,
   handleBlur,
-  errors,
-  touched,
 }: Props) => {
   const { t } = useTranslation();
-
-  const { isLoading } = useRegister();
 
   return (
     <FormControl style={styles.form}>

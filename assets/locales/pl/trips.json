@@ -15,5 +15,9 @@
   "edit_trip": "Edytuj wyjazd",
   "delete_trip": "Usuń wyjazd",
   "cannot_delete_owner": "Nie możesz usunąć właściciela z listy uczestników",
-  "add_participant_out_of_list": "Dodaj uczestnika z poza listy"
+  "add_participant_out_of_list": "Dodaj uczestnika z poza listy",
+  "scan_friends_qr": "Zeskanuj kod QR twojego przyjaciela, aby dodać go do listy uczestników wyjazdu",
+  "camera_access_needed": "Potrzebny jest dostęp do kamery, aby przeprowadzić tą operację",
+  "friend_already_on_list": "Znajomy jest już na liście",
+  "incorrect_qr": "Nieprawidłowy kod QR"
 }

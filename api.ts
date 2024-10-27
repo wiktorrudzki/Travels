@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store";
 
 export const api = axios.create({
   //   baseURL: `${process.env.EXPO_PUBLIC_API_BASE_URL}/api`,
-  baseURL: `https://2a92-94-246-157-145.ngrok-free.app/api`,
+  baseURL: `https://d4bc-94-246-157-145.ngrok-free.app/api`,
 });
 
 api.interceptors.request.use(

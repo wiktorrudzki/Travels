@@ -15,5 +15,9 @@
   "edit_trip": "Edit trip",
   "delete_trip": "Delete trip",
   "cannot_delete_owner": "You can't delete owner from the participants list",
-  "add_participant_out_of_list": "Add participant from outside the list"
+  "add_participant_out_of_list": "Add participant from outside the list",
+  "scan_friends_qr": "Scan your friend's QR code in order to add him to participant list",
+  "camera_access_needed": "Access to your camera is needed to process this operation",
+  "friend_already_on_list": "Friend is already on the list",
+  "incorrect_qr": "Incorrect QR code"
 }

@@ -13,7 +13,7 @@ import { MultiSelect } from "react-native-element-dropdown";
 import { View } from "../View";
 import { Text } from "../Text";
 
-type Option = {
+export type Option = {
   label: string;
   value: string;
 };
@@ -35,13 +35,12 @@ const MultiSelectExample = ({ label, ...passThroughProps }: Props) => {
       {label && <Text fontSize={LABEL_FONT_SIZE} text={label} />}
       <MultiSelect
         style={{ ...styles.select, borderBottomColor: colors.muted[300] }}
-        containerStyle={{
-          ...styles.container,
-        }}
+        containerStyle={styles.container}
         activeColor={colors.primary[400]}
         itemContainerStyle={{
           ...styles.itemContainer,
           borderColor: colors.muted[300],
+          backgroundColor: "transparent",
         }}
         inside
         selectedStyle={{
@@ -66,6 +65,7 @@ const styles = StyleSheet.create({
     gap: SPACING.SMALL,
   },
   select: {
+    paddingHorizontal: 16,
     borderBottomWidth: 1,
   },
   container: {

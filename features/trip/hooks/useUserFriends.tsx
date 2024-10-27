@@ -1,3 +1,4 @@
+import { LoadingSpinner } from "@/components/Spinner";
 import { getFriends } from "@/dal/user";
 import { usePromiseWithLoading } from "@/hooks";
 import { Participant } from "@/types/trip";
@@ -23,6 +24,10 @@ const UserFriendsProvider = ({ children }: Props) => {
     friends,
     isLoading,
   };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <UserFriendsContext.Provider value={value}>
