@@ -1,52 +1,102 @@
-# Welcome to your Expo app 👋
+# **Welcome to Travels app**
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## **Aplication layers**
 
-## Get started
+- **frontend** - _React Native_ using _Expo Go_ - **localhost:8081**
+- **backend** - _.Net 8_ with _Entity Framework_ and _Swagger_ - **https://localhost:5000**
+- **database** - dockerized _PostgreSQL_ - **localhost:5444**
 
-1. Install dependencies
+## **How to run**
 
-   ```bash
-   npm install
-   ```
+### 1. Set up database using Docker
 
-2. Start the app
+1. Make sure that you have Docker Desktop installed and running
 
-   ```bash
-    npx expo start
-   ```
+2. In `Travels-API` directory, run:
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+docker compose -f .\docker-compose.yml up -d
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. Make sure you have have Entity Framweork installed
 
-## Learn more
+4. In `Travels-API` directory, run:
 
-To learn more about developing your project with Expo, look at the following resources:
+```
+dotnet ef database update
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+5. Copy _sql_ script from `Travels-API/seed.sql`, then paste it into your database client and run it
 
-## Join the community
+6. Your database should be good to go runing on **localhost:5444**
 
-Join our community of developers creating universal apps.
+### 2. Set up backend app
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. Make sure that you have .Net 8 SDK installed
 
-### POSTMAN PASSWORD: 195f62edd40a1d9b0c6407104596d6c29e2b408ecc1cc964e803376917ab1fd0
+2. Install nuggets using following command in `Travels-API` directory:
+
+```
+dotnet restore
+```
+
+3. Make sure you have following `appsettings.Development.json` file in `Travels-API` directory (it should be correct as default)
+
+```
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "AllowedHosts": "*",
+    "ConnectionStrings": {
+        "DefaultConnection": "Host=localhost;Port=5444;Database=travels-dev;Username=user;Password=password"
+    }
+}
+```
+
+4. In `Travels-API` directory, run:
+
+```
+dotnet watch run
+```
+
+5. Your backend should be running. Your default browser should be automatically opened on https://localhost:5000/swagger/index.html
+
+### 3. Run frontend
+
+1. Make sure that you have Node installed on your server and Expo Go installed on your phone
+
+2. Install ngrok from its official website - https://ngrok.com/download
+
+3. After installing ngrok, run the app with following command:
+
+```
+ngrok 5000 https://localhost:5000
+```
+
+This is going to create http tunnel in order to allow communication between your mobile device and your server. The phone cannot see the localhost on your PC, so you have to find the way to make communication occure. It has to be done by http tunnel which is going to redirect all of the http requests to your localhost specified port.
+
+3. In `Travels` directory, install npm packages:
+
+```
+npm install
+```
+
+4. In `.env` file, set the EXPO_PUBLIC_API_BASE_URL variable to the ngrok tunnel URL, e.g.
+
+```
+EXPO_PUBLIC_API_BASE_URL=https://570a-94-246-157-145.ngrok-free.app
+```
+
+5. In `Travels` directory, run:
+
+```
+npm start
+```
+
+6. Scan the QR code with your phone and open **Travels** app
+
+POSTMAN PASSWORD: 195f62edd40a1d9b0c6407104596d6c29e2b408ecc1cc964e803376917ab1fd0

@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c276402a-3009-4e58-b31e-f6f410f87230" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/locales/pl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/locales/pl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Input/DatePicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Input/DatePicker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/Input/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/Input/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/trip/components/TripFormInputs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/features/trip/components/TripFormInputs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="c276402a-3009-4e58-b31e-f6f410f87230" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -23,8 +23,6 @@ const useTripParticipants = ({
   const [participants, setParticipants] =
     useState<string[]>(initialParticipants);
 
-  console.log(initialOptions, initialParticipants);
-
   const { t } = useTranslation("trips");
 
   const onParticipantsChange = (updated: string[]) => {
