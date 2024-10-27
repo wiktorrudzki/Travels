@@ -99,4 +99,29 @@ npm start
 
 6. Scan the QR code with your phone and open **Travels** app
 
-POSTMAN PASSWORD: 195f62edd40a1d9b0c6407104596d6c29e2b408ecc1cc964e803376917ab1fd0
+## **What does the seed contain**
+
+- 6 users, where everyone's password is: Qwerty1!
+- 1 main user whose email is user@example.com
+- main user is added to all of the trips and he is the owner of all of them except one called "Niespodzianka"
+- 1 user called "Do dodania QR CODE" is not added to any trip
+- 6 trips and few events added to almost each of them
+
+## **How to use the app**
+
+### Logged in section
+
+- App has the Welcome screen which navigates user to Login screen
+- From Login screen, we can either log in to the app or navigate to register screen
+- From Register screen, we can create an account
+
+### Logged out section
+
+- Home screen contains nothing right now
+- Trips screen contains all user's trips, event assigned to those trips. Here owner of the trip can edit it (start, end time, participants, title) and edit its events (name, description, start, end time)
+- Account screen has few mocked up buttons, unique QR code of the user which can be used for adding user to a trip and "logout" button
+
+### Helpful info
+
+When trying to log in to the app from a Swagger, send POST request to a /login endpoint. Use email from database and following password:
+`195f62edd40a1d9b0c6407104596d6c29e2b408ecc1cc964e803376917ab1fd0` - Paste the token returned in the response to the Authorization section in the Swagger and feel free to use the app from the Swagger
