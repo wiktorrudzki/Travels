@@ -26,9 +26,7 @@ docker compose -f .\docker-compose.yml up -d
 dotnet ef database update
 ```
 
-5. Copy _sql_ script from `Travels-API/seed.sql`, then paste it into your database client and run it
-
-6. Your database should be good to go runing on **localhost:5444**
+5. Your database should be good to go runing on **localhost:5444**
 
 ### 2. Set up backend app
 
@@ -40,30 +38,13 @@ dotnet ef database update
 dotnet restore
 ```
 
-3. Make sure you have following `appsettings.Development.json` file in `Travels-API` directory (it should be correct as default)
-
-```
-{
-    "Logging": {
-        "LogLevel": {
-            "Default": "Information",
-            "Microsoft.AspNetCore": "Warning"
-        }
-    },
-    "AllowedHosts": "*",
-    "ConnectionStrings": {
-        "DefaultConnection": "Host=localhost;Port=5444;Database=travels-dev;Username=user;Password=password"
-    }
-}
-```
-
-4. In `Travels-API` directory, run:
+3. In `Travels-API` directory, run:
 
 ```
 dotnet watch run
 ```
 
-5. Your backend should be running. Your default browser should be automatically opened on https://localhost:5000/swagger/index.html
+4. Your backend should be running. Your default browser should be automatically opened on https://localhost:5000/swagger/index.html
 
 ### 3. Run frontend
 
@@ -71,10 +52,10 @@ dotnet watch run
 
 2. Install ngrok from its official website - https://ngrok.com/download
 
-3. After installing ngrok, run the app with following command:
+3. After installing ngrok, run ngrok following command in the ngrok cli:
 
 ```
-ngrok 5000 https://localhost:5000
+ngrok http https://localhost:5000
 ```
 
 This is going to create http tunnel in order to allow communication between your mobile device and your server. The phone cannot see the localhost on your PC, so you have to find the way to make communication occure. It has to be done by http tunnel which is going to redirect all of the http requests to your localhost specified port.
@@ -103,7 +84,7 @@ npm start
 
 - 6 users, where everyone's password is: Qwerty1!
 - 1 main user whose email is user@example.com
-- main user is added to all of the trips and he is the owner of all of them except one called "Niespodzianka"
+- main user is added to all of the trips and he is the owner of all of them except two: "Niespodzianka" and "Londyn + Brighton + Edynburg"
 - 1 user called "Do dodania QR CODE" is not added to any trip
 - 6 trips and few events added to almost each of them
 
