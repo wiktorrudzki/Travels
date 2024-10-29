@@ -1,7 +1,7 @@
 ﻿# **Welcome to Travels app**
 
 ## **To use the app, you are going to need two repos: Travels & Travels-API:**
--  https://github.com/wiktorrudzki/Travels - frontend
+-  https://github.com/wiktorrudzki/Travels - frontend (This is the repo you are at right now)
 -  https://github.com/wiktorrudzki/Travels-API - backend
 
 ## **Application layers**
