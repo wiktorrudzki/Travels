@@ -19,4 +19,8 @@ web-build/
 expo-env.d.ts
 # @end expo-cli
 
+# expo generated file
 %ProgramData%
+
+# for chatbot finetuning
+dataset.jsonl
