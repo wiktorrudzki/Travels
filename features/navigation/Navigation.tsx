@@ -35,6 +35,7 @@ const Navigation = () => {
           screenOptions={DEFAULT_SCREEN_OPTIONS}
         >
           <SignedStack.Screen name="home" component={Home} />
+          <SignedStack.Screen name="chat" component={Home} />
           <SignedStack.Screen name="account" component={Account} />
           <SignedStack.Screen name="trips" component={Trips} />
           <SignedStack.Screen name="trip" component={Trip} />

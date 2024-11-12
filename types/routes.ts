@@ -1,6 +1,7 @@
 export type RootStackSignedInPropsList = {
   account: undefined;
   home: undefined;
+  chat: { id?: string };
   trips: undefined;
   trip: { id: string };
   "trip/edit": { id: string };

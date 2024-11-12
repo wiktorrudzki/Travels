@@ -17,3 +17,7 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export const flightsApi = axios.create({
+  baseURL: `${process.env.EXPO_PUBLIC_FLIGHTS_API_URL}`,
+});
