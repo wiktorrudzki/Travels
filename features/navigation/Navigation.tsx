@@ -18,6 +18,7 @@ import CreateEvent from "@/app/trip/create-event/[id]";
 import EditEvent from "@/app/trip/edit-event/[id]";
 import QrCode from "@/app/qr-code";
 import EditTrip from "@/app/trip/edit/[id]";
+import Chat from "@/app/chat";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
@@ -35,7 +36,7 @@ const Navigation = () => {
           screenOptions={DEFAULT_SCREEN_OPTIONS}
         >
           <SignedStack.Screen name="home" component={Home} />
-          <SignedStack.Screen name="chat" component={Home} />
+          <SignedStack.Screen name="chat" component={Chat} />
           <SignedStack.Screen name="account" component={Account} />
           <SignedStack.Screen name="trips" component={Trips} />
           <SignedStack.Screen name="trip" component={Trip} />

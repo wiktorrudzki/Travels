@@ -9,7 +9,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "entryPoint": "./app/(unauthorized)/login.tsx",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -47,7 +47,9 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "expo-font",
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true
@@ -70,3 +72,4 @@
     }
   }
 }
+

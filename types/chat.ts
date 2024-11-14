@@ -1,3 +1,4 @@
+import { RouteProp } from "@react-navigation/native";
 import { Event } from "./event";
 import { FlightQuery } from "./flight";
 import { TripWithEvents } from "./trip";
@@ -44,3 +45,9 @@ export type ConversationContextType = {
   conversation: Conversation;
   sendMessage: (message: string) => void;
 };
+
+export type ChatRouteWithId = RouteProp<{
+  chat: {
+    id?: string;
+  };
+}>;

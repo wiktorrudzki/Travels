@@ -14,6 +14,7 @@ import {
 import OpenAI from "openai";
 import { MODEL } from "@/constants/chat";
 import { addUserMessageToConversation } from "@/lib/openai/helpers";
+import React from "react";
 
 const openai = new OpenAI({
   apiKey: process.env.EXPO_PUBLIC_OPENAI_API_KEY,
@@ -27,7 +28,7 @@ type Props = {
   defaultConversation?: Conversation;
 };
 
-const ConversationProvider = async ({
+const ConversationProvider = ({
   children,
   tripId,
   defaultConversation,
@@ -66,7 +67,7 @@ const ConversationProvider = async ({
     []
   );
 
-  if (isLoading || !runBefore) {
+  if ((isLoading || !runBefore) && tripId !== undefined) {
     return <LoadingSpinner />;
   }
 

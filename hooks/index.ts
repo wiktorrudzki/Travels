@@ -4,4 +4,5 @@ export { default as usePromiseWithLoading } from "./usePromiseWithLoading";
 export { default as useSignedInNavigation } from "./useSignedInNavigation";
 export { default as useUnsignedInNavigation } from "./useUnsignedInNavigation";
 export { useAuth, AuthProvider } from "./useAuth";
+export { useConversation, ConversationProvider } from "./useConversation";
 export { default as useScanQR } from "./useScanQR";
