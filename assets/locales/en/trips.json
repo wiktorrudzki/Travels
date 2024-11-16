@@ -19,5 +19,7 @@
   "scan_friends_qr": "Scan your friend's QR code in order to add him to participant list",
   "camera_access_needed": "Access to your camera is needed to process this operation",
   "friend_already_on_list": "Friend is already on the list",
-  "incorrect_qr": "Incorrect QR code"
+  "incorrect_qr": "Incorrect QR code",
+  "send_chat_message": "Send a message to TravelBuddy",
+  "no_chat_response": "Could not find the response from TavelBuddy"
 }

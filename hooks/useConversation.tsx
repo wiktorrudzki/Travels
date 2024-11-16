@@ -1,7 +1,7 @@
 import { LoadingSpinner } from "@/components/Spinner";
 import { getTripWithEvents } from "@/dal/trip";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
-import { Conversation, ConversationContextType } from "@/types/chat";
+import { Conversation, ConversationContextType, Message } from "@/types/chat";
 import { TripWithEvents } from "@/types/trip";
 import {
   createContext,
@@ -22,6 +22,8 @@ import {
   concatWithSystemMessage,
 } from "@/lib/openai/helpers";
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { ChatCompletionMessageParam } from "openai/resources";
 
 const openai = new OpenAI({
   apiKey: process.env.EXPO_PUBLIC_OPENAI_API_KEY,
@@ -43,6 +45,10 @@ const ConversationProvider = ({
   const [conversation, setConversation] = useState<Conversation>(
     defaultConversation ?? []
   );
+  const [isLoadingResponse, setIsLoadingResponse] = useState(false);
+
+  const { t } = useTranslation("trips");
+
   const [trip, setTrip] = useState<TripWithEvents>();
 
   const systemMessage = useMemo(
@@ -66,21 +72,33 @@ const ConversationProvider = ({
     }
   }, []);
 
+  const addMessage = (message: Message) =>
+    setConversation((prev) => prev.concat(message));
+
   const sendMessage = async (message: string) => {
-    console.log(message);
-    const completion = await openai.chat.completions.create({
-      model: MODEL,
-      max_tokens: 100,
-      temperature: 0,
-      messages: concatWithSystemMessage(
-        addUserMessageToConversation(conversation, message),
-        systemMessage
-      ),
-    });
+    addMessage({ role: "user", content: message });
+    setIsLoadingResponse(true);
 
-    console.log(completion.choices[0].message.content);
+    openai.chat.completions
+      .create({
+        model: MODEL,
+        max_tokens: 100,
+        temperature: 0,
+        messages: concatWithSystemMessage(
+          addUserMessageToConversation(conversation, message),
+          systemMessage
+        ),
+      })
+      .then((completion) => {
+        console.log(completion);
+        const response = completion.choices[0].message.content;
 
-    return completion.choices[0].message;
+        setIsLoadingResponse(false);
+        addMessage({
+          role: "assistant",
+          content: response || t("no_chat_response"),
+        });
+      });
   };
 
   if ((isLoading || !runBefore) && tripId !== undefined) {
@@ -90,6 +108,7 @@ const ConversationProvider = ({
   const value: ConversationContextType = {
     trip,
     conversation,
+    isLoadingResponse,
     sendMessage,
   };
 

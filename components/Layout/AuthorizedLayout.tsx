@@ -1,6 +1,11 @@
 import React from "react";
 import { View } from "../View";
-import { StyleSheet } from "react-native";
+import {
+  DimensionValue,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+} from "react-native";
 import Navbar from "./Navbar";
 import {
   ALIGN_BOTTOM,
@@ -14,12 +19,24 @@ type Props = {
   title?: React.ReactNode;
   withoutNavbar?: boolean;
   children: React.ReactNode;
+  contentHeight?: DimensionValue;
 };
 
-const AuthorizedLayout = ({ children, title, withoutNavbar }: Props) => (
+const AuthorizedLayout = ({
+  children,
+  title,
+  withoutNavbar,
+  contentHeight,
+}: Props) => (
   <View style={styles.container}>
     {title}
-    <View style={styles.content}>{children}</View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={30}
+      style={{ ...styles.content, height: contentHeight }}
+    >
+      {children}
+    </KeyboardAvoidingView>
     {!withoutNavbar && (
       <View style={styles.navbar}>
         <Navbar />

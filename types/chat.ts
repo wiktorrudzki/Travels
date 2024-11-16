@@ -36,11 +36,17 @@ export type EventResponse = {
   message: string;
 };
 
-export type Conversation = ChatCompletionMessageParam[];
+export type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+export type Conversation = Message[];
 
 export type ConversationContextType = {
   trip?: TripWithEvents;
   conversation: Conversation;
+  isLoadingResponse: boolean;
   sendMessage: (message: string) => void;
 };
 
