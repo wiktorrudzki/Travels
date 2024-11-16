@@ -2,6 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { Event } from "./event";
 import { FlightQuery } from "./flight";
 import { TripWithEvents } from "./trip";
+import { ChatCompletionMessageParam } from "openai/resources";
 
 export type Response =
   | OneWayFlightResponse
@@ -35,10 +36,7 @@ export type EventResponse = {
   message: string;
 };
 
-export type Conversation = {
-  role: "system" | "user" | "assistant";
-  content: string;
-}[];
+export type Conversation = ChatCompletionMessageParam[];
 
 export type ConversationContextType = {
   trip?: TripWithEvents;

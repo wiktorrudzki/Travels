@@ -12,8 +12,15 @@ import {
   useState,
 } from "react";
 import OpenAI from "openai";
-import { MODEL } from "@/constants/chat";
-import { addUserMessageToConversation } from "@/lib/openai/helpers";
+import {
+  MODEL,
+  SYSTEM_MESSAGE,
+  SYSTEM_MESSAGE_TRIP_INFO,
+} from "@/constants/chat";
+import {
+  addUserMessageToConversation,
+  concatWithSystemMessage,
+} from "@/lib/openai/helpers";
 import React from "react";
 
 const openai = new OpenAI({
@@ -38,6 +45,14 @@ const ConversationProvider = ({
   );
   const [trip, setTrip] = useState<TripWithEvents>();
 
+  const systemMessage = useMemo(
+    () =>
+      trip !== undefined
+        ? SYSTEM_MESSAGE
+        : SYSTEM_MESSAGE + SYSTEM_MESSAGE_TRIP_INFO + trip,
+    [trip]
+  );
+
   const [get, isLoading, runBefore] = usePromiseWithLoading(
     getTripWithEvents,
     (data) => {
@@ -51,21 +66,22 @@ const ConversationProvider = ({
     }
   }, []);
 
-  const sendMessage = useCallback(
-    () => async (message: string) => {
-      const completion = await openai.chat.completions.create({
-        model: MODEL,
-        max_tokens: 6,
-        temperature: 0,
-        messages: addUserMessageToConversation(conversation, message),
-      });
+  const sendMessage = async (message: string) => {
+    console.log(message);
+    const completion = await openai.chat.completions.create({
+      model: MODEL,
+      max_tokens: 100,
+      temperature: 0,
+      messages: concatWithSystemMessage(
+        addUserMessageToConversation(conversation, message),
+        systemMessage
+      ),
+    });
 
-      console.log(completion);
+    console.log(completion.choices[0].message.content);
 
-      return completion.choices[0].message;
-    },
-    []
-  );
+    return completion.choices[0].message;
+  };
 
   if ((isLoading || !runBefore) && tripId !== undefined) {
     return <LoadingSpinner />;

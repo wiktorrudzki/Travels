@@ -1,6 +1,7 @@
 import { AuthorizedLayout } from "@/components/Layout";
 import { TabBadge } from "@/components/TabBadge";
 import { View } from "@/components/View";
+import { Conversation, MessageInput } from "@/features/chat/components";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -20,7 +21,20 @@ const ChatScreen = () => {
         />
       }
     >
-      <View></View>
+      <View
+        style={
+          {
+            // height: "100%",
+            // width: "100%",
+            // display: "flex",
+            // alignItems: "flex-start",
+            // justifyContent: "center",
+          }
+        }
+      >
+        {/* <Conversation /> */}
+        <MessageInput />
+      </View>
     </AuthorizedLayout>
   );
 };

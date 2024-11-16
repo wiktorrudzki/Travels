@@ -1,9 +1,13 @@
 import { Conversation } from "@/types/chat";
+import { ChatCompletionMessageParam } from "openai/resources";
 
-export const setDefaultSystemMessage = (
+export const concatWithSystemMessage = (
   conversation: Conversation,
   message: string
-) => [{ role: "system", content: message }].concat(conversation);
+) =>
+  [{ role: "system", content: message } as ChatCompletionMessageParam].concat(
+    conversation
+  );
 
 export const addUserMessageToConversation = (
   conversation: Conversation,
