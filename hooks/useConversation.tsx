@@ -1,6 +1,6 @@
 import { LoadingSpinner } from "@/components/Spinner";
 import { getTripWithEvents } from "@/dal/trip";
-import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
+import { usePromiseWithLoading } from "@/hooks";
 import { Conversation, ConversationContextType, Message } from "@/types/chat";
 import { TripWithEvents } from "@/types/trip";
 import {
@@ -9,6 +9,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import OpenAI from "openai";
@@ -23,7 +24,7 @@ import {
 } from "@/lib/openai/helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ChatCompletionMessageParam } from "openai/resources";
+import { Keyboard, ScrollView } from "react-native";
 
 const openai = new OpenAI({
   apiKey: process.env.EXPO_PUBLIC_OPENAI_API_KEY,
@@ -46,6 +47,8 @@ const ConversationProvider = ({
     defaultConversation ?? []
   );
   const [isLoadingResponse, setIsLoadingResponse] = useState(false);
+
+  const scrollViewRef = useRef<ScrollView | null>(null);
 
   const { t } = useTranslation("trips");
 
@@ -70,19 +73,28 @@ const ConversationProvider = ({
     if (tripId) {
       get(tripId);
     }
+
+    Keyboard.addListener("keyboardDidShow", scrollToEnd);
   }, []);
+
+  const scrollToEnd = useCallback(
+    () => scrollViewRef.current?.scrollToEnd({ animated: true }),
+    [scrollViewRef]
+  );
 
   const addMessage = (message: Message) =>
     setConversation((prev) => prev.concat(message));
 
   const sendMessage = async (message: string) => {
+    Keyboard.dismiss();
     addMessage({ role: "user", content: message });
     setIsLoadingResponse(true);
+    scrollToEnd();
 
     openai.chat.completions
       .create({
         model: MODEL,
-        max_tokens: 100,
+        max_tokens: 1000,
         temperature: 0,
         messages: concatWithSystemMessage(
           addUserMessageToConversation(conversation, message),
@@ -90,9 +102,9 @@ const ConversationProvider = ({
         ),
       })
       .then((completion) => {
-        console.log(completion);
         const response = completion.choices[0].message.content;
 
+        scrollToEnd();
         setIsLoadingResponse(false);
         addMessage({
           role: "assistant",
@@ -109,6 +121,7 @@ const ConversationProvider = ({
     trip,
     conversation,
     isLoadingResponse,
+    scrollViewRef,
     sendMessage,
   };
 

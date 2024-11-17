@@ -9,7 +9,7 @@ import { useConversation } from "@/hooks";
 import { Feather } from "@expo/vector-icons";
 import { Pressable, useTheme } from "native-base";
 import React, { useMemo, useState } from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { Keyboard, StyleSheet, TextInput } from "react-native";
 
 type Props = React.ComponentPropsWithRef<typeof TextInput>;
 
@@ -22,14 +22,12 @@ const MessageInput = (props: Props) => {
 
   const disabled = useMemo(() => value.length === 0, [value]);
 
-  console.log(disabled);
-
   return (
     <View style={styles.container} borderColor={colors.black}>
       <TextInput
         value={value}
         onChangeText={setValue}
-        style={{ fontSize: LABEL_FONT_SIZE }}
+        style={styles.input}
         {...props}
       />
       <Pressable
@@ -42,7 +40,7 @@ const MessageInput = (props: Props) => {
         <Feather
           name="send"
           size={24}
-          color="black"
+          color={colors.black}
           style={{ opacity: disabled ? 0.4 : 1 }}
         />
       </Pressable>
@@ -57,6 +55,10 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.TINY,
     justifyContent: "space-between",
     borderBottomWidth: 1,
+  },
+  input: {
+    fontSize: LABEL_FONT_SIZE,
+    flex: 1,
   },
 });
 

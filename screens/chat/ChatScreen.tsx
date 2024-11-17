@@ -3,6 +3,8 @@ import { TabBadge } from "@/components/TabBadge";
 import { View } from "@/components/View";
 import { SPACING } from "@/constants/styles";
 import { Conversation, MessageInput } from "@/features/chat/components";
+import EmptyConversation from "@/features/chat/components/EmptyConversation";
+import { useConversation } from "@/hooks";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -10,6 +12,7 @@ import {
   Platform,
   SafeAreaView,
   StyleSheet,
+  TextInput,
 } from "react-native";
 
 const ChatScreen = () => {
@@ -42,7 +45,14 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    gap: SPACING.LARGE,
+  },
+  emptyContent: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     gap: SPACING.LARGE,
   },
 });

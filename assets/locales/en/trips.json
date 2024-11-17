@@ -21,5 +21,6 @@
   "friend_already_on_list": "Friend is already on the list",
   "incorrect_qr": "Incorrect QR code",
   "send_chat_message": "Send a message to TravelBuddy",
-  "no_chat_response": "Could not find the response from TavelBuddy"
+  "no_chat_response": "Could not find the response from TavelBuddy",
+  "empty_conversation_placeholder": "Hi!\nWhere are we going this time?"
 }

@@ -3,6 +3,8 @@ import { Event } from "./event";
 import { FlightQuery } from "./flight";
 import { TripWithEvents } from "./trip";
 import { ChatCompletionMessageParam } from "openai/resources";
+import { ScrollView } from "react-native";
+import { MutableRefObject } from "react";
 
 export type Response =
   | OneWayFlightResponse
@@ -47,6 +49,7 @@ export type ConversationContextType = {
   trip?: TripWithEvents;
   conversation: Conversation;
   isLoadingResponse: boolean;
+  scrollViewRef: MutableRefObject<ScrollView | null>;
   sendMessage: (message: string) => void;
 };
 
