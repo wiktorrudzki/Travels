@@ -11,8 +11,8 @@ const Conversation = () => {
   return (
     <ScrollView ref={scrollViewRef} style={styles.container}>
       {conversation.length > 0 ? (
-        conversation.map(({ role, content }) => (
-          <Message variant={role} text={content} />
+        conversation.map(({ role, content }, index) => (
+          <Message key={`${role}-${index}`} variant={role} text={content} />
         ))
       ) : (
         <EmptyConversation />

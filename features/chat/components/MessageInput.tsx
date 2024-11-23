@@ -9,7 +9,7 @@ import { useConversation } from "@/hooks";
 import { Feather } from "@expo/vector-icons";
 import { Pressable, useTheme } from "native-base";
 import React, { useMemo, useState } from "react";
-import { Keyboard, StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 
 type Props = React.ComponentPropsWithRef<typeof TextInput>;
 

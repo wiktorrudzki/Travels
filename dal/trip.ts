@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { EditTripRequest, Trip, TripWithEvents } from "@/types/trip";
+import { EditTripRequest, Trip, TripForm, TripWithEvents } from "@/types/trip";
 
 export const getTrips = () => api.get<Trip[]>("/trip");
 
@@ -14,3 +14,5 @@ export const deleteTrip = (id: string) => api.delete<string>(`/trip/${id}`);
 
 export const editTrip = ({ id, ...rest }: EditTripRequest) =>
   api.patch<TripWithEvents>(`/trip/${id}`, rest);
+
+export const createTrip = (body: TripForm) => api.post("/trip", body);

@@ -2,7 +2,6 @@ import { RouteProp } from "@react-navigation/native";
 import { Event } from "./event";
 import { FlightQuery } from "./flight";
 import { TripWithEvents } from "./trip";
-import { ChatCompletionMessageParam } from "openai/resources";
 import { ScrollView } from "react-native";
 import { MutableRefObject } from "react";
 
@@ -28,7 +27,7 @@ export type TwoWayFlightResponse = {
 
 export type TripResponse = {
   type: "trip";
-  data: TripWithEvents;
+  data: Pick<TripWithEvents, "start" | "end" | "title">;
   message: string;
 };
 

@@ -69,7 +69,8 @@
         "wasm",
         "svg"
       ]
-    }
+    },
+    "newArchEnabled": true
   }
 }
 

@@ -1,7 +1,12 @@
 import { LoadingSpinner } from "@/components/Spinner";
-import { getTripWithEvents } from "@/dal/trip";
-import { usePromiseWithLoading } from "@/hooks";
-import { Conversation, ConversationContextType, Message } from "@/types/chat";
+import { createTrip, getTripWithEvents } from "@/dal/trip";
+import { usePromise, usePromiseWithLoading } from "@/hooks";
+import {
+  Conversation,
+  ConversationContextType,
+  Message,
+  TripResponse,
+} from "@/types/chat";
 import { TripWithEvents } from "@/types/trip";
 import {
   createContext,
@@ -21,13 +26,16 @@ import {
 import {
   addUserMessageToConversation,
   concatWithSystemMessage,
+  isValidJSON,
 } from "@/lib/openai/helpers";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Keyboard, ScrollView } from "react-native";
 
+const OPENAI_API_KEY = process.env.EXPO_PUBLIC_OPENAI_API_KEY;
+
 const openai = new OpenAI({
-  apiKey: process.env.EXPO_PUBLIC_OPENAI_API_KEY,
+  apiKey: OPENAI_API_KEY,
 });
 
 const ConversationContext = createContext<ConversationContextType | null>(null);
@@ -47,6 +55,15 @@ const ConversationProvider = ({
     defaultConversation ?? []
   );
   const [isLoadingResponse, setIsLoadingResponse] = useState(false);
+
+  const [awaitingResponse, setAwaitingResponse] = useState<string>();
+
+  const onSuccessPlan = useCallback(() => {
+    onChatResponse(awaitingResponse);
+    setAwaitingResponse(undefined);
+  }, [awaitingResponse]);
+
+  const [planTrip] = usePromise(createTrip, onSuccessPlan);
 
   const scrollViewRef = useRef<ScrollView | null>(null);
 
@@ -101,16 +118,29 @@ const ConversationProvider = ({
           systemMessage
         ),
       })
-      .then((completion) => {
+      .then(async (completion) => {
         const response = completion.choices[0].message.content;
 
-        scrollToEnd();
-        setIsLoadingResponse(false);
-        addMessage({
-          role: "assistant",
-          content: response || t("no_chat_response"),
-        });
+        console.log(response);
+
+        const responseJSON = isValidJSON<TripResponse>(response);
+
+        if (responseJSON && "type" in responseJSON) {
+          setAwaitingResponse(responseJSON.message);
+          planTrip({ ...responseJSON.data, participants: [] });
+        } else {
+          onChatResponse(response);
+        }
       });
+  };
+
+  const onChatResponse = (response?: string | null) => {
+    scrollToEnd();
+    setIsLoadingResponse(false);
+    addMessage({
+      role: "assistant",
+      content: response || t("no_chat_response"),
+    });
   };
 
   if ((isLoading || !runBefore) && tripId !== undefined) {
