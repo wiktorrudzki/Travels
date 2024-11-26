@@ -11,10 +11,10 @@ import {
   Conversation,
   ConversationContextType,
   Message,
-  TripResponse,
+  Response,
 } from "@/types/chat";
 import { TripWithEvents } from "@/types/trip";
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -23,28 +23,23 @@ import {
   useRef,
   useState,
 } from "react";
-import OpenAI from "openai";
 import {
-  MODEL,
-  SYSTEM_MESSAGE,
-  SYSTEM_MESSAGE_TRIP_INFO,
+  PLANNED_TRIP_SYSTEM_MESSAGE,
   SYSTEM_MESSAGE_V2,
 } from "@/constants/chat";
 import {
   addUserMessageToConversation,
   concatWithSystemMessage,
+  createCompletion,
+  extractMessage,
+  generateResponseWithRag,
   isValidJSON,
+  removeAfterLastDash,
 } from "@/lib/openai/helpers";
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { Keyboard, ScrollView } from "react-native";
 import { toaster } from "@/lib/native-base";
-
-const OPENAI_API_KEY = process.env.EXPO_PUBLIC_OPENAI_API_KEY;
-
-const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY,
-});
+import { createEvent } from "@/dal/event";
 
 const ConversationContext = createContext<ConversationContextType | null>(null);
 
@@ -77,7 +72,21 @@ const ConversationProvider = ({
       onChatResponse();
     }
   );
-  const [modifyTrip] = usePromise(editTrip, setTrip);
+  // const [modifyTrip] = usePromise(editTrip, setTrip);
+  const [addEvent] = usePromise(
+    createEvent,
+    (data) => {
+      setTrip(
+        (prev) =>
+          ({ ...prev, events: prev?.events.concat(data) } as TripWithEvents)
+      );
+      onChatResponse(data.chatMessage, data?.id);
+    },
+    (err) => {
+      toaster({ text: err, variant: "danger" });
+      onChatResponse();
+    }
+  );
   const [updateChat] = usePromise(updateTripChat);
   const [getChat] = usePromise(
     getTripChat,
@@ -104,8 +113,8 @@ const ConversationProvider = ({
   const systemMessage = useMemo(
     () =>
       trip !== undefined
-        ? SYSTEM_MESSAGE_V2
-        : SYSTEM_MESSAGE_V2 + SYSTEM_MESSAGE_TRIP_INFO + trip,
+        ? PLANNED_TRIP_SYSTEM_MESSAGE + JSON.stringify(trip)
+        : SYSTEM_MESSAGE_V2,
     [trip]
   );
 
@@ -136,41 +145,81 @@ const ConversationProvider = ({
       return newConversation;
     });
 
+  // PLANOWANIE WYDARZENIA DZIAŁA, ALE MUSZE POPRAWIĆ DATY, KTÓRE ZWRACA CZAT WZGLĘDEM TEGO CO JEST W BAZIE I CO JEST WYŚWIETLANE NA FRONCIE
   const sendMessage = async (message: string) => {
     Keyboard.dismiss();
     addMessage({ role: "user", content: message });
     setIsLoadingResponse(true);
     scrollToEnd();
 
-    // TODO musze w odpowiednim momencie wysyłać czat przy tworzeniu wyjazdu i przy edycji moze tez by sie przydalo cos zmienic
-    openai.chat.completions
-      .create({
-        model: MODEL,
-        max_tokens: 1000,
-        temperature: 0,
-        messages: concatWithSystemMessage(
-          addUserMessageToConversation(conversation, message),
-          systemMessage
-        ),
-      })
+    createCompletion(generateCompletionMessages(message))
       .then(async (completion) => {
-        const response = completion.choices[0].message.content;
+        const response = extractMessage(completion);
 
-        const responseJSON = isValidJSON<TripResponse>(response);
+        console.log("first response:", response);
 
-        if (responseJSON && "type" in responseJSON) {
-          planTrip(
-            {
-              ...responseJSON.data,
-              participants: [],
-            },
-            responseJSON.message
+        if (response?.includes("googleSearch")) {
+          const ragResponse = await generateResponseWithRag(
+            removeAfterLastDash(response)
           );
+
+          console.log("ragResponse", ragResponse);
+
+          createCompletion(
+            generateCompletionMessages(
+              `Pytanie od użytkownika: ${message}. Wyniki wyszukiwania na pytanie: ${response}: ${JSON.stringify(
+                ragResponse
+              )}`
+            )
+          ).then((completion) => {
+            const response = extractMessage(completion);
+
+            console.log("second response", response);
+
+            onChatResponse(response);
+          });
         } else {
-          onChatResponse(response);
+          const responseJSON = isValidJSON<Response>(response);
+
+          if (responseJSON && "type" in responseJSON) {
+            handleJSONResponse(responseJSON);
+          } else {
+            onChatResponse(response);
+          }
         }
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
+
+  const handleJSONResponse = (response: Response) => {
+    switch (response.type) {
+      case "trip":
+        return planTrip(
+          {
+            ...response.data,
+            participants: [],
+          },
+          response.message
+        );
+      case "event":
+        return addEvent(
+          {
+            ...response.data,
+            start: new Date(response.data.start),
+            end: new Date(response.data.end),
+          },
+          response.message
+        );
+    }
+  };
+
+  const generateCompletionMessages = (message: string) =>
+    concatWithSystemMessage(
+      addUserMessageToConversation(conversation, message),
+      systemMessage
+    );
 
   const onChatResponse = (response?: string | null, tripId?: string) => {
     scrollToEnd();

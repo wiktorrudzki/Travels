@@ -1,9 +1,18 @@
+import { MODEL } from "@/constants/chat";
 import { Conversation } from "@/types/chat";
 import axios from "axios";
-import { ChatCompletionMessageParam } from "openai/resources";
+import OpenAI from "openai";
+
+import { ChatCompletion, ChatCompletionMessageParam } from "openai/resources";
 
 const GOOGLE_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
 const GOOGLE_CUSTOM_SEARCH_ID = process.env.EXPO_PUBLIC_GOOGLE_CUSTOM_SEARCH_ID;
+
+const OPENAI_API_KEY = process.env.EXPO_PUBLIC_OPENAI_API_KEY;
+
+const openai = new OpenAI({
+  apiKey: OPENAI_API_KEY,
+});
 
 export const concatWithSystemMessage = (
   conversation: Conversation,
@@ -43,7 +52,7 @@ type GoogleSearchResult = {
 export const googleSearch = async (
   query: string
 ): Promise<GoogleSearchResult[]> => {
-  const url = `https://www.googleapis.com/customsearch/v1?q=${query}&key=${GOOGLE_API_KEY}&cx=${GOOGLE_CUSTOM_SEARCH_ID}`;
+  const url = `https://www.googleapis.com/customsearch/v1?q="${query}"&key=${GOOGLE_API_KEY}&cx=${GOOGLE_CUSTOM_SEARCH_ID}`;
   try {
     const response = await axios.get(url);
     return response.data.items || [];
@@ -54,9 +63,9 @@ export const googleSearch = async (
 };
 
 export const generateResponseWithRag = async (
-  question: string,
   query: string
 ): Promise<string> => {
+  console.log("query", query);
   const searchResults = await googleSearch(query);
 
   if (searchResults.length === 0) {
@@ -68,10 +77,18 @@ export const generateResponseWithRag = async (
     .map((item) => item.snippet)
     .join("\n");
 
-  return `
-  Odpowiedz na pytanie od użytkownika: ${question}
-  Wyniki wyszukiwania google na pytanie: ${query}:
-  ${retrievedInfo}
-  Jeśli pomimmo wyników wyszukiwania, dalej nie wiesz, to napisz użytkownikowi, że nie wiesz jak odpowowiedzieć na to pytanie i daj mu wskazówkę jak samemu może znaleźć na nie odpowiedź
-  `;
+  console.log("retrievedInfo", retrievedInfo);
+
+  return retrievedInfo;
 };
+
+export const extractMessage = (completion: ChatCompletion) =>
+  completion.choices[0].message.content;
+
+export const createCompletion = (messages: ChatCompletionMessageParam[]) =>
+  openai.chat.completions.create({
+    model: MODEL,
+    max_tokens: 1000,
+    temperature: 0,
+    messages,
+  });

@@ -6,8 +6,10 @@ import {
   EventWithTrip,
 } from "@/types/event";
 
-export const createEvent = (body: CreateEventRequest) =>
-  api.post<Event>("/event", body);
+export const createEvent = (body: CreateEventRequest, chatMessage?: string) =>
+  api
+    .post<Event>("/event", body)
+    .then((res) => ({ ...res, data: { ...res.data, chatMessage } }));
 
 export const editEvent = ({ id, ...rest }: EditEventRequest) =>
   api.patch<Event>(`/event/${id}`, rest);

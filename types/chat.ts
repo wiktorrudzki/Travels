@@ -1,5 +1,5 @@
 import { RouteProp } from "@react-navigation/native";
-import { Event } from "./event";
+import { EventForm } from "./event";
 import { FlightQuery } from "./flight";
 import { TripWithEvents } from "./trip";
 import { ScrollView } from "react-native";
@@ -33,7 +33,7 @@ export type TripResponse = {
 
 export type EventResponse = {
   type: "event";
-  data: Event;
+  data: EventForm;
   message: string;
 };
 
