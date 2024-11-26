@@ -11,6 +11,7 @@ import { Platform, StyleSheet } from "react-native";
 import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
 import { TripForm } from "@/types/trip";
+import React from "react";
 
 type Props = FormikProps<TripForm> & {
   participantsOptions: Option[];

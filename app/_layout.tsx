@@ -9,6 +9,7 @@ import { AuthProvider } from "@/hooks";
 import { Navigation } from "@/features/navigation";
 import { COLORS } from "@/constants/colors";
 import { LITTLE_ROUNDED } from "@/constants/styles";
+import React from "react";
 
 const newColorTheme = COLORS;
 const theme = extendTheme({

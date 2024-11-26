@@ -3,6 +3,7 @@ import { getTripWithEvents } from "@/dal/trip";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
 import { formatToHttpDate } from "@/lib/date-fns";
 import { TripWithEventsContextType, TripWithEvents } from "@/types/trip";
+import React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const TripWithEventsContext = createContext<TripWithEventsContextType | null>(

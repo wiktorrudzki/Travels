@@ -3,6 +3,7 @@ import { Text } from "@/components/Text";
 import { View } from "@/components/View";
 import { CENTER_FLEX, FULL_SPACE } from "@/constants/styles";
 import { useAuth } from "@/hooks";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 

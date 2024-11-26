@@ -2,6 +2,7 @@ import { LoadingSpinner } from "@/components/Spinner";
 import { getTrip } from "@/dal/trip";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
 import { Trip, TripContextType } from "@/types/trip";
+import React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const TripContext = createContext<TripContextType | null>(null);

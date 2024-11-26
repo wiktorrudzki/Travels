@@ -6,6 +6,7 @@ import { FormControl, View } from "native-base";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { SPACING } from "@/constants/styles";
+import React from "react";
 
 type Props = FormikProps<RegisterRequest> & {
   isLoading: boolean;

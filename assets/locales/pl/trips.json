@@ -22,5 +22,6 @@
   "incorrect_qr": "Nieprawidłowy kod QR",
   "send_chat_message": "Wyślij wiadomość do TravelBuddy",
   "no_chat_response": "Nie udało sie uzyskać odpowiedzi od TavelBuddy",
-  "empty_conversation_placeholder": "Cześć!\nGdzie jedziemy tym razem?"
+  "empty_conversation_placeholder": "Cześć!\nGdzie jedziemy tym razem?",
+  "lets_chat": "Porozmawiajmy!"
 }

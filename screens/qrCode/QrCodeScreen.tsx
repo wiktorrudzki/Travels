@@ -6,6 +6,7 @@ import { Text } from "@/components/Text";
 import { StyleSheet } from "react-native";
 import { CENTER_FLEX, FULL_SPACE } from "@/constants/styles";
 import { useTranslation } from "react-i18next";
+import React from "react";
 
 const QrCodeScreen = () => {
   const { qrCode, isLoading } = useGetQRCode();

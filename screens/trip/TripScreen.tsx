@@ -14,11 +14,13 @@ import { StyleSheet } from "react-native";
 import {
   CENTER_FLEX,
   FLEX_COLUMN,
+  ROUNDED,
   SEMI_BOLD_TITLE,
   SPACING,
 } from "@/constants/styles";
 import { useSignedInNavigation } from "@/hooks";
 import { TabBadge } from "@/components/TabBadge";
+import { FontAwesome } from "@expo/vector-icons";
 
 const TripScreen = () => {
   const { t } = useTranslation("trips");
@@ -40,7 +42,23 @@ const TripScreen = () => {
             }}
             title={trip.title}
           />
-          {trip.isOwner && <TripSettingsButton />}
+          {trip.isOwner && (
+            <>
+              <Pressable
+                onPress={() => push("chat", { id: trip.id })}
+                style={styles.iconButton}
+                borderColor={colors.primary[400]}
+                backgroundColor={colors.white}
+              >
+                <FontAwesome
+                  color={colors.primary[400]}
+                  name="wechat"
+                  size={32}
+                />
+              </Pressable>
+              <TripSettingsButton />
+            </>
+          )}
         </>
       }
       withoutNavbar
@@ -73,6 +91,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   title: SEMI_BOLD_TITLE,
+  iconButton: {
+    ...ROUNDED,
+    padding: SPACING.MEDIUM,
+    zIndex: 100,
+    borderWidth: 1,
+    position: "absolute",
+    bottom: 50,
+    right: 50,
+  },
 });
 
 export default TripScreen;

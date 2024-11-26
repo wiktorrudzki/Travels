@@ -3,20 +3,15 @@ import { TabBadge } from "@/components/TabBadge";
 import { View } from "@/components/View";
 import { SPACING } from "@/constants/styles";
 import { Conversation, MessageInput } from "@/features/chat/components";
-import EmptyConversation from "@/features/chat/components/EmptyConversation";
 import { useConversation } from "@/hooks";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-} from "react-native";
+import { StyleSheet } from "react-native";
 
 const ChatScreen = () => {
   const { t } = useTranslation("trips");
+
+  const { trip } = useConversation();
 
   return (
     <AuthorizedLayout
@@ -25,10 +20,12 @@ const ChatScreen = () => {
       title={
         <TabBadge
           goBack={{
-            to: { screen: "home" },
-            text: t("home"),
+            to: trip
+              ? { screen: "trip", params: { id: trip.id } }
+              : { screen: "home" },
+            text: trip?.title ?? t("home"),
           }}
-          title={"Let's chat"}
+          title={t("lets_chat")}
         />
       }
     >

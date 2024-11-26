@@ -9,7 +9,7 @@ import {
 import React, { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "../Text";
-import { CENTER_FLEX, SPACING } from "@/constants/styles";
+import { BOLD, CENTER_FLEX, LITTLE_ROUNDED, SPACING } from "@/constants/styles";
 
 type Props = {
   text: string;
@@ -64,9 +64,12 @@ const Toast = ({ text, variant }: Props) => {
 const styles = StyleSheet.create({
   container: {
     ...CENTER_FLEX,
+    ...LITTLE_ROUNDED,
+    padding: SPACING.MEDIUM,
+    fontWeight: BOLD,
     gap: SPACING.MEDIUM,
     borderStyle: "solid",
-    borderWidth: 1,
+    borderWidth: 2,
   },
 });
 

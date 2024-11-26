@@ -20,7 +20,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import TripMenu from "./TripMenu";
-import { useDeleteTrip } from "../hooks";
+import { useDeleteTrip, useTrips } from "../hooks";
 import { LoadingSpinner } from "@/components/Spinner";
 
 type Props = {
@@ -28,7 +28,9 @@ type Props = {
 };
 
 const MainTripCard = ({ trip }: Props) => {
-  const { deleteTrip, isLoading } = useDeleteTrip();
+  const { deleteTrip: deleteOne } = useTrips();
+
+  const { deleteTrip, isLoading } = useDeleteTrip(deleteOne);
 
   const { t } = useTranslation("trips");
 

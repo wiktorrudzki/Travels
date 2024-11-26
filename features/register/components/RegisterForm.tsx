@@ -2,6 +2,7 @@ import { RegisterRequest } from "@/types/auth";
 import { Formik } from "formik";
 import { useRegister } from "../hooks";
 import RegisterFormInputs from "./RegisterFormInputs";
+import React from "react";
 
 const initialValues: RegisterRequest = {
   email: "",
