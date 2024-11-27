@@ -10,7 +10,7 @@ import {
   TripSettingsButton,
 } from "@/features/trip/components";
 import { Text } from "@/components/Text";
-import { StyleSheet } from "react-native";
+import { RefreshControl, StyleSheet } from "react-native";
 import {
   CENTER_FLEX,
   FLEX_COLUMN,

@@ -26,8 +26,9 @@ const EventFormInputs = ({
   const minimumDate = useMemo(() => new Date(trip.start), [trip]);
   const maximumDate = useMemo(() => new Date(trip.end), [trip]);
 
-  const toStringDate = (e: DateTimePickerEvent) =>
-    new Date(e.nativeEvent.timestamp).toString();
+  const toStringDate = (e: DateTimePickerEvent) => {
+    return new Date(e.nativeEvent.timestamp).toString();
+  };
 
   return (
     <View style={styles.inputsWrapper}>

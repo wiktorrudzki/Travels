@@ -156,14 +156,10 @@ const ConversationProvider = ({
       .then(async (completion) => {
         const response = extractMessage(completion);
 
-        console.log("first response:", response);
-
         if (response?.includes("googleSearch")) {
           const ragResponse = await generateResponseWithRag(
             removeAfterLastDash(response)
           );
-
-          console.log("ragResponse", ragResponse);
 
           createCompletion(
             generateCompletionMessages(
@@ -173,8 +169,6 @@ const ConversationProvider = ({
             )
           ).then((completion) => {
             const response = extractMessage(completion);
-
-            console.log("second response", response);
 
             onChatResponse(response);
           });
@@ -204,6 +198,11 @@ const ConversationProvider = ({
           response.message
         );
       case "event":
+        console.log(response, {
+          ...response.data,
+          start: new Date(response.data.start),
+          end: new Date(response.data.end),
+        });
         return addEvent(
           {
             ...response.data,

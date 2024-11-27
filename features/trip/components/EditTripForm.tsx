@@ -29,6 +29,8 @@ const EditTripForm = () => {
 
   const { friends } = useUserFriends();
 
+  console.log(trip);
+
   const {
     participants,
     options,

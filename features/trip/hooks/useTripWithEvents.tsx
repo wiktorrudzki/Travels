@@ -3,8 +3,7 @@ import { getTripWithEvents } from "@/dal/trip";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
 import { formatToHttpDate } from "@/lib/date-fns";
 import { TripWithEventsContextType, TripWithEvents } from "@/types/trip";
-import React from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const TripWithEventsContext = createContext<TripWithEventsContextType | null>(
   null
@@ -34,7 +33,7 @@ const TripWithEventsProvider = ({ children, id }: Props) => {
 
   useEffect(() => {
     get(id);
-  }, []);
+  }, [id]);
 
   if (isLoading || !runBefore) {
     return <LoadingSpinner />;

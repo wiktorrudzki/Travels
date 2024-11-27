@@ -38,13 +38,20 @@ const useEditEvent = (eventId: string) => {
     end: date().required().min(ref("start"), t("common:end_after_start")),
   });
 
-  const onSubmit = (values: EventForm) =>
-    edit({
+  const onSubmit = (values: EventForm) => {
+    console.log(values, {
       ...values,
       id: eventId,
       start: new Date(values.start),
       end: new Date(values.end),
     });
+    return edit({
+      ...values,
+      id: eventId,
+      start: new Date(values.start),
+      end: new Date(values.end),
+    });
+  };
 
   return { schema, isLoading, onSubmit };
 };
