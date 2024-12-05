@@ -13,6 +13,7 @@ const usePromise = <T extends unknown[], A>(
         }
       })
       .catch((e: AxiosError) => {
+        console.log(e);
         if (onFailure) {
           onFailure(
             typeof e.response?.data === "string" ? e.response.data : e.message

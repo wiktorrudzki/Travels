@@ -92,3 +92,13 @@ export const createCompletion = (messages: ChatCompletionMessageParam[]) =>
     temperature: 0,
     messages,
   });
+
+/*This sample code assumes the request-promise package is installed. If it is not installed run: "npm install request-promise"*/
+// require('request-promise')({
+//     url: 'https://www.bing.com/search?q=co+robi%C4%87+w+barcelonie%3F&cc=pl&first=1&count=20',
+//     proxy: 'http://brd-customer-hl_36799ffe-zone-travelsv1:ov240517rpjl@brd.superproxy.io:33335',
+//     rejectUnauthorized: false,
+//     })
+// .then(function(data){ console.log(data); },
+//     function(err){ console.error(err); });
+// .organic.map(o => o.link) ->
