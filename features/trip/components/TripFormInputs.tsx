@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// todo co zrobic jak ktos zmniejszy zakres trip start/end a event zostanie poza zakresem
+// 3. todo co zrobic jak ktos zmniejszy zakres trip start/end a event zostanie poza zakresem
 
 export default TripFormInputs;

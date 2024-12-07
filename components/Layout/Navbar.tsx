@@ -22,16 +22,25 @@ const Navbar = () => {
         icon={<Search />}
         checkedIcon={<SearchChecked />}
         href="home"
+        checkedRoutes={["home"]}
       />
       <NavbarIcon
         icon={<Calendar />}
         checkedIcon={<CalendarChecked />}
         href="trips"
+        checkedRoutes={[
+          "trip",
+          "trip/create-event",
+          "trip/edit",
+          "trip/edit-event",
+          "trips",
+        ]}
       />
       <NavbarIcon
         icon={<User />}
         checkedIcon={<UserChecked />}
         href="account"
+        checkedRoutes={["account", "change-password"]}
       />
     </View>
   );

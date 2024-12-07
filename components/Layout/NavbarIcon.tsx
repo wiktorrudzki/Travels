@@ -2,23 +2,32 @@ import { useSignedInNavigation } from "@/hooks";
 import { RootStackSignedInPropsList } from "@/types/routes";
 import { useRoute } from "@react-navigation/native";
 import { Pressable } from "native-base";
-import React from "react";
+import React, { useMemo } from "react";
 
 type Props = {
   icon: React.ReactNode;
   checkedIcon: React.ReactNode;
   href: keyof RootStackSignedInPropsList;
+  checkedRoutes?: (keyof RootStackSignedInPropsList)[];
 };
 
-const NavbarIcon = ({ icon, checkedIcon, href }: Props) => {
+const NavbarIcon = ({ icon, checkedIcon, href, checkedRoutes }: Props) => {
   const route = useRoute();
 
   const { push } = useSignedInNavigation();
 
-  return route.name === href ? (
-    checkedIcon
-  ) : (
-    <Pressable onPress={() => push(href)}>{icon}</Pressable>
+  const isIconChecked = useMemo(
+    () =>
+      checkedRoutes
+        ? checkedRoutes.includes(route.name as keyof RootStackSignedInPropsList)
+        : route.name === href,
+    [route.name, checkedRoutes, href]
+  );
+
+  return (
+    <Pressable onPress={() => push(href)}>
+      {isIconChecked ? checkedIcon : icon}
+    </Pressable>
   );
 };
 

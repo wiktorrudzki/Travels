@@ -5,7 +5,6 @@ import { object, ref, string } from "yup";
 import { toaster } from "@/lib/native-base";
 import { register } from "@/dal/auth";
 import { RegisterRequest } from "@/types/auth";
-import CryptoJS from "crypto-js";
 import { hashWithSha256ToHex } from "@/lib/crypto-js";
 
 const useRegister = () => {
