@@ -57,3 +57,11 @@ export type ChatRouteWithId = RouteProp<{
     id?: string;
   };
 }>;
+
+export type GoogleOrganicResult = {
+  position: number;
+  title: string;
+  snippet: string;
+  source: string;
+  link: string;
+};

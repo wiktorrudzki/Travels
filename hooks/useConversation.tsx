@@ -23,10 +23,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  PLANNED_TRIP_SYSTEM_MESSAGE,
-  SYSTEM_MESSAGE_V2,
-} from "@/constants/chat";
+import { PLANNED_TRIP_SYSTEM_MESSAGE, SYSTEM_MESSAGE } from "@/constants/chat";
 import {
   addUserMessageToConversation,
   concatWithSystemMessage,
@@ -114,7 +111,7 @@ const ConversationProvider = ({
     () =>
       trip !== undefined
         ? PLANNED_TRIP_SYSTEM_MESSAGE + JSON.stringify(trip)
-        : SYSTEM_MESSAGE_V2,
+        : SYSTEM_MESSAGE,
     [trip]
   );
 
@@ -145,7 +142,6 @@ const ConversationProvider = ({
       return newConversation;
     });
 
-  // PLANOWANIE WYDARZENIA DZIAŁA, ALE MUSZE POPRAWIĆ DATY, KTÓRE ZWRACA CZAT WZGLĘDEM TEGO CO JEST W BAZIE I CO JEST WYŚWIETLANE NA FRONCIE
   const sendMessage = async (message: string) => {
     Keyboard.dismiss();
     addMessage({ role: "user", content: message });
@@ -156,7 +152,9 @@ const ConversationProvider = ({
       .then(async (completion) => {
         const response = extractMessage(completion);
 
-        if (response?.includes("googleSearch")) {
+        console.log(response);
+
+        if (response?.includes("search")) {
           const ragResponse = await generateResponseWithRag(
             removeAfterLastDash(response)
           );
@@ -173,7 +171,9 @@ const ConversationProvider = ({
             onChatResponse(response);
           });
         } else {
-          const responseJSON = isValidJSON<Response>(response);
+          const responseJSON = isValidJSON<Response>(
+            response?.substring(response.indexOf("{"))
+          );
 
           if (responseJSON && "type" in responseJSON) {
             handleJSONResponse(responseJSON);
@@ -198,11 +198,6 @@ const ConversationProvider = ({
           response.message
         );
       case "event":
-        console.log(response, {
-          ...response.data,
-          start: new Date(response.data.start),
-          end: new Date(response.data.end),
-        });
         return addEvent(
           {
             ...response.data,

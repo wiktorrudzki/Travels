@@ -4,7 +4,6 @@ import { toaster } from "@/lib/native-base";
 import { uppercasedLetterRegex } from "@/utils/regex";
 import { useTranslation } from "react-i18next";
 import { object, string } from "yup";
-import CryptoJS from "crypto-js";
 import { LoginRequest } from "@/types/auth";
 import { hashWithSha256ToHex } from "@/lib/crypto-js";
 

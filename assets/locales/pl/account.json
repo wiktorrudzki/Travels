@@ -6,5 +6,9 @@
   "friends": "Znajomi",
   "friends_list": "Lista znajomych",
   "add_friend": "Dodaj znajomego",
-  "qr_not_found": "Nie udało sie odnaleźć kodu QR dla twojego konta"
+  "qr_not_found": "Nie udało sie odnaleźć kodu QR dla twojego konta",
+  "pwd_changed": "Hasło zostało pomyślnie zmienione",
+  "old_pwd": "Stare hasło",
+  "new_pwd": "Nowe hasło",
+  "confirm_new_pwd": "Potwierdź nowe hasło"
 }

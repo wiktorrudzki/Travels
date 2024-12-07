@@ -11,12 +11,10 @@ const DatePicker = (props: Props) => {
 
   const { colors } = useTheme();
 
-  console.log(props.value);
-
   return (
     <DateTimePicker
       focusable
-      timeZoneName="Etc/UCT"
+      timeZoneName="PL"
       locale={i18n.language}
       themeVariant={Platform.OS === "ios" ? "light" : undefined}
       accentColor={Platform.OS === "ios" ? colors.primary[400] : undefined}

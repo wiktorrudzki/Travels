@@ -10,7 +10,7 @@ export const ACCOUNT_TABS: { title: string; tabs: Tab[] }[] = [
       // },
       {
         title: "change_password",
-        to: "home",
+        to: "change-password",
       },
     ],
   },

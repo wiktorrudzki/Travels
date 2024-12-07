@@ -1,6 +1,6 @@
-import { editEvent } from "@/dal/event";
 import { editTrip } from "@/dal/trip";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
+import { addHour } from "@/lib/date-fns";
 import { toaster } from "@/lib/native-base";
 import { TripForm } from "@/types/trip";
 import { useTranslation } from "react-i18next";
@@ -38,13 +38,11 @@ const useEditTrip = (tripId: string) => {
     edit({
       ...values,
       id: tripId,
-      start: new Date(values.start),
-      end: new Date(values.end),
+      start: addHour(new Date(values.start)),
+      end: addHour(new Date(values.end)),
     });
 
   return { schema, isLoading, onSubmit };
 };
-
-// todo DODAC UCZESTNIKOW WYJAZDU DO FORMULARZA, ZAKTUALIZOWAC SEEDY, ZAKTUALIZOWAĆ README
 
 export default useEditTrip;

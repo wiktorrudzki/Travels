@@ -1,14 +1,15 @@
 import { editEvent } from "@/dal/event";
 import { usePromiseWithLoading } from "@/hooks";
+import { addHour } from "@/lib/date-fns";
 import { toaster } from "@/lib/native-base";
-import { EventForm } from "@/types/event";
+import { Event, EventForm } from "@/types/event";
 import { useTranslation } from "react-i18next";
 import { date, object, ref, string } from "yup";
 
 const useEditEvent = (eventId: string) => {
   const { t } = useTranslation(["common", "trips"]);
 
-  const success = () => {
+  const success = (data: Event) => {
     toaster({ text: t("trips:edit_success"), variant: "success" });
   };
 
@@ -39,23 +40,15 @@ const useEditEvent = (eventId: string) => {
   });
 
   const onSubmit = (values: EventForm) => {
-    console.log(values, {
-      ...values,
-      id: eventId,
-      start: new Date(values.start),
-      end: new Date(values.end),
-    });
     return edit({
       ...values,
       id: eventId,
-      start: new Date(values.start),
-      end: new Date(values.end),
+      start: addHour(new Date(values.start)),
+      end: addHour(new Date(values.end)),
     });
   };
 
   return { schema, isLoading, onSubmit };
 };
-
-// DODAC USUWANIE WYDARZEN I WYJAZDOW, DODAC SZYFROWANIE HASLA PO FRONCIE, DODAC UCZESTNIKOW WYJAZDU DO FORMULARZA, ZAKTUALIZOWAĆ README
 
 export default useEditEvent;

@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse, AxiosResponseHeaders } from "axios";
+import { AxiosResponse, AxiosResponseHeaders } from "axios";
 import { useState } from "react";
 
 const usePromiseWithLoading = <T extends unknown[], A>(

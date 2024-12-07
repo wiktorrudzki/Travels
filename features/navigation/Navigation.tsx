@@ -19,6 +19,7 @@ import EditEvent from "@/app/trip/edit-event/[id]";
 import QrCode from "@/app/qr-code";
 import EditTrip from "@/app/trip/edit/[id]";
 import Chat from "@/app/chat";
+import ChangePassword from "@/app/change-password";
 
 const DEFAULT_SCREEN_OPTIONS = { headerShown: false };
 
@@ -47,6 +48,10 @@ const Navigation = () => {
           />
           <SignedStack.Screen name="trip/edit-event" component={EditEvent} />
           <SignedStack.Screen name="qr-code" component={QrCode} />
+          <SignedStack.Screen
+            name="change-password"
+            component={ChangePassword}
+          />
           <SignedStack.Screen name="+not-found" component={NotFound} />
           <SignedStack.Screen name="*" component={NotFound} />
         </SignedStack.Navigator>

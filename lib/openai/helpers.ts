@@ -1,5 +1,5 @@
 import { MODEL } from "@/constants/chat";
-import { Conversation } from "@/types/chat";
+import { Conversation, GoogleOrganicResult } from "@/types/chat";
 import axios from "axios";
 import OpenAI from "openai";
 
@@ -49,12 +49,51 @@ type GoogleSearchResult = {
   snippet: string;
 };
 
+const searchSerpApi = async (query: string) => {
+  let output = "";
+
+  try {
+    const params = {
+      engine: "google",
+      q: query,
+      location: "Poland",
+      api_key:
+        "cf1ed0ebbbba834e6f3511f0d1fe9d9ffea18c92e1b6a4125154c7bc1fe92679",
+    };
+
+    const response = await axios.get("https://serpapi.com/search", { params });
+
+    const results = response.data;
+
+    if (results && results.organic_results.length >= 10) {
+      results.organic_results
+        .slice(0, 10)
+        .forEach((item: GoogleOrganicResult) => {
+          output += `Pozycja: ${item.position}\n`;
+          output += `Tytuł: ${item.title}\n`;
+          output += `Snippet: ${item.snippet}\n`;
+          output += `Link: ${item.link}\n`;
+          output += `Źródło: ${item.source}\n`;
+          output += "-".repeat(40) + "\n";
+        });
+
+      return output;
+    } else {
+      console.log("No results found.");
+    }
+  } catch (error) {
+    console.error("Error fetching data from SerpApi:", error);
+  }
+};
+
 export const googleSearch = async (
   query: string
 ): Promise<GoogleSearchResult[]> => {
-  const url = `https://www.googleapis.com/customsearch/v1?q="${query}"&key=${GOOGLE_API_KEY}&cx=${GOOGLE_CUSTOM_SEARCH_ID}`;
+  // cf1ed0ebbbba834e6f3511f0d1fe9d9ffea18c92e1b6a4125154c7bc1fe92679
+  const url = `https://serpapi.com/search.json?q=${query}?&location=Poland&hl=pl&gl=pl&google_domain=google.pl`;
   try {
     const response = await axios.get(url);
+    console.group(response);
     return response.data.items || [];
   } catch (error) {
     console.error("Błąd podczas wyszukiwania w Google:", error);
@@ -66,20 +105,13 @@ export const generateResponseWithRag = async (
   query: string
 ): Promise<string> => {
   console.log("query", query);
-  const searchResults = await googleSearch(query);
+  const searchResults = await searchSerpApi(query);
 
-  if (searchResults.length === 0) {
+  if (searchResults === undefined) {
     return "Niestety, nie znalazłem żadnych informacji na ten temat.";
   }
 
-  const retrievedInfo = searchResults
-    .slice(0, 3)
-    .map((item) => item.snippet)
-    .join("\n");
-
-  console.log("retrievedInfo", retrievedInfo);
-
-  return retrievedInfo;
+  return searchResults;
 };
 
 export const extractMessage = (completion: ChatCompletion) =>
@@ -92,13 +124,3 @@ export const createCompletion = (messages: ChatCompletionMessageParam[]) =>
     temperature: 0,
     messages,
   });
-
-/*This sample code assumes the request-promise package is installed. If it is not installed run: "npm install request-promise"*/
-// require('request-promise')({
-//     url: 'https://www.bing.com/search?q=co+robi%C4%87+w+barcelonie%3F&cc=pl&first=1&count=20',
-//     proxy: 'http://brd-customer-hl_36799ffe-zone-travelsv1:ov240517rpjl@brd.superproxy.io:33335',
-//     rejectUnauthorized: false,
-//     })
-// .then(function(data){ console.log(data); },
-//     function(err){ console.error(err); });
-// .organic.map(o => o.link) ->

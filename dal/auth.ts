@@ -1,5 +1,9 @@
 import { api } from "@/api";
-import { LoginRequest, RegisterRequest } from "@/types/auth";
+import {
+  ChangePasswordRequest,
+  LoginRequest,
+  RegisterRequest,
+} from "@/types/auth";
 
 export const login = (body: LoginRequest) => api.post("/auth/login", body);
 
@@ -14,3 +18,11 @@ export const getQrCode = () =>
   api.get("/auth/QR", {
     responseType: "arraybuffer",
   });
+
+export const changePassword = (
+  body: ChangePasswordRequest,
+  callback: () => void
+) =>
+  api
+    .patch("/auth/change-password", body)
+    .then((res) => ({ ...res, data: callback }));

@@ -1,7 +1,7 @@
 import { createEvent } from "@/dal/event";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
 import { toaster } from "@/lib/native-base";
-import { EventForm, Event } from "@/types/event";
+import { EventForm } from "@/types/event";
 import { useTranslation } from "react-i18next";
 import { date, object, ref, string } from "yup";
 

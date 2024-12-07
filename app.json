@@ -48,6 +48,12 @@
           "recordAudioAndroid": true
         }
       ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "$(PRODUCT_NAME) needs to access your calendar in order to plan an event"
+        }
+      ],
       "expo-font",
       "expo-localization"
     ],

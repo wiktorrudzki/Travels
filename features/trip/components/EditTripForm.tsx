@@ -29,8 +29,6 @@ const EditTripForm = () => {
 
   const { friends } = useUserFriends();
 
-  console.log(trip);
-
   const {
     participants,
     options,
@@ -64,6 +62,8 @@ const EditTripForm = () => {
   if (isLoadingDelete) {
     return <LoadingSpinner style={{ height: "auto" }} />;
   }
+
+  console.log(trip, initialValues);
 
   return (
     <Formik
@@ -108,5 +108,5 @@ const styles = StyleSheet.create({
   },
   form: { ...FLEX_COLUMN, gap: SPACING.MEDIUM },
 });
-// TODO edit trip i edit event wydzielic do osobnego komponentu
+
 export default EditTripForm;

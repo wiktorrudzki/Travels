@@ -8,10 +8,10 @@ import { View } from "@/components/View";
 import { FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { Platform, StyleSheet } from "react-native";
-import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
 import { TripForm } from "@/types/trip";
 import React from "react";
+import { addHour, parseDateTime } from "@/lib/date-fns";
 
 type Props = FormikProps<TripForm> & {
   participantsOptions: Option[];
@@ -32,8 +32,11 @@ const TripFormInputs = ({
 }: Props) => {
   const { t } = useTranslation(["trips", "common"]);
 
-  const toStringDate = (e: DateTimePickerEvent) =>
-    new Date(e.nativeEvent.timestamp).toString();
+  const toStringDate = (date?: Date) => {
+    return addHour(date)?.toISOString().split(".")[0];
+  };
+
+  console.log(values);
 
   return (
     <View style={styles.inputsWrapper}>
@@ -59,16 +62,16 @@ const TripFormInputs = ({
       <DatePickerWithError
         error={touched.end ? errors.end : undefined}
         nativeID="start"
-        value={new Date(values.start)}
-        onChange={(e) => handleChange("start")(toStringDate(e))}
+        value={parseDateTime("2024-12-20T17:00:00")}
+        onChange={(e, date) => handleChange("start")(toStringDate(date))}
         mode={Platform.OS === "ios" ? "datetime" : "date"}
         label={t("common:start")}
       />
       <DatePickerWithError
         error={touched.end ? errors.end : undefined}
         nativeID="end"
-        value={new Date(values.end)}
-        onChange={(e) => handleChange("end")(toStringDate(e))}
+        value={parseDateTime(values.end)}
+        onChange={(e, date) => handleChange("end")(toStringDate(date))}
         mode={Platform.OS === "ios" ? "datetime" : "date"}
         label={t("common:end")}
       />

@@ -5,9 +5,9 @@ import { FormikProps } from "formik";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
-import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { FLEX_COLUMN, SPACING } from "@/constants/styles";
 import { Trip } from "@/types/trip";
+import { addHour, parseDateTime } from "@/lib/date-fns";
 
 type Props = FormikProps<EventForm> & {
   trip: Pick<Trip, "start" | "end">;
@@ -26,9 +26,11 @@ const EventFormInputs = ({
   const minimumDate = useMemo(() => new Date(trip.start), [trip]);
   const maximumDate = useMemo(() => new Date(trip.end), [trip]);
 
-  const toStringDate = (e: DateTimePickerEvent) => {
-    return new Date(e.nativeEvent.timestamp).toString();
+  const toStringDate = (date?: Date) => {
+    return addHour(date)?.toISOString().split(".")[0];
   };
+
+  console.log(values);
 
   return (
     <View style={styles.inputsWrapper}>
@@ -55,8 +57,8 @@ const EventFormInputs = ({
         minimumDate={minimumDate}
         maximumDate={maximumDate}
         nativeID="start"
-        value={new Date(values.start)}
-        onChange={(e) => handleChange("start")(toStringDate(e))}
+        value={parseDateTime(values.start)}
+        onChange={(e, date) => handleChange("start")(toStringDate(date))}
         mode="datetime"
         label={t("common:start")}
       />
@@ -65,8 +67,8 @@ const EventFormInputs = ({
         minimumDate={minimumDate}
         maximumDate={maximumDate}
         nativeID="end"
-        value={new Date(values.end)}
-        onChange={(e) => handleChange("end")(toStringDate(e))}
+        value={parseDateTime(values.end)}
+        onChange={(e, date) => handleChange("end")(toStringDate(date))}
         mode="datetime"
         label={t("common:end")}
       />

@@ -1,10 +1,8 @@
 import { LoadingSpinner } from "@/components/Spinner";
 import { getEvent } from "@/dal/event";
 import { usePromiseWithLoading, useSignedInNavigation } from "@/hooks";
-import { EventWithTrip } from "@/types/event";
-import { EventContextType } from "@/types/event";
-import React from "react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { EventWithTrip, EventContextType } from "@/types/event";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const EventContext = createContext<EventContextType | null>(null);
 

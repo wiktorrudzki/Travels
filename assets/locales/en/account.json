@@ -6,5 +6,9 @@
   "friends": "Friends",
   "friends_list": "List of friends",
   "add_friend": "Add new friend",
-  "qr_not_found": "QR code for your account has not been found"
+  "qr_not_found": "QR code for your account has not been found",
+  "pwd_changed": "Password has been changed succesfully",
+  "old_pwd": "Old password",
+  "new_pwd": "New password",
+  "confirm_new_pwd": "Confirm new password"
 }

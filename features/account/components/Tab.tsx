@@ -25,6 +25,8 @@ const Tab = ({ tab: { to, title } }: Props) => {
 
   const { t } = useTranslation("account");
 
+  console.log(to);
+
   return (
     <Pressable onPress={() => navigation.push(to)}>
       <View style={styles.container} borderBottomColor={colors.muted[300]}>

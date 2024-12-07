@@ -1,4 +1,4 @@
-import { compareAsc, format, getDate, isEqual, startOfDay } from "date-fns";
+import { add, format, getDate, isEqual, parse, startOfDay } from "date-fns";
 
 type Convertable = string | Date | number;
 
@@ -34,3 +34,13 @@ export const areDatesSame = (date1: Convertable, date2: Convertable) =>
 
 export const formatToDateTime = (date: Convertable) =>
   `${formatToDate(date)} ${formatToTime(date)}`;
+
+export const parseDateTime = (date: string) =>
+  parse(date, "yyyy-MM-dd'T'HH:mm:ss", new Date());
+
+export const parseTime = (date: string) => parse(date, "HH:mm:ss", new Date());
+
+export const parseDate = (date: string) =>
+  parse(date, "yyyy-MM-dd", new Date());
+
+export const addHour = (date?: Date) => add(date || "", { hours: 1 });
