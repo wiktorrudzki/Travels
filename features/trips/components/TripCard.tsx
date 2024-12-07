@@ -18,6 +18,7 @@ import { StyleSheet } from "react-native";
 import { useDeleteTrip, useTrips } from "../hooks";
 import { LoadingSpinner } from "@/components/Spinner";
 import TripMenu from "./TripMenu";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   trip: Trip;
@@ -25,6 +26,8 @@ type Props = {
 
 const TripCard = ({ trip }: Props) => {
   const { deleteTrip: deleteOne } = useTrips();
+
+  const { t } = useTranslation("trips");
 
   const { deleteTrip, isLoading } = useDeleteTrip(deleteOne);
 
@@ -41,7 +44,7 @@ const TripCard = ({ trip }: Props) => {
       <View style={styles.container} backgroundColor={colors.white}>
         <View style={styles.content}>
           <Image
-            alt="main-image"
+            alt="trip-image"
             source={{
               uri: "https://picsum.photos/200/300",
             }}
@@ -52,6 +55,7 @@ const TripCard = ({ trip }: Props) => {
             <Text
               text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
             />
+            <Text text={`${t("participants")}: ${trip.participants.length}`} />
           </View>
         </View>
         <TripMenu trip={trip} onDelete={deleteTrip} />

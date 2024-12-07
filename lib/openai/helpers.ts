@@ -1,4 +1,8 @@
-import { MODEL } from "@/constants/chat";
+import {
+  IMAGE_GENERATOR_API,
+  IMAGE_PROMPT_INTRO,
+  MODEL,
+} from "@/constants/chat";
 import { Conversation, GoogleOrganicResult } from "@/types/chat";
 import axios from "axios";
 import OpenAI from "openai";

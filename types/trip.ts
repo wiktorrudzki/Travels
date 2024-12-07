@@ -19,6 +19,7 @@ export type Trip = {
   start: string;
   end: string;
   ownerId: string;
+  participants: Participant[];
 };
 
 export type TripsContextType = {

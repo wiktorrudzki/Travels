@@ -48,6 +48,4 @@ const useChangePassword = () => {
   return { schema, isLoading, onSubmit };
 };
 
-// 2. todo poprawna ilosc uzytkownikow w widoku z wyjazdami
-
 export default useChangePassword;

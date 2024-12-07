@@ -57,7 +57,7 @@ const MainTripCard = ({ trip }: Props) => {
           <Text
             text={`${formatToDate(trip.start)} - ${formatToDate(trip.end)}`}
           />
-          <Text text={`${2} ${t("participants")}`} />
+          <Text text={`${t("participants")}: ${trip.participants.length}`} />
         </View>
         <View style={styles.menuWrapper}>
           <TripMenu trip={trip} onDelete={deleteTrip} />

@@ -29,6 +29,7 @@ import {
   concatWithSystemMessage,
   createCompletion,
   extractMessage,
+  generateImage,
   generateResponseWithRag,
   isValidJSON,
   removeAfterLastDash,
@@ -69,7 +70,6 @@ const ConversationProvider = ({
       onChatResponse();
     }
   );
-  // const [modifyTrip] = usePromise(editTrip, setTrip);
   const [addEvent] = usePromise(
     createEvent,
     (data) => {
@@ -187,9 +187,13 @@ const ConversationProvider = ({
       });
   };
 
-  const handleJSONResponse = (response: Response) => {
+  const handleJSONResponse = async (response: Response) => {
     switch (response.type) {
       case "trip":
+        const image = await generateImage(response.data.title);
+
+        console.log(image);
+
         return planTrip(
           {
             ...response.data,
